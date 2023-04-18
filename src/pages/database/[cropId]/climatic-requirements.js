@@ -26,15 +26,14 @@ const ClimaticRequirements = () => {
   const list = [
     {
       property: listArr[0][0],
-      value: listArr[0][1] + " mm/annual",
+      value: listArr[0][1]
     },
     {
       property: listArr[1][0],
       value: (
         <>
           {" "}
-          l{listArr[1][1]} candela{" "}
-          <span style={{ textTransform: "lowercase" }}>(cd)</span>
+          {listArr[1][1]}
         </>
       ),
     },
@@ -42,7 +41,7 @@ const ClimaticRequirements = () => {
       property: listArr[2][0],
       value: (
         <div style={{ textTransform: "lowercase" }}>
-          {listArr[2][1]} g/m<sup>3</sup>
+          {listArr[2][1]} 
         </div>
       ),
     },
@@ -50,7 +49,7 @@ const ClimaticRequirements = () => {
       property: listArr[3][0],
       value: (
         <div style={{ textTransform: "lowercase" }}>
-          {listArr[3][1]} <sup>o</sup>C
+          {listArr[3][1]}
         </div>
       ),
     },

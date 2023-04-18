@@ -1,3 +1,4 @@
+import WaterReqIcon from "@/assets/icons/sidebar/WaterReqIcon";
 import ClimaticReqIcon from "../assets/icons/sidebar/ClimaticReqIcon";
 import CropManagIcon from "../assets/icons/sidebar/CropManagIcon";
 import CropProfileIcon from "../assets/icons/sidebar/CropProfileIcon";
@@ -68,6 +69,11 @@ export const sidebarList = [
     text: "Soil Requirements",
     icon: SoilReqIcon,
     path: "soil-requirements",
+  },
+  {
+    text: "Water Requirements",
+    icon: WaterReqIcon,
+    path: "water-requirements",
   },
   {
     text: "Nutrient Requirements",

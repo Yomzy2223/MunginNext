@@ -36,7 +36,7 @@ const Profile = () => {
       value: crops?.scientificName,
       valueStyle: { fontStyle: "italic" },
     },
-    { property: "yeild rate", value: crops?.yieldRate + " tonnes/ha" },
+    { property: "yeild rate", value: crops?.yieldRate},
   ];
 
   return (

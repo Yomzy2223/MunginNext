@@ -26,11 +26,11 @@ const Anatomy = () => {
     },
     {
       property: listArr[1][0],
-      value: listArr[1][1] + " hours",
+      value: listArr[1][1],
     },
     {
       property: listArr[2][0],
-      value: listArr[2][1] + " plant",
+      value: listArr[2][1],
     },
   ];
   // const list = listArr.map((list) => ({ property: [list[0]], value: list[1] }));

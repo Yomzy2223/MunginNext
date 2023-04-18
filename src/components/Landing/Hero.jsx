@@ -101,6 +101,10 @@ export const Buttons = styled.div`
   a {
     text-decoration: none;
   }
+
+  button {
+    cursor: pointer;
+  }
 `;
 
 export const HeroButton = styled.button`
@@ -117,6 +121,9 @@ export const HeroButton = styled.button`
 export const Right = styled.div`
   margin: 24px 0 32px;
   padding: 40px 0 0;
+
+  animation: bounce;
+  animation-duration: 2s;
 
   img {
     max-width: 100%;

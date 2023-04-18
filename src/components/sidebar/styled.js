@@ -24,6 +24,10 @@ export const SidebarListContainer = styled.div`
     text-transform: capitalize;
     white-space: nowrap;
   }
+
+  path {
+    transition: 0.3s ease all;
+  }
 `;
 
 export const IconWrapper = styled.div`
