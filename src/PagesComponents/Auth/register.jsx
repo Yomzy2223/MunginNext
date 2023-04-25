@@ -21,6 +21,7 @@ import {
   SubmitButton,
   Title,
 } from "./styled";
+import { useRouter } from "next/router";
 
 const RegisterComponent = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -45,21 +46,21 @@ const RegisterComponent = () => {
   const [farmer, setfarmer] = useState(true);
   const [formValues, setformValues] = useState(initialValues);
 
+  const router = useRouter();
+
   const handleChange = (event) => {
+    setIsLoading(false);
     const { name, value } = event.target;
     setformValues({ ...formValues, [name]: value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setMessage("");
-    setSuccessful(false);
-    let response = await registerUser(formValues);
+    let response = await registerUser(Object.assign(formValues, { farmer }));
     setIsLoading(false);
-    console.log(response);
     if (response) {
       toast.success("Account created successfully");
-      navigate("/");
+      router.push("/");
     }
   };
 
@@ -76,9 +77,6 @@ const RegisterComponent = () => {
 
     return errors;
   };
-
-  // test farmer
-  console.log(farmer);
 
   return (
     // parent container
@@ -220,7 +218,7 @@ const RegisterComponent = () => {
               {/* button container */}
               <SubmitButton disabled={isLoading}>
                 {isLoading ? (
-                  <Oval stroke="#ffffff" fill="white" width={24} height={24} />
+                  <Oval stroke="#ffffff" fill="white" width={20} height={20} />
                 ) : (
                   "Register"
                 )}

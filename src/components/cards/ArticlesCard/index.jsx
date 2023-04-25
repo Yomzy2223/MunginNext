@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { ReactComponent as ArticleImg } from "../../../assets/images/ArticleImg.svg";
+import ArticleImg from "../../../assets/images/ArticleImg.svg";
+import { Image } from "next/image";
 
 const ArticlesCard = ({ date, title, text }) => {
   const [hovered, setHovered] = useState(false);
@@ -11,9 +12,7 @@ const ArticlesCard = ({ date, title, text }) => {
       onMouseLeave={() => setHovered(false)}
       hovered={hovered}
     >
-      <Image>
-        <ArticleImg />
-      </Image>
+      <Image src={ArticleImg} alt="Articles" />
       <Text>
         <p>{date}</p>
         <p>{title}</p>
@@ -38,8 +37,6 @@ export const Container = styled.div`
   transform: ${({ hovered }) => (hovered ? "scale(1.05)" : "")};
   transition: 0.3s all ease;
 `;
-
-export const Image = styled.div``;
 
 export const Text = styled.div`
   display: flex;

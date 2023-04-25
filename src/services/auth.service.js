@@ -80,6 +80,7 @@ export const loginUser = async (formData) => {
 };
 
 export const registerUser = async (formData) => {
+  console.log(formData);
   let requiredData = {
     fullName: formData.fullName,
     // password: formData.password,
@@ -101,8 +102,8 @@ export const registerUser = async (formData) => {
     if (response.data.email) toast.success("Registration successful");
     return true;
   } catch (e) {
-    if (e.message.toString() === "Network Error") toast.error(e.message);
-    else toast.error(e.response.data);
+    if (e?.message?.toString() === "Network Error") toast.error(e.message);
+    else toast.error(e?.response?.data);
     console.log(e);
     return false;
   }

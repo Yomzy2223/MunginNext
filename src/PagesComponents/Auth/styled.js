@@ -76,7 +76,8 @@ export const FieldInput = styled.input`
 `;
 
 export const SubmitButton = styled.button`
-  padding: 24px 8px;
+  padding: 0 8px;
+  height: 66px;
   background-color: #17233c;
   color: #fff;
   border: none;
