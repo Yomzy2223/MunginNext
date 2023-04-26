@@ -25,6 +25,7 @@ const DetailsLayout = ({ children }) => {
     let details = await getCropDetails(cropId);
     store.dispatch(storeCropDetails(details ? details : {}));
     setFetched(true);
+    console.log(details);
   };
 
   return (

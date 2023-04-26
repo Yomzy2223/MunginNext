@@ -13,16 +13,17 @@ const PostOperation = () => {
     store.dispatch(storeTitle("Post Operations"));
   }, []);
 
-  const operationsObj = cropDetails.operations
+  const operations = cropDetails.operations
     ? cropDetails?.operations.postHarvestOps
-    : {};
+    : "";
 
+  console.log(operations);
   return (
     <DetailsLayout>
       <PostHarvestContainer>
         <ListWithTitle
           title={`The post-harvest operations of ${cropDetails?.cropName} include:`}
-          list={[...operationsObj?.split(",")]}
+          list={[...operations?.split(",")]}
         />
       </PostHarvestContainer>
     </DetailsLayout>
