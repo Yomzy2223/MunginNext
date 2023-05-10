@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -9,7 +10,7 @@ import { store } from "../redux/store";
 import { getCropDetails } from "../services/auth.service";
 
 const DetailsLayout = ({ children }) => {
-  const [fetched, setFetched] = useState(false);
+  const [cropName, setCropName] = useState(false);
 
   const { title, cropDetails } = useSelector((store) => store.database);
 
@@ -19,22 +20,27 @@ const DetailsLayout = ({ children }) => {
 
   useEffect(() => {
     handleCropDetails();
-  }, [fetched]);
+  }, [cropName]);
 
   const handleCropDetails = async () => {
     let details = await getCropDetails(cropId);
     store.dispatch(storeCropDetails(details ? details : {}));
-    setFetched(true);
+    setCropName(details?.commonName);
   };
 
   return (
-    <DetailsContainer>
-      <Sidebar desktop />
-      <ContentWrapper>
-        <DetailsHeader title={title} />
-        {children}
-      </ContentWrapper>
-    </DetailsContainer>
+    <>
+      <Head>
+        <title>Mungin: {cropName} database</title>
+      </Head>
+      <DetailsContainer>
+        <Sidebar desktop />
+        <ContentWrapper>
+          <DetailsHeader title={title} />
+          {children}
+        </ContentWrapper>
+      </DetailsContainer>
+    </>
   );
 };
 
