@@ -16,7 +16,9 @@ import Head from "next/head";
 const App = () => {
   return (
     <>
-      <Head></Head>
+      <Head>
+        <title>Mungin: Landing Page</title>
+      </Head>
       <Navbar />
       <AppContainer>
         <Hero />
