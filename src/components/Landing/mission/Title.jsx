@@ -13,7 +13,7 @@ const Title = () => {
 
       <p>
         To generate and provide data and insight to facilitate innovation in
-        Nigeria's Agricultural sectior.
+        Nigeria&lsquo;s Agricultural sectior.
       </p>
     </TitleContainer>
   );

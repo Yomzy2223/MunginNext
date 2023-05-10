@@ -16,7 +16,7 @@ export const ImageContainer = styled.div`
   border-radius: 8px;
 `;
 
-export const Image = styled.div`
+export const ImageWrapper = styled.div`
   padding: 22px;
   border: 3px solid #dadada40;
   border-radius: 8px;

@@ -10,8 +10,13 @@ const DetailList = ({ title, text, array }) => {
         <p>{text}</p>
       </Text>
       <ImagesWrapper>
-        {array.map((arr) => (
-          <ImageList image={arr?.img} text={arr?.text} title={arr?.title} />
+        {array.map((arr, i) => (
+          <ImageList
+            key={i}
+            image={arr?.img}
+            text={arr?.text}
+            title={arr?.title}
+          />
         ))}
       </ImagesWrapper>
     </DetailListContainer>
