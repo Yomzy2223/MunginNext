@@ -99,7 +99,7 @@ export const registerUser = async (formData) => {
   try {
     let response = await client.post("/auth/farm/register", requiredData);
     console.log(response);
-    if (response.data.email) toast.success("Registration successful");
+    if (response?.data?.phoneNumber) toast.success("Registration successful");
     return true;
   } catch (e) {
     if (e?.message?.toString() === "Network Error") toast.error(e.message);
