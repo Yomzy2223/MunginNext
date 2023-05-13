@@ -62,7 +62,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           {/* <link rel="icon" href="%PUBLIC_URL%/favicon.svg" /> */}
-          <link rel="shortcut icon" href="/public/favicon.svg"></link>
+          {/* <link rel="shortcut icon" href="/public/favicon.svg"></link> */}
         </Head>
         <body>
           <Main />
