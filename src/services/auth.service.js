@@ -7,61 +7,6 @@ const client = axios.create({
   baseURL: "https://crop-profiles.herokuapp.com/api/v1",
 });
 
-class AuthService {
-  login = (email, password) => {
-    return axios.post(API_URL + `login`, {
-      email,
-      password,
-    });
-    // .then((response) => {
-    //   console.log(response);
-    //   if (response.data) {
-    //     localStorage.setItem("user", JSON.stringify(response.data));
-    //   }
-    //   return response.data;
-    // });
-  };
-
-  logout = () => {
-    localStorage.removeItem("user");
-  };
-  register = (
-    email,
-    password,
-    fullName,
-    farmer,
-    numberOfFarm,
-    farmName,
-    location,
-    animalName,
-    animalsize,
-    cropName,
-    cropsize,
-    produceName,
-    othersize
-  ) => {
-    return axios.post(API_URL + "register", {
-      email,
-      password,
-      fullName,
-      farmer,
-      numberOfFarm,
-      farmName,
-      location,
-      animalName,
-      animalsize,
-      cropName,
-      cropsize,
-      produceName,
-      othersize,
-    });
-  };
-
-  getCurrentUser = () => {
-    JSON.parse(localStorage.getItem("user"));
-  };
-}
-
 export const loginUser = async (formData) => {
   let requiredData = {
     phoneNumber: formData.phoneNumber,
@@ -148,5 +93,3 @@ export const analyzeCrop = async (searchParams) => {
     return e.response.data;
   }
 };
-
-export default new AuthService();

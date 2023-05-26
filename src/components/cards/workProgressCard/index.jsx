@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import WorkIcon from "../../../assets/icons/WorkIcon";
-import { Container, Image, ImageContainer, Text, Title } from "./styled";
+import { Container, ImageWrapper, ImageContainer, Text, Title } from "./styled";
 
 const WorkProgressCard = ({ title, text }) => {
   const [hovered, setHovered] = useState(false);
@@ -12,9 +12,9 @@ const WorkProgressCard = ({ title, text }) => {
       hovered={hovered}
     >
       <ImageContainer hovered={hovered}>
-        <Image>
+        <ImageWrapper>
           <WorkIcon hover={hovered} />
-        </Image>
+        </ImageWrapper>
       </ImageContainer>
       <Title hovered={hovered}>{title}</Title>
       <Text hovered={hovered}>{text}</Text>
