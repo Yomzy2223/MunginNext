@@ -85,7 +85,7 @@ export const registerUser = async (formData) => {
     fullName: formData.fullName,
     // password: formData.password,
     email: formData.email,
-    isFarmer: formData.farmer,
+    isFarmer: formData.farmer.toString(),
     numberOfFarm: formData.numberOfFarm,
     farmName: formData.farmName,
     location: formData.location,
