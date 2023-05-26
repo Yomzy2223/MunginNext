@@ -2,34 +2,26 @@ import ImageWithLabel from "@/components/CropDetails/ImageWithLabel";
 import DetailsLayout from "@/layout/DetailsLayout";
 import { storeTitle } from "@/redux/slices";
 import { store } from "@/redux/store";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const NutrientRequirements = () => {
-  const [list, setList] = useState([]);
-
   const { cropDetails } = useSelector((store) => store.database);
 
   useEffect(() => {
     store.dispatch(storeTitle("Nutrient Requirements"));
   }, []);
 
-  useEffect(() => {
-    if (cropDetails.nutrient) {
-      const dataList = [
-        {
-          property: "Micro Quantity",
-          value: cropDetails?.nutrient[0].microQuantity,
-        },
-        {
-          property: "Macro Quantity",
-          value: cropDetails?.nutrient[0].macroQuantity,
-        },
-      ];
-      setList(dataList);
-    }
-  }, [cropDetails?.nutrient?.length]);
+  const nutrients =
+    cropDetails?.nutrient?.length > 0 ? cropDetails?.nutrient[0] : {};
+
+  const list = nutrients
+    ? [
+        { property: "Micro Quantity", value: nutrients.microQuantity },
+        { property: "Macro Quantity", value: nutrients.macroQuantity },
+      ]
+    : {};
 
   return (
     <DetailsLayout>
