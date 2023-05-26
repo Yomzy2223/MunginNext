@@ -14,7 +14,7 @@ const Cultivar = () => {
     store.dispatch(storeTitle("Cultivar"));
   }, []);
 
-  const cultivars = cropDetails.cultivars ? cropDetails?.cultivars : {};
+  const cultivars = cropDetails.cultivars ? cropDetails?.cultivars : [];
 
   console.log(cropDetails);
   return (

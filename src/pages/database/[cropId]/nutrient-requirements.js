@@ -13,7 +13,9 @@ const NutrientRequirements = () => {
     store.dispatch(storeTitle("Nutrient Requirements"));
   }, []);
 
-  const nutrients = cropDetails?.nutrient[0];
+  const nutrients =
+    cropDetails?.nutrient?.length > 0 ? cropDetails?.nutrient[0] : {};
+
   const list = nutrients
     ? [
         { property: "Micro Quantity", value: nutrients.microQuantity },

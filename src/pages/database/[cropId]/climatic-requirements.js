@@ -23,33 +23,30 @@ const ClimaticRequirements = () => {
     (each) => each[0] !== "id" && each[0] !== "atmosphericGas"
   );
 
+  let loaded = listArr?.length > 0;
+
   const list = [
     {
-      property: listArr[0][0],
-      value: listArr[0][1]
+      property: loaded ? listArr[0][0] : "",
+      value: loaded ? listArr[0][1] : "",
     },
     {
-      property: listArr[1][0],
-      value: (
-        <>
-          {" "}
-          {listArr[1][1]}
-        </>
-      ),
+      property: loaded ? listArr[1][0] : "",
+      value: loaded ? listArr[1][1] : "",
     },
     {
-      property: listArr[2][0],
+      property: loaded ? listArr[2][0] : "",
       value: (
         <div style={{ textTransform: "lowercase" }}>
-          {listArr[2][1]} 
+          {loaded ? listArr[2][1] : ""}
         </div>
       ),
     },
     {
-      property: listArr[3][0],
+      property: loaded ? listArr[3][0] : "",
       value: (
         <div style={{ textTransform: "lowercase" }}>
-          {listArr[3][1]}
+          {loaded ? listArr[3][1] : ""}
         </div>
       ),
     },

@@ -15,14 +15,15 @@ const PostOperation = () => {
 
   const operationsObj = cropDetails.operations
     ? cropDetails?.operations.postHarvestOps
-    : {};
+    : "";
 
+  console.log(operationsObj);
   return (
     <DetailsLayout>
       <PostHarvestContainer>
         <ListWithTitle
           title={`The post-harvest operations of ${cropDetails?.cropName} include:`}
-          list={[...operationsObj?.split(",")]}
+          list={operationsObj ? operationsObj?.split(",") : []}
         />
       </PostHarvestContainer>
     </DetailsLayout>
