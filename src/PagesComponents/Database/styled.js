@@ -12,6 +12,17 @@ export const Header = styled.div`
   flex-flow: column;
   gap: clamp(20px, 4vw, 48px);
   padding-block: clamp(20px, 4vw, 48px);
+
+  button {
+    display: flex;
+    background-color: #17233c;
+    color: white;
+    padding: clamp(8px, 1.2vw, 15px);
+    white-space: nowrap;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+  }
 `;
 export const Top = styled.div`
   display: flex;
@@ -76,17 +87,6 @@ export const MiddleRight = styled.div`
     @media screen and (max-width: 500px) {
       display: none;
     }
-  }
-
-  button {
-    display: flex;
-    background-color: #17233c;
-    color: white;
-    padding: clamp(8px, 1.2vw, 15px);
-    white-space: nowrap;
-    border-radius: 4px;
-    border: none;
-    outline: none;
   }
 `;
 export const Main = styled.div`

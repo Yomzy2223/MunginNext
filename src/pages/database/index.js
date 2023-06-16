@@ -17,8 +17,8 @@ const Login = (prop) => {
 
 export default Login;
 
-// export async function getServerSideProps() {
-//   return {
-//     props: { id: 3, name: "Sayo" },
-//   };
-// }
+export async function getServerSideProps() {
+  return {
+    props: { id: 3, name: "Sayo" },
+  };
+}

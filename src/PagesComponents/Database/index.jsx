@@ -40,7 +40,11 @@ const DatabaseComponent = () => {
           <Link href="/">
             <Image src={logo} alt="" />
           </Link>
+          <button>
+            <Link href="/map">Check Map</Link>
+          </button>
         </Top>
+
         <Middle>
           <Modal1 open={open} onClose={() => setOpen(false)}>
             <Analyzer setOpen={setOpen} />

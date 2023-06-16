@@ -3,11 +3,10 @@ import minicard from "../../assets/working process.png";
 import unlockdata from "../../assets/unlock_data.png";
 import analysis from "../../assets/activate_analysis.png";
 import accelerate from "../../assets/accelerate_value.png";
-import Image from "next/image";
 
 const MiniCard = () => {
   return (
-    // <div className='rounded-lg flex justify-center mt-24'><Image src={minicard} alt='minicard'/></div>
+    // <div className='rounded-lg flex justify-center mt-24'><img src={minicard} alt='minicard'/></div>
     // parent container
     <div className="flex flex-col items-center space-y-12 mt-12">
       {/* header container */}
@@ -23,7 +22,7 @@ const MiniCard = () => {
         <div className=" p-6 rounded-lg space-y-4 shadow-4xl hover:animate-pulse cursor-pointer">
           {/* header div */}
           <div className="flex space-x-6 border-b pb-2 w-1/2  ">
-            <Image src={unlockdata} width={60} alt="" />
+            <img src={unlockdata} width={60} alt="" />
             <p className="pt-2 font-semibold text-xl">Unlock Data</p>
           </div>
           {/* body container */}
@@ -40,7 +39,7 @@ const MiniCard = () => {
         <div className=" p-6 rounded-lg space-y-4 hover:animate-pulse cursor-pointer shadow-4xl ">
           {/* header div */}
           <div className="flex space-x-6 border-b pb-2 w-1/2  ">
-            <Image src={analysis} width={60} alt="" />
+            <img src={analysis} width={60} alt="" />
             <p className="pt-2 font-semibold text-xl">Activate Analysis</p>
           </div>
           {/* body container */}
@@ -58,7 +57,7 @@ const MiniCard = () => {
         <div className=" p-6 rounded-lg space-y-4 hover:animate-pulse cursor-pointer shadow-4xl ">
           {/* header div */}
           <div className="flex space-x-6 border-b pb-2 w-1/2  ">
-            <Image src={accelerate} width={60} alt="" />
+            <img src={accelerate} width={60} alt="" />
             <p className="pt-2 font-semibold text-xl">Accelerate Value</p>
           </div>
           {/* body container */}
