@@ -16,6 +16,7 @@ const Cultivar = () => {
 
   const cultivars = cropDetails.cultivars ? cropDetails?.cultivars : [];
 
+  console.log(cropDetails);
   return (
     <DetailsLayout>
       <CultivarContainer>

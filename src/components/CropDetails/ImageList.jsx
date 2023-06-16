@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
 import { tickCircle } from "../../../assets/images";
@@ -8,11 +7,11 @@ const ImageList = ({ title, text, image }) => {
     <ImageListContainer>
       {title && (
         <div>
-          <Image src={tickCircle} alt="" />
+          <img src={tickCircle} alt="" />
           <p>{title} </p>
         </div>
       )}
-      {image && <Image src={image} alt="" />}
+      {image && <img src={image} alt="" />}
       {text && <span>{text}</span>}
     </ImageListContainer>
   );
@@ -33,7 +32,7 @@ export const ImageListContainer = styled.div`
     font-size: clamp(17px, 1.7vw, 20px);
   }
 
-  > Image {
+  > img {
     height: 100%;
     max-height: 275px;
     width: max-content;

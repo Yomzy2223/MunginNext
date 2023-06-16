@@ -17,7 +17,7 @@ const App = () => {
   return (
     <>
       <Head>
-        <title>Mungin: Landing Page</title>
+        <title>Mungin</title>
       </Head>
       <Navbar />
       <AppContainer>

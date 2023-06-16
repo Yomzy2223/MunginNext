@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import { BsArrowRight } from "react-icons/bs";
 import carousel from "../../assets/carousel-image.png";
@@ -10,7 +9,7 @@ const CardContainer = ({ item }) => {
         className="bg-[#FAFAFA] rounded-md flex flex-col w-1/2 sm:w-full"
         key={item.id}
       >
-        <Image src={item.url} className="w-full" alt="carousel-img" />
+        <img src={item.url} className="w-full" alt="carousel-img" />
         <p className="pl-10 mt-4 text-sm text-[#83BF4F]">{item.date}</p>
         <h3 className="pl-10 mt-2 text-xl font-semibold">{item.topic}</h3>
         <p className="pl-10 mt-2 text-[#7D7D7D]">{item.content}</p>
