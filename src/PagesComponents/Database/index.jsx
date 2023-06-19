@@ -40,9 +40,9 @@ const DatabaseComponent = () => {
           <Link href="/">
             <Image src={logo} alt="" />
           </Link>
-          <button>
-            <Link href="/map">Check Map</Link>
-          </button>
+          <Link href="/map">
+            <button>Check Map</button>
+          </Link>
         </Top>
 
         <Middle>

@@ -14,6 +14,7 @@ export const Header = styled.div`
   padding-block: clamp(20px, 4vw, 48px);
 
   button {
+    cursor: pointer;
     display: flex;
     background-color: #17233c;
     color: white;
