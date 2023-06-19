@@ -11,39 +11,39 @@ const Hero = () => {
     <Container>
       {/* left container */}
       <Left>
-        {/* <AnimatedElement animation="animate__lightSpeedInLeft"> */}
-        <h1>
-          Growing <span style={{ color: "#83BF4F" }}>Agricultural</span> Data
-          For immediate Impact
-        </h1>
-        {/* </AnimatedElement> */}
-        {/* <AnimatedElement animation="animate__zoomIn"> */}
-        <p className="mt-7 text-[#565656]">
-          We transform data to actionable insights that power decision making
-          across the agricultural value chain. Delivering innovative Agtech
-          Solutions to improve agricultural productivity in Nigeria is our
-          ethos.{" "}
-        </p>
-        {/* </AnimatedElement> */}
+        <AnimatedElement animation="animate__fadeIn">
+          <h1>
+            Growing <span style={{ color: "#83BF4F" }}>Agricultural</span> Data
+            For immediate Impact
+          </h1>
+        </AnimatedElement>
+        <AnimatedElement animation="animate__fadeIn">
+          <p className="mt-7 text-[#565656]">
+            We transform data to actionable insights that power decision making
+            across the agricultural value chain. Delivering innovative Agtech
+            Solutions to improve agricultural productivity in Nigeria is our
+            ethos.{" "}
+          </p>
+        </AnimatedElement>
         {/* button and link */}
-        {/* <AnimatedElement animation="animate__fadeInUp"> */}
-        <Buttons>
-          <Link href={"/database"}>
-            <HeroButton>Search Our Database</HeroButton>
-          </Link>
-          <Link href={"/register"}>
-            <button style={JoinButtonStyles}>Join Us</button>
-          </Link>
-        </Buttons>
-        {/* </AnimatedElement> */}
+        <AnimatedElement animation="animate__fadeIn">
+          <Buttons>
+            <Link href={"/database"}>
+              <HeroButton>Search Our Database</HeroButton>
+            </Link>
+            <Link href={"/register"}>
+              <button style={JoinButtonStyles}>Join Us</button>
+            </Link>
+          </Buttons>
+        </AnimatedElement>
       </Left>
 
       {/* right container */}
-      {/* <AnimatedElement animation="animate__zoomInDown"> */}
-      <Right>
-        <Image src={green} alt="right" />
-      </Right>
-      {/* </AnimatedElement> */}
+      <AnimatedElement animation="animate__fadeIn">
+        <Right>
+          <Image src={green} alt="right" />
+        </Right>
+      </AnimatedElement>
     </Container>
   );
 };
