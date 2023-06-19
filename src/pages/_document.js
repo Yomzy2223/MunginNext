@@ -61,6 +61,11 @@ class MyDocument extends Document {
             href="https://fonts.cdnfonts.com/css/montserrat-alternates"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.cdnfonts.com/css/raleway-5"
+            rel="stylesheet"
+          />
+
           <link rel="icon" href="/favicon/favicon.ico" />
           <link rel="shortcut icon" href="/favicon/favicon.ico"></link>
         </Head>

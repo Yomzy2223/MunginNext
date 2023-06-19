@@ -2,16 +2,25 @@ import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 
-const MapSidebar = ({ lists, handleListClick, listingRef, handleSearch }) => {
+const MapSidebar = ({
+  lists,
+  handleListClick,
+  listingRef,
+  handleSearch,
+  handleChange = () => {},
+}) => {
   const { query } = useRouter();
 
   const { farm } = query;
-  console.log(farm);
 
   return (
     <div className="sidebar">
       <MapSidebarHeader className="heading">
-        <h1>Farms</h1>
+        <select name="locations" id="locations" onChange={handleChange}>
+          <option value="farms">Farms</option>
+          <option value="airports">Airports</option>
+        </select>
+        {/* <h1>Farms</h1> */}
         <input
           type="text"
           placeholder="Search location, farms..."
@@ -60,6 +69,12 @@ export const MapSidebarHeader = styled.div`
     border-radius: 8px;
     border: 1px solid #ccc;
     padding: 0 8px;
+  }
+
+  select {
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
   }
 `;
 

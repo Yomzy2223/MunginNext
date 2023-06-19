@@ -5,7 +5,7 @@ import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import ReactDOM from "react-dom";
 import Tooltip from "@/components/Tooltip";
 import MapSidebar from "@/components/sidebar/MapSidebar";
-import { farmStore } from "@/utils/config";
+import { airportStore, farmStore } from "@/utils/config";
 import { useRouter } from "next/router";
 import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
 import Image from "next/image";
@@ -17,9 +17,12 @@ mapboxgl.accessToken =
   "pk.eyJ1IjoieW9tenkyMjIzIiwiYSI6ImNsaHgyZ28xcjBwcGozcW50anYwd2owcTkifQ.-uQHl78lQyHAQf-wnBAplw";
 
 const Map = () => {
-  const [stores, setStores] = useState(farmStore);
+  const [selected, setSelected] = useState("farms");
 
-  console.log(stores);
+  const defaultStore = selected === "farms" ? farmStore : airportStore;
+
+  const [stores, setStores] = useState(defaultStore);
+
   const router = useRouter();
   const mapContainerRef = useRef(null);
 
@@ -36,7 +39,7 @@ const Map = () => {
     map.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [-79.38, 43.65],
+      center: [-77.034084142948, 38.909671288923],
       zoom: 12.5,
     });
 
@@ -63,7 +66,7 @@ const Map = () => {
         storesCoordinates,
         coordinates[0]
       );
-      const newStore = farmStore.features.filter((el) =>
+      const newStore = defaultStore.features.filter((el) =>
         inside.find(
           (val) =>
             JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
@@ -84,7 +87,7 @@ const Map = () => {
         storesCoordinates,
         coordinates[0]
       );
-      const newStore = farmStore.features.filter((el) =>
+      const newStore = defaultStore.features.filter((el) =>
         inside.find(
           (val) =>
             JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
@@ -100,12 +103,8 @@ const Map = () => {
     // Event handling for draw.delete
     map.current.on("draw.delete", (e) => {
       const feature = e.features[0];
-      setStores(farmStore);
+      setStores(defaultStore);
       console.log("Feature deleted:", feature);
-    });
-
-    stores.features.forEach(function (store, i) {
-      store.properties.id = i;
     });
 
     map.current.on("load", () => {
@@ -119,51 +118,14 @@ const Map = () => {
           data: stores,
         },
       });
-      // map.addSource("places", {
-      //   type: "geojson",
-      //   data: stores,
-      // });
       addMarkers();
 
       // buildLocationList(stores);
     });
 
-    const addMarkers = () => {
-      /* For each feature in the GeoJSON object above: */
-      for (const marker of stores.features) {
-        /* Create a div element for the marker. */
-        const el = document.createElement("div");
-        /* Assign a unique `id` to the marker. */
-        el.id = `marker-${marker.properties.id}`;
-        /* Assign the `marker` class to each marker for styling. */
-        el.className = "marker";
-
-        /**
-         * Create a marker using the div element
-         * defined above and add it to the map.
-         **/
-        new mapboxgl.Marker(el, { offset: [0, -23] })
-          .setLngLat(marker.geometry.coordinates)
-          .addTo(map.current);
-
-        el.addEventListener("click", (e) => {
-          /* Fly to the point */
-          flyToStore(marker);
-          /* Close all other popups and display popup for clicked store */
-          createPopUp(marker);
-          /* Highlight listing in sidebar */
-          const activeItem = document.getElementsByClassName("active");
-          e.stopPropagation();
-          if (activeItem[0]) {
-            activeItem[0].classList.remove("active");
-          }
-          const listing = document.getElementById(
-            `listing-${marker.properties.id}`
-          );
-          listing.classList.add("active");
-        });
-      }
-    };
+    stores.features.forEach(function (store, i) {
+      store.properties.id = i;
+    });
 
     map.current.on("click", (event) => {
       /* Determine if a feature in the "locations" layer exists at that point. */
@@ -195,7 +157,48 @@ const Map = () => {
 
     // Clean up on unmount
     return () => map.current.remove();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selected]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  //
+  const addMarkers = () => {
+    /* For each feature in the GeoJSON object above: */
+    for (const marker of stores.features) {
+      /* Create a div element for the marker. */
+      const el = document.createElement("div");
+      /* Assign a unique `id` to the marker. */
+      el.id = `marker-${marker.properties.id}`;
+      /* Assign the `marker` class to each marker for styling. */
+      el.className = "marker";
+
+      /**
+       * Create a marker using the div element
+       * defined above and add it to the map.
+       **/
+      new mapboxgl.Marker(el, { offset: [0, -23] })
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map.current);
+
+      el.addEventListener("click", (e) => {
+        router.push({
+          query: { farm: marker.properties.farmName },
+        });
+        /* Fly to the point */
+        flyToStore(marker);
+        /* Close all other popups and display popup for clicked store */
+        createPopUp(marker);
+        /* Highlight listing in sidebar */
+        const activeItem = document.getElementsByClassName("active");
+        e.stopPropagation();
+        if (activeItem[0]) {
+          activeItem[0].classList.remove("active");
+        }
+        const listing = document.getElementById(
+          `listing-${marker.properties.id}`
+        );
+        listing.classList.add("active");
+      });
+    }
+  };
 
   //
   const handleListClick = (store) => {
@@ -242,7 +245,7 @@ const Map = () => {
   const handleSearch = (e) => {
     const value = e.target.value;
     if (value) {
-      const filteredStore = farmStore.features.filter(
+      const filteredStore = defaultStore.features.filter(
         (el) =>
           checkInclude(el?.properties?.cropName, value) ||
           checkInclude(el?.properties?.livestockName, value) ||
@@ -250,10 +253,10 @@ const Map = () => {
           checkInclude(el?.properties?.storageFacility, value) ||
           checkInclude(el?.properties?.farmName, value)
       );
+
       setStores({ ...stores, features: filteredStore });
-      console.log({ ...stores, features: filteredStore });
     } else {
-      setStores(farmStore);
+      setStores(defaultStore);
     }
   };
 
@@ -283,7 +286,6 @@ const Map = () => {
   }
 
   function getCoordinatesInsidePolygon(coordinates, polygon) {
-    console.log(coordinates, polygon);
     const coordinatesInside = [];
 
     for (let i = 0; i < coordinates.length; i++) {
@@ -296,6 +298,13 @@ const Map = () => {
     console.log(coordinatesInside);
     return coordinatesInside;
   }
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSelected(value);
+    if (value === "farms") setStores(farmStore);
+    else setStores(airportStore);
+  };
 
   return (
     <div>
@@ -310,6 +319,7 @@ const Map = () => {
           handleListClick={handleListClick}
           listingRef={listingRef}
           handleSearch={handleSearch}
+          handleChange={handleChange}
         />
 
         <div
