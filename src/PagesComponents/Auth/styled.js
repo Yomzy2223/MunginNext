@@ -98,9 +98,9 @@ export const Bottom = styled.div`
 `;
 
 export const BottomLinkText = styled.p`
-  color: #888888;
+  color: #333333;
 
-  span {
-    color: #333333;
+  a {
+    color: #888888;
   }
 `;
