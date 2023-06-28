@@ -149,10 +149,10 @@ export const analyzeCrop = async (searchParams) => {
   }
 };
 
-export const getMapInfo = async (pageNumber) => {
+export const getMapInfo = async (state) => {
   try {
     let response = await client.get(
-      `/geo/spatial/load?pageNumber=${pageNumber}&pageSize=1000`
+      `https://crop-profiles.herokuapp.com/api/v1/geo/spatial/state?state=${state}`
     );
     // console.log(JSON.parse(response.data));
     return response.data;
@@ -163,5 +163,20 @@ export const getMapInfo = async (pageNumber) => {
     return e;
   }
 };
+
+// export const getMapInfo = async (pageNumber) => {
+//   try {
+//     let response = await client.get(
+//       `/geo/spatial/load?pageNumber=${pageNumber}&pageSize=1000`
+//     );
+//     // console.log(JSON.parse(response.data));
+//     return response.data;
+//   } catch (e) {
+//     if (e.message.toString() === "Network Error")
+//       toast.error("Please check your internet connection");
+//     // else toast.error(e.response.data);
+//     return e;
+//   }
+// };
 
 export default new AuthService();

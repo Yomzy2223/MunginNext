@@ -13,6 +13,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import logo from "../assets/images/MUNGINLogo.png";
 import { getMapInfo } from "@/services/auth.service";
+import { airportStore } from "@/utils/config";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoieW9tenkyMjIzIiwiYSI6ImNsaHgyZ28xcjBwcGozcW50anYwd2owcTkifQ.-uQHl78lQyHAQf-wnBAplw";
@@ -31,6 +32,7 @@ const Map = () => {
   const [stores, setStores] = useState(defaultStore);
 
   const router = useRouter();
+  const { state } = router.query;
   const mapContainerRef = useRef(null);
 
   let map = useRef();
@@ -41,35 +43,49 @@ const Map = () => {
   );
 
   useEffect(() => {
-    handleMapInfo();
-  }, []);
+    if (state) handleMapInfo();
+  }, [state]);
 
   const handleMapInfo = async () => {
-    let mapPromise = [];
-    for (let i = 1; i <= 45; i++) {
-      let eachPromise = getMapInfo(i);
-      mapPromise.push(eachPromise);
-    }
     setLoading(true);
-    // const response1 = await getMapInfo(1)
-    const response2 = await Promise.all(mapPromise);
+    const response = await getMapInfo(state);
     setLoading(false);
-    let farms = [];
-    response2?.map((el) => {
-      if (el?.farm?.length > 0) farms = [...farms, ...el.farm];
-    });
-    if (farms.length > 0)
+    console.log(response);
+    if (response?.length > 0) {
       setFarmStore({
         type: "FeatureCollection",
-        features: farms,
+        features: response,
       });
-    setStores({
-      type: "FeatureCollection",
-      features: farms,
-    });
-    console.log(farms);
-    // if(farms.length > 0) localStorage.setItem('farmsInfo', JSON.stringify(farms) )
+      setStores({
+        type: "FeatureCollection",
+        features: response,
+      });
+    }
   };
+
+  // const handleMapInfo = async () => {
+  //   let mapPromise = [];
+  //   for (let i = 1; i <= 45; i++) {
+  //     let eachPromise = getMapInfo(i);
+  //     mapPromise.push(eachPromise);
+  //   }
+  //   setLoading(true);
+  //   const response2 = await Promise.all(mapPromise);
+  //   setLoading(false);
+  //   let farms = [];
+  //   response2?.map((el) => {
+  //     if (el?.farm?.length > 0) farms = [...farms, ...el.farm];
+  //   });
+  //   if (farms.length > 0)
+  //     setFarmStore({
+  //       type: "FeatureCollection",
+  //       features: farms,
+  //     });
+  //   setStores({
+  //     type: "FeatureCollection",
+  //     features: farms,
+  //   });
+  // };
 
   // Initialize map when component mounts
   useEffect(() => {
@@ -77,6 +93,7 @@ const Map = () => {
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [8.6753, 9.082],
+      // center: [8.6753, 9.082],
       zoom: 6,
     });
 
@@ -145,21 +162,23 @@ const Map = () => {
       console.log("Feature deleted:", feature);
     });
 
-    // map.current.on("load", () => {
-    //   /* Add the data to your map as a layer */
-    //   map.current.addLayer({
-    //     id: "locations",
-    //     type: "circle",
-    //     /* Add a GeoJSON source containing place coordinates and information. */
-    //     source: {
-    //       type: "geojson",
-    //       data: stores,
-    //     },
-    //   });
-    //   addMarkers();
+    map.current.on("load", () => {
+      if (state) {
+        /* Add the data to your map as a layer */
+        map.current.addLayer({
+          id: "locations",
+          type: "circle",
+          /* Add a GeoJSON source containing place coordinates and information. */
+          source: {
+            type: "geojson",
+            data: stores,
+          },
+        });
+        addMarkers();
 
-    //   // buildLocationList(stores);
-    // });
+        // buildLocationList(stores);
+      }
+    });
 
     stores.features.forEach(function (store, i) {
       store.properties.id = i;
@@ -198,42 +217,45 @@ const Map = () => {
   }, [selected, farmStore]); // eslint-disable-line react-hooks/exhaustive-deps
 
   //
-  const addMarkers = (point) => {
+  const addMarkers = () => {
     /* For each feature in the GeoJSON object above: */
-    // for (const marker of stores.features) {
-    /* Create a div element for the marker. */
-    const el = document.createElement("div");
-    /* Assign a unique `id` to the marker. */
-    el.id = `marker-${point.properties.id}`;
-    /* Assign the `marker` class to each marker for styling. */
-    el.className = "marker";
+    for (const marker of stores.features) {
+      /* Create a div element for the marker. */
+      const el = document.createElement("div");
+      /* Assign a unique `id` to the marker. */
+      el.id = `marker-${marker.properties.id}`;
+      /* Assign the `marker` class to each marker for styling. */
+      el.className = "marker";
+      console.log(marker);
 
-    /**
-     * Create a marker using the div element
-     * defined above and add it to the map.
-     **/
-    new mapboxgl.Marker(el, { offset: [0, -23] })
-      .setLngLat(point.geometry.coordinates)
-      .addTo(map.current);
+      /**
+       * Create a marker using the div element
+       * defined above and add it to the map.
+       **/
+      new mapboxgl.Marker(el, { offset: [0, -23] })
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map.current);
 
-    el.addEventListener("click", (e) => {
-      router.push({
-        query: { farm: point.properties.name },
+      el.addEventListener("click", (e) => {
+        router.push({
+          query: { state, farm: marker.properties.name },
+        });
+        /* Fly to the point */
+        flyToStore(marker);
+        /* Close all other popups and display popup for clicked store */
+        createPopUp(marker);
+        /* Highlight listing in sidebar */
+        const activeItem = document.getElementsByClassName("active");
+        e.stopPropagation();
+        if (activeItem[0]) {
+          activeItem[0].classList.remove("active");
+        }
+        const listing = document.getElementById(
+          `listing-${marker.properties.id}`
+        );
+        listing.classList.add("active");
       });
-      /* Fly to the point */
-      flyToStore(point);
-      /* Close all other popups and display popup for clicked store */
-      createPopUp(point);
-      /* Highlight listing in sidebar */
-      const activeItem = document.getElementsByClassName("active");
-      e.stopPropagation();
-      if (activeItem[0]) {
-        activeItem[0].classList.remove("active");
-      }
-      const listing = document.getElementById(`listing-${point.properties.id}`);
-      listing.classList.add("active");
-    });
-    // }
+    }
   };
 
   //
@@ -241,21 +263,9 @@ const Map = () => {
     const id = `link-${point.properties.id}`;
 
     router.push({
-      query: { farm: point.properties.name },
+      query: { state, farm: point.properties.name },
     });
     console.log(point);
-
-    map.current.removeLayer("locations");
-    map.current.addLayer({
-      id: "locations",
-      type: "circle",
-      /* Add a GeoJSON source containing place coordinates and information. */
-      source: {
-        type: "geojson",
-        data: { type: "FeatureCollection", features: [point] },
-      },
-    });
-    addMarkers(point);
 
     for (const feature of stores.features) {
       if (id === `link-${feature.properties.id}`) {
