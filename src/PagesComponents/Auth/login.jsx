@@ -138,11 +138,9 @@ const LoginComponent = () => {
                   "Login"
                 )}
               </SubmitButton>
-              <Link href="/register">
-                <BottomLinkText>
-                  Don't have an account? <span>Register</span>
-                </BottomLinkText>
-              </Link>
+              <BottomLinkText>
+                Don't have an account? <Link href="/register">Register</Link>
+              </BottomLinkText>
             </Bottom>
           </Body>
         </Form>

@@ -1,83 +1,43 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import { Puff } from "react-loading-icons";
+import ReactPaginate from "react-paginate";
 import styled from "styled-components";
+import MapStateInfo from "./MapStateInfo";
+import SelectState from "./SelectState";
 
 const MapSidebar = ({
+  itemsPerPage = 200,
   lists,
   handleListClick,
   listingRef,
   handleSearch,
+  loading,
   handleChange = () => {},
 }) => {
+  const [itemOffset, setItemOffset] = useState(0);
+
   const { query } = useRouter();
 
-  const { farm } = query;
+  const { state } = query;
 
   return (
     <div className="sidebar">
-      <MapSidebarHeader className="heading">
-        <select name="locations" id="locations" onChange={handleChange}>
-          <option value="farms">Farms</option>
-          <option value="airports">Airports</option>
-        </select>
-        {/* <h1>Farms</h1> */}
-        <input
-          type="text"
-          placeholder="Search location, farms..."
-          onChange={handleSearch}
+      {state ? (
+        <MapStateInfo
+          itemsPerPage={itemsPerPage}
+          lists={lists}
+          handleListClick={handleListClick}
+          listingRef={listingRef}
+          handleSearch={handleSearch}
+          loading={loading}
+          handleChange={handleChange}
         />
-      </MapSidebarHeader>
-      <div id="listings" className="listings">
-        {lists.features?.map((store, i) => (
-          <Listing
-            key={i}
-            id={`listing-${store.properties.id}`}
-            className="item"
-            ref={listingRef}
-            active={farm === store.properties.farmName}
-          >
-            <a
-              id={`link-${store.properties.id}`}
-              href="#"
-              className="title"
-              onClick={() => handleListClick(store)}
-            >
-              {store.properties.cropName}, {store?.properties?.livestockName}
-            </a>
-            <div>
-              {store?.properties?.farmName}, {store?.properties?.address},{" "}
-              {store.properties.city}
-            </div>
-          </Listing>
-        ))}
-      </div>
+      ) : (
+        <SelectState />
+      )}
     </div>
   );
 };
 
 export default MapSidebar;
-
-export const MapSidebarHeader = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-
-  input {
-    flex: 1;
-    height: 30px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    padding: 0 8px;
-  }
-
-  select {
-    border: none;
-    font-size: 16px;
-    font-weight: 500;
-  }
-`;
-
-export const Listing = styled.div`
-  background-color: ${({ active }) => (active ? "#BAFFE655" : "transparent")};
-`;
