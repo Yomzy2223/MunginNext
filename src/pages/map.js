@@ -24,12 +24,9 @@ const Map = () => {
     type: "FeatureCollection",
     features: [],
   });
-  const [clickedPoint, setClickedPoint] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const defaultStore = selected === "farms" ? farmStore : airportStore;
-
-  const [stores, setStores] = useState(defaultStore);
+  const [stores, setStores] = useState(farmStore);
 
   const router = useRouter();
   const { state } = router.query;
@@ -121,7 +118,7 @@ const Map = () => {
         storesCoordinates,
         coordinates[0]
       );
-      const newStore = defaultStore.features.filter((el) =>
+      const newStore = stores.features.filter((el) =>
         inside.find(
           (val) =>
             JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
@@ -142,7 +139,7 @@ const Map = () => {
         storesCoordinates,
         coordinates[0]
       );
-      const newStore = defaultStore.features.filter((el) =>
+      const newStore = stores.features.filter((el) =>
         inside.find(
           (val) =>
             JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
@@ -158,7 +155,7 @@ const Map = () => {
     // Event handling for draw.delete
     map.current.on("draw.delete", (e) => {
       const feature = e.features[0];
-      setStores(defaultStore);
+      setStores(stores);
       console.log("Feature deleted:", feature);
     });
 
@@ -214,7 +211,7 @@ const Map = () => {
 
     // Clean up on unmount
     return () => map.current.remove();
-  }, [selected, farmStore]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [stores.features?.length, farmStore]); // eslint-disable-line react-hooks/exhaustive-deps
 
   //
   const addMarkers = () => {
@@ -304,7 +301,7 @@ const Map = () => {
   const handleSearch = (e) => {
     const value = e.target.value;
     if (value) {
-      const filteredStore = defaultStore.features.filter(
+      const filteredStore = stores.features.filter(
         (el) =>
           checkInclude(el?.properties?.name, value) ||
           checkInclude(el?.properties?.farmType, value) ||
@@ -315,7 +312,7 @@ const Map = () => {
 
       setStores({ ...stores, features: filteredStore });
     } else {
-      setStores(defaultStore);
+      setStores(stores);
     }
   };
 
@@ -358,11 +355,21 @@ const Map = () => {
     return coordinatesInside;
   }
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setSelected(value);
-    if (value === "farms") setStores(farmStore);
-    else setStores(airportStore);
+  const handleChange = (tags) => {
+    if (tags.length === 0) {
+      setStores({ type: "FeatureCollection", features: [] });
+      return;
+    }
+    console.log(airportStore);
+
+    let newStore = { type: "FeatureCollection", features: [] };
+    tags.map((el) => {
+      if (el.toLowerCase() === "farms")
+        newStore.features = [...newStore.features, ...farmStore.features];
+      else if (el.toLowerCase() === "airports")
+        newStore.features = [...newStore.features, ...airportStore.features];
+    });
+    setStores(newStore);
   };
 
   return (

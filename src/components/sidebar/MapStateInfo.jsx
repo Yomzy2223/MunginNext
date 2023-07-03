@@ -4,6 +4,7 @@ import { HiArrowLeft } from "react-icons/hi";
 import { Puff } from "react-loading-icons";
 import ReactPaginate from "react-paginate";
 import styled from "styled-components";
+import InputWithTags from "../Inputs/InputWithTags";
 
 const MapStateInfo = ({
   itemsPerPage,
@@ -15,6 +16,7 @@ const MapStateInfo = ({
   handleChange = () => {},
 }) => {
   const [itemOffset, setItemOffset] = useState(0);
+  const [tags, setTags] = useState(["Farms"]);
 
   const router = useRouter();
   const { query } = useRouter();
@@ -38,20 +40,46 @@ const MapStateInfo = ({
     router.push("/map");
   };
 
+  const handleTagSelect = (tag) => {
+    console.log(tag);
+    if (!tags.find((el) => el === tag)) {
+      setTags([...tags, tag]);
+      handleChange([...tags, tag]);
+    }
+  };
+
+  const handleTagRemove = (tag) => {
+    const newTags = tags.filter((el) => el !== tag);
+    setTags(newTags);
+    handleChange(newTags);
+  };
+
   return (
     <SidebarInfoWrapper>
       <MapSidebarHeader className="heading">
-        <HiArrowLeft onClick={handleBack} style={{ cursor: "pointer" }} />
-        <select name="locations" id="locations" onChange={handleChange}>
+        <HiArrowLeft
+          onClick={handleBack}
+          style={{ cursor: "pointer", height: "25px" }}
+        />
+        {/* <select name="locations" id="locations" onChange={handleChange}>
           <option value="farms">Farms</option>
           <option value="airports">Airports</option>
-        </select>
+        </select> */}
+        <InputWithTags
+          options={["Farms", "Airports"]}
+          tags={tags}
+          handleSelect={handleTagSelect}
+          handleRemove={handleTagRemove}
+          placeholder="Select type"
+        />
         <input
           type="text"
           placeholder="Search location, farms..."
           onChange={handleSearch}
         />
-        <Count>{currentItems?.length + "/" + items?.length}</Count>
+        {currentItems && items && (
+          <Count>{currentItems?.length + "/" + items?.length}</Count>
+        )}
       </MapSidebarHeader>
       {loading ? (
         <Loading>
@@ -119,9 +147,10 @@ export const SidebarInfoWrapper = styled.div`
 export const MapSidebarHeader = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
   width: 100%;
+  padding: 10px;
 
   input {
     flex: 1;
