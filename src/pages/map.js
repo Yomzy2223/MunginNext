@@ -5,22 +5,25 @@ import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import ReactDOM from "react-dom";
 import Tooltip from "@/components/Tooltip";
 import MapSidebar from "@/components/sidebar/MapSidebar";
-// import { airportStore, farmStore } from "@/utils/config";
 import { useRouter } from "next/router";
 import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import logo from "../assets/images/MUNGINLogo.png";
-import { getMapInfo } from "@/services/auth.service";
-import { airportStore } from "@/utils/config";
+import { getMapAirportInfo, getMapInfo } from "@/services/auth.service";
+import farmImg from "../assets/farmIcon.png";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoieW9tenkyMjIzIiwiYSI6ImNsaHgyZ28xcjBwcGozcW50anYwd2owcTkifQ.-uQHl78lQyHAQf-wnBAplw";
 
 const Map = () => {
-  const [selected, setSelected] = useState("farms");
+  const [selected, setSelected] = useState(["Farms"]);
   const [farmStore, setFarmStore] = useState({
+    type: "FeatureCollection",
+    features: [],
+  });
+  const [airportStore, setAirportStore] = useState({
     type: "FeatureCollection",
     features: [],
   });
@@ -45,17 +48,22 @@ const Map = () => {
 
   const handleMapInfo = async () => {
     setLoading(true);
-    const response = await getMapInfo(state);
+    const farms = await getMapInfo(state);
+    const airports = await getMapAirportInfo(state);
     setLoading(false);
-    console.log(response);
-    if (response?.length > 0) {
+    console.log(farms);
+    if (farms?.length > 0) {
       setFarmStore({
         type: "FeatureCollection",
-        features: response,
+        features: farms,
+      });
+      setAirportStore({
+        type: "FeatureCollection",
+        features: airports,
       });
       setStores({
         type: "FeatureCollection",
-        features: response,
+        features: airports ? [...farms, ...airports] : farms,
       });
     }
   };
@@ -162,15 +170,15 @@ const Map = () => {
     map.current.on("load", () => {
       if (state) {
         /* Add the data to your map as a layer */
-        map.current.addLayer({
-          id: "locations",
-          type: "circle",
-          /* Add a GeoJSON source containing place coordinates and information. */
-          source: {
-            type: "geojson",
-            data: stores,
-          },
-        });
+        // map.current.addLayer({
+        //   id: "locations",
+        //   type: "circle",
+        //   /* Add a GeoJSON source containing place coordinates and information. */
+        //   source: {
+        //     type: "geojson",
+        //     data: stores,
+        //   },
+        // });
         addMarkers();
 
         // buildLocationList(stores);
@@ -215,21 +223,27 @@ const Map = () => {
 
   //
   const addMarkers = () => {
+    const farmSelected = selected.find((el) => el.toLowerCase() === "farms");
+    const airportSelected = selected.find(
+      (el) => el.toLowerCase() === "airports"
+    );
     /* For each feature in the GeoJSON object above: */
     for (const marker of stores.features) {
+      // console.log(marker.properties);
       /* Create a div element for the marker. */
       const el = document.createElement("div");
       /* Assign a unique `id` to the marker. */
       el.id = `marker-${marker.properties.id}`;
       /* Assign the `marker` class to each marker for styling. */
-      el.className = "marker";
-      console.log(marker);
+      el.className = `marker ${
+        marker.properties.farmCategory ? "farm-marker" : ""
+      } ${marker.properties.scheduled_service ? "airport-marker" : ""}`;
 
       /**
        * Create a marker using the div element
        * defined above and add it to the map.
        **/
-      new mapboxgl.Marker(el, { offset: [0, -23] })
+      new mapboxgl.Marker(el, { offset: [0, 0] })
         .setLngLat(marker.geometry.coordinates)
         .addTo(map.current);
 
@@ -250,7 +264,7 @@ const Map = () => {
         const listing = document.getElementById(
           `listing-${marker.properties.id}`
         );
-        listing.classList.add("active");
+        if (listing) listing.classList.add("active");
       });
     }
   };
@@ -356,6 +370,7 @@ const Map = () => {
   }
 
   const handleChange = (tags) => {
+    setSelected(tags);
     if (tags.length === 0) {
       setStores({ type: "FeatureCollection", features: [] });
       return;
@@ -364,10 +379,11 @@ const Map = () => {
 
     let newStore = { type: "FeatureCollection", features: [] };
     tags.map((el) => {
-      if (el.toLowerCase() === "farms")
+      if (el.toLowerCase() === "farms") {
         newStore.features = [...newStore.features, ...farmStore.features];
-      else if (el.toLowerCase() === "airports")
+      } else if (el.toLowerCase() === "airports") {
         newStore.features = [...newStore.features, ...airportStore.features];
+      }
     });
     setStores(newStore);
   };
@@ -388,7 +404,6 @@ const Map = () => {
           handleChange={handleChange}
           loading={loading}
         />
-
         <div
           ref={mapContainerRef}
           style={{

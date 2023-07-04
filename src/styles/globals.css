@@ -175,7 +175,15 @@ p {
   height: 10px;
   width: 10px;
   border-radius: 50%;
-  /* background-image: url(../assets/farmIcon.png); */
+  background-color: #91c949;
+}
+
+.farm-marker {
+  background-color: #91c949;
+}
+
+.airport-marker {
+  background-color: #1775bd;
 }
 
 .mapboxgl-popup {
