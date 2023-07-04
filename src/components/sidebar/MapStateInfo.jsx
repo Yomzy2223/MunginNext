@@ -101,10 +101,13 @@ const MapStateInfo = ({
                 className="title"
                 onClick={() => handleListClick(store)}
               >
-                {store.properties.name}, {store?.properties?.farmType}
+                {store.properties.name},{" "}
+                {store?.properties?.farmType || store?.properties?.type}
               </a>
               <div>
-                {store?.properties?.farmCategory}, {store?.properties?.region},{" "}
+                {store?.properties?.farmCategory}{" "}
+                {store?.properties?.farmCategory && ","}{" "}
+                {store?.properties?.region} {store?.properties?.region && ","}{" "}
                 {store.properties.state}
               </div>
             </Listing>
