@@ -13,6 +13,7 @@ import styled from "styled-components";
 import logo from "../assets/images/MUNGINLogo.png";
 import { getMapAirportInfo, getMapInfo } from "@/services/auth.service";
 import farmImg from "../assets/farmIcon.png";
+import { TbZoomReplace } from "react-icons/tb";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoieW9tenkyMjIzIiwiYSI6ImNsaHgyZ28xcjBwcGozcW50anYwd2owcTkifQ.-uQHl78lQyHAQf-wnBAplw";
@@ -47,6 +48,10 @@ const Map = () => {
   }, [state]);
 
   const handleMapInfo = async () => {
+    let stores = {
+      type: "FeatureCollection",
+      features: [],
+    };
     setLoading(true);
     const farms = await getMapInfo(state);
     const airports = await getMapAirportInfo(state);
@@ -57,15 +62,15 @@ const Map = () => {
         type: "FeatureCollection",
         features: farms,
       });
+      stores.features = [...stores.features, ...farms];
+    }
+    if (airports?.length > 0) {
       setAirportStore({
         type: "FeatureCollection",
         features: airports,
       });
-      setStores({
-        type: "FeatureCollection",
-        features: airports ? [...farms, ...airports] : farms,
-      });
     }
+    setStores(stores);
   };
 
   // const handleMapInfo = async () => {
@@ -304,7 +309,7 @@ const Map = () => {
     /** Check if there is already a popup on the map and if so, remove it */
     if (popUps[0]) popUps[0].remove();
 
-    const popup = new mapboxgl.Popup({ closeOnClick: false })
+    const popup = new mapboxgl.Popup({ closeOnClick: true })
       .setLngLat(currentFeature.geometry.coordinates)
       .setHTML(
         `<h3>${currentFeature.properties.name}</h3><h4>${currentFeature.properties.farmCategory}</h4>`
@@ -388,6 +393,11 @@ const Map = () => {
     setStores(newStore);
   };
 
+  const resetZoom = () => {
+    map.current.setZoom(6);
+    // map.current.setCenter([8.6753, 9.082]);
+  };
+
   return (
     <div>
       {/* <Top>
@@ -414,6 +424,9 @@ const Map = () => {
             overflow: "hidden",
           }}
         ></div>
+        <ResetZoom>
+          <TbZoomReplace color="#000" size={18} onClick={resetZoom} />
+        </ResetZoom>
       </div>
     </div>
   );
@@ -431,5 +444,21 @@ export const Top = styled.div`
   a {
     text-decoration: none;
     color: inherit;
+  }
+`;
+
+export const ResetZoom = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: 175px;
+  right: 8px;
+  z-index: 1000;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+
+  :hover {
+    background-color: #eee;
   }
 `;
