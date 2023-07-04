@@ -19,9 +19,12 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { Oval } from "react-loading-icons";
+import { useRouter } from "next/router";
 
 const LoginComponent = () => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const initialValues = {
     email: "",
@@ -50,7 +53,7 @@ const LoginComponent = () => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       let response = await loginUser(formValues);
       console.log(response);
-      if (response === true) navigate("/");
+      if (response === true) router.push("/");
       setIsLoading(false);
       // AuthService.login(formValues.email, formValues.password).then(
       //   () => {
