@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import styled from "styled-components";
@@ -8,7 +9,7 @@ const Analyzer = ({ setOpen }) => {
   const [result, setResult] = useState("");
   // const [params, setParams] = useSearchParams();
 
-  // const location = useLocation();
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ const Analyzer = ({ setOpen }) => {
       soil: e.target[1].value,
       crop: e.target[0].value,
     };
-    setParams(required);
+    router.push({ query: required });
     setAnalysed(true);
   };
 
