@@ -5,6 +5,8 @@ import { Puff } from "react-loading-icons";
 import ReactPaginate from "react-paginate";
 import styled from "styled-components";
 import InputWithTags from "../Inputs/InputWithTags";
+import { useActions } from "./actions";
+import { DataPoint, DataPoints } from "./SelectState";
 
 const MapStateInfo = ({
   itemsPerPage,
@@ -14,14 +16,19 @@ const MapStateInfo = ({
   handleSearch,
   loading,
   handleChange = () => {},
+  onDataPointClick = () => {},
 }) => {
   const [itemOffset, setItemOffset] = useState(0);
   const [tags, setTags] = useState(["Farms"]);
 
+  const { active, checkSelectedDataPoints, handleDataToggle } = useActions({
+    onDataPointClick,
+  });
+
   const router = useRouter();
   const { query } = useRouter();
 
-  const { farm, state } = query;
+  const { name, state } = query;
 
   const items = lists?.features;
   const endOffset = itemOffset + itemsPerPage;
@@ -37,7 +44,13 @@ const MapStateInfo = ({
   };
 
   const handleBack = () => {
-    router.push("/map");
+    router.push({
+      pathname: "/map",
+      query: {
+        ...router.query,
+        view: false,
+      },
+    });
   };
 
   const handleTagSelect = (tag) => {
@@ -57,29 +70,68 @@ const MapStateInfo = ({
   return (
     <SidebarInfoWrapper>
       <MapSidebarHeader className="heading">
-        <HiArrowLeft
-          onClick={handleBack}
-          style={{ cursor: "pointer", height: "25px" }}
-        />
-        {/* <select name="locations" id="locations" onChange={handleChange}>
-          <option value="farms">Farms</option>
-          <option value="airports">Airports</option>
-        </select> */}
-        <InputWithTags
-          options={["Farms", "Airports"]}
-          tags={tags}
-          handleSelect={handleTagSelect}
-          handleRemove={handleTagRemove}
-          placeholder="Select type"
-        />
-        <input
-          type="text"
-          placeholder="Search location, farms..."
-          onChange={handleSearch}
-        />
-        {currentItems && items && (
-          <Count>{currentItems?.length + "/" + items?.length}</Count>
-        )}
+        <DataPoints>
+          {checkSelectedDataPoints("farms") && (
+            <DataPoint
+              $active={active === "farms"}
+              $selected={true}
+              onClick={() => handleDataToggle("farms")}
+            >
+              Farms
+            </DataPoint>
+          )}
+          {checkSelectedDataPoints("airports") && (
+            <DataPoint
+              $active={active === "airports"}
+              $selected={true}
+              onClick={() => handleDataToggle("airports")}
+              hueSelected={170}
+              hueActive={190}
+            >
+              Airports
+            </DataPoint>
+          )}
+          {checkSelectedDataPoints("seaports") && (
+            <DataPoint
+              $active={active === "seaports"}
+              $selected={true}
+              onClick={() => handleDataToggle("seaports")}
+              hueSelected={220}
+              hueActive={240}
+            >
+              Seaports
+            </DataPoint>
+          )}
+          {checkSelectedDataPoints("markets") && (
+            <DataPoint
+              $active={active === "markets"}
+              $selected={true}
+              onClick={() => handleDataToggle("markets")}
+              hueSelected={260}
+              hueActive={280}
+            >
+              Markets
+            </DataPoint>
+          )}
+        </DataPoints>
+        <SubHeader>
+          <HiArrowLeft
+            onClick={handleBack}
+            style={{
+              cursor: "pointer",
+              height: "25px",
+              justifySelf: "flex-start",
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Search location, farms..."
+            onChange={handleSearch}
+          />
+          {currentItems && items && (
+            <Count>{currentItems?.length + "/" + items?.length}</Count>
+          )}
+        </SubHeader>
       </MapSidebarHeader>
       {loading ? (
         <Loading>
@@ -93,7 +145,7 @@ const MapStateInfo = ({
               id={`listing-${store.properties.id}`}
               className="item"
               ref={listingRef}
-              active={farm === store.properties.name}
+              active={name === store.properties.name}
             >
               <a
                 id={`link-${store.properties.id}`}
@@ -102,7 +154,9 @@ const MapStateInfo = ({
                 onClick={() => handleListClick(store)}
               >
                 {store.properties.name},{" "}
-                {store?.properties?.farmType || store?.properties?.type}
+                {store?.properties?.farmType ||
+                  store?.properties?.type ||
+                  store?.properties?.source}
               </a>
               <div>
                 {store?.properties?.farmCategory}{" "}
@@ -149,11 +203,10 @@ export const SidebarInfoWrapper = styled.div`
 
 export const MapSidebarHeader = styled.div`
   display: flex;
+  flex-flow: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 16px;
   width: 100%;
-  padding: 10px;
 
   input {
     flex: 1;
@@ -183,6 +236,15 @@ export const Count = styled.p`
 
 export const Listing = styled.div`
   background-color: ${({ active }) => (active ? "#BAFFE655" : "transparent")};
+`;
+
+export const SubHeader = styled.div`
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  border-bottom: 1px solid #eee;
+  padding: 12px 24px;
+  width: 100%;
 `;
 
 export const Pagination = styled.div`

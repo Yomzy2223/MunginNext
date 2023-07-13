@@ -7,7 +7,7 @@ import Modal1 from "../../layout/Modal1";
 import Analyzer from "../../components/CropDetails/Analyzer";
 import Link from "next/link";
 import Image from "next/image";
-import { Router } from "next/router";
+import { Router, useRouter } from "next/router";
 import {
   Container,
   CropName,
@@ -24,6 +24,8 @@ const DatabaseComponent = () => {
   const [crops, setCrops] = useState([]);
   const [search, setSearch] = useState("");
 
+  const router = useRouter();
+
   useEffect(() => {
     handleCrops();
   }, []);
@@ -33,15 +35,25 @@ const DatabaseComponent = () => {
     setCrops(crops);
   };
 
+  const handleMapNavigate = () => {
+    const selected = ["farms", "markets", "seaports", "airports"].filter(
+      (el) => JSON.parse(localStorage.getItem(el + "States"))?.length > 0
+    );
+
+    router.push({
+      pathname: "/map",
+      query: {
+        selected: selected || "",
+      },
+    });
+  };
+
   return (
     <Container>
       <Header>
         <Top>
           <Link href="/">
             <Image src={logo} alt="" />
-          </Link>
-          <Link href="/map">
-            <button>Check Map</button>
           </Link>
         </Top>
 
@@ -63,7 +75,7 @@ const DatabaseComponent = () => {
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            <button onClick={setOpen}>Analyze Crop Yield</button>
+            <button onClick={handleMapNavigate}>Check Map</button>
           </MiddleRight>
         </Middle>
       </Header>

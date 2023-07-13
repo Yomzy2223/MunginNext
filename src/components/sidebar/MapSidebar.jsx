@@ -14,16 +14,17 @@ const MapSidebar = ({
   handleSearch,
   loading,
   handleChange = () => {},
+  onDataPointClick,
 }) => {
   const [itemOffset, setItemOffset] = useState(0);
 
   const { query } = useRouter();
 
-  const { state } = query;
+  const { view } = query;
 
   return (
     <div className="sidebar">
-      {state ? (
+      {view === "true" ? (
         <MapStateInfo
           itemsPerPage={itemsPerPage}
           lists={lists}
@@ -32,6 +33,7 @@ const MapSidebar = ({
           handleSearch={handleSearch}
           loading={loading}
           handleChange={handleChange}
+          onDataPointClick={onDataPointClick}
         />
       ) : (
         <SelectState />
