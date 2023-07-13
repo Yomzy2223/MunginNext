@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, createContext } from "react";
 import mapboxgl from "mapbox-gl";
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 // import "./Map.css";
@@ -11,15 +11,21 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import logo from "../assets/images/MUNGINLogo.png";
-import { getMapAirportInfo, getMapInfo } from "@/services/auth.service";
+import {
+  getMapAirportInfo,
+  getMapInfo,
+  getMarketInfo,
+} from "@/services/auth.service";
 import farmImg from "../assets/farmIcon.png";
 import { TbZoomReplace } from "react-icons/tb";
+import { MdClear } from "react-icons/md";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoieW9tenkyMjIzIiwiYSI6ImNsaHgyZ28xcjBwcGozcW50anYwd2owcTkifQ.-uQHl78lQyHAQf-wnBAplw";
 
+export const MapContext = createContext();
+
 const Map = () => {
-  const [selected, setSelected] = useState(["Farms"]);
   const [farmStore, setFarmStore] = useState({
     type: "FeatureCollection",
     features: [],
@@ -28,12 +34,21 @@ const Map = () => {
     type: "FeatureCollection",
     features: [],
   });
+  const [marketStore, setMarketStore] = useState({
+    type: "FeatureCollection",
+    features: [],
+  });
+  const [activeStore, setActiveStore] = useState([]);
+  const [activeStoreFiltered, setActiveStoreFiltered] = useState([]);
+  const [stores, setStores] = useState(farmStore);
   const [loading, setLoading] = useState(false);
 
-  const [stores, setStores] = useState(farmStore);
-
   const router = useRouter();
-  const { state } = router.query;
+  const { view, selected } = router.query;
+
+  const active =
+    typeof selected === "string" ? selected : selected?.[selected?.length - 1];
+
   const mapContainerRef = useRef(null);
 
   let map = useRef();
@@ -44,31 +59,81 @@ const Map = () => {
   );
 
   useEffect(() => {
-    if (state) handleMapInfo();
-  }, [state]);
+    if (view) handleMapInfo();
+  }, [view]);
+
+  const findDataPoint = (dataPoint) => {
+    if (typeof selected === "string") {
+      return dataPoint === selected;
+    } else {
+      return selected?.find((el) => el === dataPoint);
+    }
+  };
 
   const handleMapInfo = async () => {
     let stores = {
       type: "FeatureCollection",
       features: [],
     };
+    const farmState = JSON.parse(localStorage.getItem("farmsStates"))?.[0];
+    const marketState = JSON.parse(localStorage.getItem("marketsStates"))?.[0];
+
     setLoading(true);
-    const farms = await getMapInfo(state);
-    const airports = await getMapAirportInfo(state);
+    const farms = findDataPoint("farms") ? await getMapInfo(farmState) : [];
+    const airports = findDataPoint("airports") ? await getMapAirportInfo() : [];
+    const markets = findDataPoint("markets")
+      ? await getMarketInfo(marketState)
+      : [];
     setLoading(false);
-    console.log(farms);
+
     if (farms?.length > 0) {
       setFarmStore({
         type: "FeatureCollection",
         features: farms,
       });
       stores.features = [...stores.features, ...farms];
+      if (active === "farms") {
+        setActiveStore({
+          type: "FeatureCollection",
+          features: farms,
+        });
+        setActiveStoreFiltered({
+          type: "FeatureCollection",
+          features: farms,
+        });
+      }
     }
     if (airports?.length > 0) {
       setAirportStore({
         type: "FeatureCollection",
         features: airports,
       });
+      if (active === "airports") {
+        setActiveStore({
+          type: "FeatureCollection",
+          features: airports,
+        });
+        setActiveStoreFiltered({
+          type: "FeatureCollection",
+          features: airports,
+        });
+      }
+    }
+    if (markets?.length > 0) {
+      setMarketStore({
+        type: "FeatureCollection",
+        features: markets,
+      });
+      if (active === "markets") {
+        setActiveStore({
+          type: "FeatureCollection",
+          features: markets,
+        });
+        setActiveStoreFiltered({
+          type: "FeatureCollection",
+          features: markets,
+        });
+      }
     }
     setStores(stores);
   };
@@ -103,7 +168,6 @@ const Map = () => {
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [8.6753, 9.082],
-      // center: [8.6753, 9.082],
       zoom: 6,
     });
 
@@ -118,7 +182,7 @@ const Map = () => {
 
       // Set mapbox-gl-draw to draw by default.
       // The user does not have to click the polygon control button first.
-      defaultMode: "draw_polygon",
+      // defaultMode: "draw_polygon",
     });
     map.current.addControl(draw);
     map.current.addControl(new mapboxgl.NavigationControl());
@@ -173,7 +237,7 @@ const Map = () => {
     });
 
     map.current.on("load", () => {
-      if (state) {
+      if (view) {
         /* Add the data to your map as a layer */
         // map.current.addLayer({
         //   id: "locations",
@@ -184,7 +248,9 @@ const Map = () => {
         //     data: stores,
         //   },
         // });
-        addMarkers();
+        findDataPoint("farms") && addMarkers(farmStore, "farm-marker");
+        findDataPoint("airports") && addMarkers(airportStore, "airport-marker");
+        findDataPoint("markets") && addMarkers(marketStore, "market-marker");
 
         // buildLocationList(stores);
       }
@@ -224,25 +290,22 @@ const Map = () => {
 
     // Clean up on unmount
     return () => map.current.remove();
-  }, [stores.features?.length, farmStore]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [farmStore, marketStore, airportStore]); // eslint-disable-line react-hooks/exhaustive-deps
 
   //
-  const addMarkers = () => {
-    const farmSelected = selected.find((el) => el.toLowerCase() === "farms");
-    const airportSelected = selected.find(
-      (el) => el.toLowerCase() === "airports"
-    );
+  const addMarkers = (dataPointStore, className) => {
     /* For each feature in the GeoJSON object above: */
-    for (const marker of stores.features) {
+    for (const marker of dataPointStore?.features) {
       // console.log(marker.properties);
       /* Create a div element for the marker. */
       const el = document.createElement("div");
       /* Assign a unique `id` to the marker. */
       el.id = `marker-${marker.properties.id}`;
       /* Assign the `marker` class to each marker for styling. */
-      el.className = `marker ${
-        marker.properties.farmCategory ? "farm-marker" : ""
-      } ${marker.properties.scheduled_service ? "airport-marker" : ""}`;
+      // el.className = `marker ${
+      //   marker.properties.farmCategory ? "farm-marker" : ""
+      // } ${marker.properties.scheduled_service ? "airport-marker" : ""}`;
+      el.className = `marker ${className}`;
 
       /**
        * Create a marker using the div element
@@ -254,7 +317,7 @@ const Map = () => {
 
       el.addEventListener("click", (e) => {
         router.push({
-          query: { state, farm: marker.properties.name },
+          query: { ...router.query, view, name: marker.properties.name },
         });
         /* Fly to the point */
         flyToStore(marker);
@@ -276,15 +339,14 @@ const Map = () => {
 
   //
   const handleListClick = (point) => {
-    const id = `link-${point.properties.id}`;
+    const id = `link-${point.id}`;
 
     router.push({
-      query: { state, farm: point.properties.name },
+      query: { ...router.query, view, name: point.properties.name },
     });
-    console.log(point);
 
-    for (const feature of stores.features) {
-      if (id === `link-${feature.properties.id}`) {
+    for (const feature of activeStoreFiltered.features) {
+      if (id === `link-${feature.id}`) {
         flyToStore(feature);
         createPopUp(feature);
       }
@@ -309,18 +371,34 @@ const Map = () => {
     /** Check if there is already a popup on the map and if so, remove it */
     if (popUps[0]) popUps[0].remove();
 
-    const popup = new mapboxgl.Popup({ closeOnClick: true })
+    const popup = new mapboxgl.Popup({
+      closeOnClick: true,
+      closeButton: true,
+    })
       .setLngLat(currentFeature.geometry.coordinates)
       .setHTML(
-        `<h3>${currentFeature.properties.name}</h3><h4>${currentFeature.properties.farmCategory}</h4>`
+        `<h3>${
+          currentFeature.properties.farmCategory ||
+          currentFeature?.properties?.type ||
+          currentFeature?.properties?.source
+        } <button class="popup-close-button" >X</button></h3>
+        
+        <h4>${currentFeature.properties.name}</h4>`
       )
       .addTo(map.current);
+    // Add a click event listener to the close button
+    document
+      .querySelector(".popup-close-button")
+      ?.addEventListener("click", () => {
+        popup.remove();
+      });
   };
 
+  //
   const handleSearch = (e) => {
     const value = e.target.value;
     if (value) {
-      const filteredStore = stores.features.filter(
+      const filteredStore = activeStore.features.filter(
         (el) =>
           checkInclude(el?.properties?.name, value) ||
           checkInclude(el?.properties?.farmType, value) ||
@@ -328,10 +406,12 @@ const Map = () => {
           checkInclude(el?.properties?.region, value) ||
           checkInclude(el?.properties?.state, value)
       );
-
-      setStores({ ...stores, features: filteredStore });
+      setActiveStoreFiltered({
+        type: "FeatureCollection",
+        features: filteredStore,
+      });
     } else {
-      setStores(stores);
+      setActiveStoreFiltered(activeStore);
     }
   };
 
@@ -374,28 +454,50 @@ const Map = () => {
     return coordinatesInside;
   }
 
-  const handleChange = (tags) => {
-    setSelected(tags);
-    if (tags.length === 0) {
-      setStores({ type: "FeatureCollection", features: [] });
-      return;
-    }
-    console.log(airportStore);
+  // const handleChange = (tags) => {
+  //   setSelected(tags);
+  //   if (tags.length === 0) {
+  //     setStores({ type: "FeatureCollection", features: [] });
+  //     return;
+  //   }
+  //   console.log(airportStore);
 
-    let newStore = { type: "FeatureCollection", features: [] };
-    tags.map((el) => {
-      if (el.toLowerCase() === "farms") {
-        newStore.features = [...newStore.features, ...farmStore.features];
-      } else if (el.toLowerCase() === "airports") {
-        newStore.features = [...newStore.features, ...airportStore.features];
-      }
-    });
-    setStores(newStore);
-  };
+  //   let newStore = { type: "FeatureCollection", features: [] };
+  //   tags.map((el) => {
+  //     if (el.toLowerCase() === "farms") {
+  //       newStore.features = [...newStore.features, ...farmStore.features];
+  //     } else if (el.toLowerCase() === "airports") {
+  //       newStore.features = [...newStore.features, ...airportStore.features];
+  //     }
+  //   });
+  //   setStores(newStore);
+  // };
 
   const resetZoom = () => {
     map.current.setZoom(6);
     // map.current.setCenter([8.6753, 9.082]);
+  };
+
+  const handleDataPointClick = (selected) => {
+    if (selected === "airports") {
+      setActiveStore(airportStore);
+      setActiveStoreFiltered(airportStore);
+    } else if (selected === "farms") {
+      setActiveStore(farmStore);
+      setActiveStoreFiltered(farmStore);
+    } else if (selected === "markets") {
+      setActiveStore(marketStore);
+      setActiveStoreFiltered(marketStore);
+    } else if (selected === "seaports") {
+      setActiveStore({
+        type: "FeatureCollection",
+        features: [],
+      });
+      setActiveStoreFiltered({
+        type: "FeatureCollection",
+        features: [],
+      });
+    }
   };
 
   return (
@@ -405,29 +507,31 @@ const Map = () => {
           <Image src={logo} alt="" />
         </Link>
       </Top> */}
-      <div className="container">
-        <MapSidebar
-          lists={stores}
-          handleListClick={handleListClick}
-          listingRef={listingRef}
-          handleSearch={handleSearch}
-          handleChange={handleChange}
-          loading={loading}
-        />
-        <div
-          ref={mapContainerRef}
-          style={{
-            height: "100vh",
-            position: "absolute",
-            left: "33.3333%",
-            width: "66.6666%",
-            overflow: "hidden",
-          }}
-        ></div>
-        <ResetZoom>
-          <TbZoomReplace color="#000" size={18} onClick={resetZoom} />
-        </ResetZoom>
-      </div>
+      <MapContext.Provider>
+        <div className="container">
+          <MapSidebar
+            lists={activeStoreFiltered}
+            handleListClick={handleListClick}
+            listingRef={listingRef}
+            handleSearch={handleSearch}
+            loading={loading}
+            onDataPointClick={handleDataPointClick}
+          />
+          <div
+            ref={mapContainerRef}
+            style={{
+              height: "100vh",
+              position: "absolute",
+              left: "33.3333%",
+              width: "66.6666%",
+              overflow: "hidden",
+            }}
+          ></div>
+          <ResetZoom>
+            <TbZoomReplace color="#000" size={18} onClick={resetZoom} />
+          </ResetZoom>
+        </div>
+      </MapContext.Provider>
     </div>
   );
 };

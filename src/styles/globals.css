@@ -76,7 +76,7 @@ p {
   background: #fff;
   border-bottom: 1px solid #eee;
   height: max(60px, max-height);
-  padding: 0 10px;
+  /* padding: 0 10px; */
 }
 
 .listings {
@@ -142,6 +142,11 @@ p {
 }
 
 .mapboxgl-popup-content h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+
   background: #91c949;
   color: #fff;
   margin: 0;
@@ -159,6 +164,14 @@ p {
 
 .mapboxgl-popup-content div {
   padding: 10px;
+}
+
+.popup-close-button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  font-weight: 700;
 }
 
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
@@ -183,7 +196,11 @@ p {
 }
 
 .airport-marker {
-  background-color: #1775bd;
+  background-color: hsl(170, 54%, 58%);
+}
+
+.market-marker {
+  background-color: hsl(260, 54%, 58%);
 }
 
 .mapboxgl-popup {

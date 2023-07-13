@@ -115,7 +115,7 @@ export const getCrops = async () => {
     return response.data;
   } catch (e) {
     if (e?.message?.toString() === "Network Error")
-      toast.error("Please check your internet connection");
+      toast.error("Network error");
     else toast.error(e?.response?.data);
     console.log(e);
     return e?.response?.data;
@@ -128,7 +128,7 @@ export const getCropDetails = async (id) => {
     return response.data;
   } catch (e) {
     if (e?.message?.toString() === "Network Error")
-      toast.error("Please check your internet connection");
+      toast.error("Network error");
     else toast.error(e?.response?.data);
     console.log(e);
     return e?.response?.data;
@@ -141,8 +141,7 @@ export const analyzeCrop = async (searchParams) => {
     let response = await client.put(`/crop/yield/check${searchParams}`);
     return response.data;
   } catch (e) {
-    if (e.message.toString() === "Network Error")
-      toast.error("Please check your internet connection");
+    if (e.message.toString() === "Network Error") toast.error("Network error");
     else toast.error(e.response.data);
     console.log(e);
     return e.response.data;
@@ -157,8 +156,7 @@ export const getMapInfo = async (state) => {
     // console.log(JSON.parse(response.data));
     return response.data;
   } catch (e) {
-    if (e.message.toString() === "Network Error")
-      toast.error("Please check your internet connection");
+    if (e.message.toString() === "Network Error") toast.error("Network error");
     // else toast.error(e.response.data);
     return e;
   }
@@ -167,13 +165,32 @@ export const getMapInfo = async (state) => {
 export const getMapAirportInfo = async (state) => {
   try {
     let response = await client.get(
-      `https://crop-profiles.herokuapp.com/api/v1/geo/airport/state?state=${state}`
+      `https://crop-profiles.herokuapp.com/api/v1/geo/airport`
     );
-    // console.log(JSON.parse(response.data));
+    let data = response.data;
+    const airportStates = JSON.parse(localStorage.getItem("airportsStates"));
+    data = data.filter((el) =>
+      airportStates.find(
+        (each) =>
+          each?.toLowerCase() === el.properties.state.slice(0, 2)?.toLowerCase()
+      )
+    );
+    return data;
+  } catch (e) {
+    if (e.message.toString() === "Network Error") toast.error("Network error");
+    // else toast.error(e.response.data);
+    return e;
+  }
+};
+
+export const getMarketInfo = async (state) => {
+  try {
+    let response = await client.get(
+      `https://crop-profiles.herokuapp.com/api/v1/geo/market/state?state=${state}`
+    );
     return response.data;
   } catch (e) {
-    if (e.message.toString() === "Network Error")
-      toast.error("Please check your internet connection");
+    if (e.message.toString() === "Network Error") toast.error("Network error");
     // else toast.error(e.response.data);
     return e;
   }
