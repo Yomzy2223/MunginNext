@@ -1,7 +1,8 @@
 {
   "extends": "next/core-web-vitals",
   "globals": {
-    "Promise": "readonly"
+    "Promise": "readonly",
+    "Set": "readonly"
   },
   "rules": {
     "react/no-unescaped-entities": "off",
