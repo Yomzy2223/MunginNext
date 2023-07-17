@@ -54,7 +54,7 @@ const Map = () => {
   let map = useRef();
   const listingRef = useRef();
 
-  const storesCoordinates = stores?.features?.map(
+  const storesCoordinates = activeStore?.features?.map(
     (el) => el?.geometry?.coordinates
   );
 
@@ -80,18 +80,20 @@ const Map = () => {
 
     setLoading(true);
     const farms = findDataPoint("farms") ? await getMapInfo(farmState) : [];
+    console.log(farms);
     const airports = findDataPoint("airports") ? await getMapAirportInfo() : [];
     const markets = findDataPoint("markets")
       ? await getMarketInfo(marketState)
       : [];
     setLoading(false);
 
+    resetStores();
+
     if (farms?.length > 0) {
       setFarmStore({
         type: "FeatureCollection",
         features: farms,
       });
-      stores.features = [...stores.features, ...farms];
       if (active === "farms") {
         setActiveStore({
           type: "FeatureCollection",
@@ -135,7 +137,30 @@ const Map = () => {
         });
       }
     }
-    setStores(stores);
+  };
+
+  //
+  const resetStores = () => {
+    setActiveStore({
+      type: "FeatureCollection",
+      features: [],
+    });
+    setActiveStoreFiltered({
+      type: "FeatureCollection",
+      features: [],
+    });
+    setFarmStore({
+      type: "FeatureCollection",
+      features: [],
+    });
+    setAirportStore({
+      type: "FeatureCollection",
+      features: [],
+    });
+    setMarketStore({
+      type: "FeatureCollection",
+      features: [],
+    });
   };
 
   // const handleMapInfo = async () => {
@@ -195,13 +220,13 @@ const Map = () => {
         storesCoordinates,
         coordinates[0]
       );
-      const newStore = stores.features.filter((el) =>
+      const newStore = activeStore.features.filter((el) =>
         inside.find(
           (val) =>
             JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
         )
       );
-      setStores({
+      setActiveStoreFiltered({
         type: "FeatureCollection",
         features: newStore,
       });
@@ -216,13 +241,13 @@ const Map = () => {
         storesCoordinates,
         coordinates[0]
       );
-      const newStore = stores.features.filter((el) =>
+      const newStore = activeStore.features.filter((el) =>
         inside.find(
           (val) =>
             JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
         )
       );
-      setStores({
+      setActiveStoreFiltered({
         type: "FeatureCollection",
         features: newStore,
       });
@@ -232,7 +257,7 @@ const Map = () => {
     // Event handling for draw.delete
     map.current.on("draw.delete", (e) => {
       const feature = e.features[0];
-      setStores(stores);
+      setActiveStoreFiltered(activeStore);
       console.log("Feature deleted:", feature);
     });
 
@@ -256,9 +281,9 @@ const Map = () => {
       }
     });
 
-    stores.features.forEach(function (store, i) {
-      store.properties.id = i;
-    });
+    // activeStore.features.forEach(function (store, i) {
+    //   store.properties.id = i;
+    // });
 
     map.current.on("click", (event) => {
       /* Determine if a feature in the "locations" layer exists at that point. */

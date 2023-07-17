@@ -4,7 +4,6 @@ import { HiArrowLeft } from "react-icons/hi";
 import { Puff } from "react-loading-icons";
 import ReactPaginate from "react-paginate";
 import styled from "styled-components";
-import InputWithTags from "../Inputs/InputWithTags";
 import { useActions } from "./actions";
 import { DataPoint, DataPoints } from "./SelectState";
 
