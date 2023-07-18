@@ -40,8 +40,8 @@ const Map = () => {
   });
   const [activeStore, setActiveStore] = useState([]);
   const [activeStoreFiltered, setActiveStoreFiltered] = useState([]);
-  const [stores, setStores] = useState(farmStore);
   const [loading, setLoading] = useState(false);
+  const [polygonCoordinates, setPolygonCoordinates] = useState([]);
 
   const router = useRouter();
   const { view, selected } = router.query;
@@ -80,7 +80,6 @@ const Map = () => {
 
     setLoading(true);
     const farms = findDataPoint("farms") ? await getMapInfo(farmState) : [];
-    console.log(farms);
     const airports = findDataPoint("airports") ? await getMapAirportInfo() : [];
     const markets = findDataPoint("markets")
       ? await getMarketInfo(marketState)
@@ -216,49 +215,54 @@ const Map = () => {
     map.current.on("draw.create", (e) => {
       const feature = e.features[0];
       const coordinates = feature.geometry.coordinates;
-      const inside = getCoordinatesInsidePolygon(
-        storesCoordinates,
-        coordinates[0]
-      );
-      const newStore = activeStore.features.filter((el) =>
-        inside.find(
-          (val) =>
-            JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
-        )
-      );
-      setActiveStoreFiltered({
-        type: "FeatureCollection",
-        features: newStore,
-      });
-      console.log("Feature updated:", newStore);
+      setPolygonCoordinates(coordinates[0]);
+      // const inside = getCoordinatesInsidePolygon(
+      //   storesCoordinates,
+      //   coordinates[0]
+      // );
+      // const newStore = activeStore.features.filter((el) =>
+      //   inside.find(
+      //     (val) =>
+      //       JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
+      //   )
+      // );
+      // setActiveStoreFiltered({
+      //   type: "FeatureCollection",
+      //   features: newStore,
+      // });
+      // console.log("Feature updated:", newStore);
     });
 
     // Event handling for draw.update
     map.current.on("draw.update", (e) => {
       const feature = e.features[0];
       const coordinates = feature.geometry.coordinates;
-      const inside = getCoordinatesInsidePolygon(
-        storesCoordinates,
-        coordinates[0]
-      );
-      const newStore = activeStore.features.filter((el) =>
-        inside.find(
-          (val) =>
-            JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
-        )
-      );
-      setActiveStoreFiltered({
-        type: "FeatureCollection",
-        features: newStore,
-      });
-      console.log("Feature updated:", newStore);
+      setPolygonCoordinates(coordinates[0]);
+      // const inside = getCoordinatesInsidePolygon(
+      //   storesCoordinates,
+      //   coordinates[0]
+      // );
+      // console.log(inside);
+      // const newStore = activeStore.features.filter((el) =>
+      //   inside.find(
+      //     (val) =>
+      //       JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
+      //   )
+      // );
+      // console.log(newStore);
+      // setActiveStoreFiltered({
+      //   type: "FeatureCollection",
+      //   features: newStore,
+      // });
+      // console.log("Feature updated:", newStore);
     });
 
     // Event handling for draw.delete
     map.current.on("draw.delete", (e) => {
       const feature = e.features[0];
       setActiveStoreFiltered(activeStore);
-      console.log("Feature deleted:", feature);
+      setPolygonCoordinates([]);
+      // console.log("Feature deleted:", feature);
     });
 
     map.current.on("load", () => {
@@ -475,7 +479,6 @@ const Map = () => {
       }
     }
 
-    console.log(coordinatesInside);
     return coordinatesInside;
   }
 
@@ -524,6 +527,26 @@ const Map = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (storesCoordinates?.length > 0 && polygonCoordinates?.length > 0) {
+      const insidePolygon = getCoordinatesInsidePolygon(
+        storesCoordinates,
+        polygonCoordinates
+      );
+      let newStore = activeStore?.features?.filter((el) =>
+        insidePolygon?.find(
+          (val) =>
+            JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
+        )
+      );
+      newStore = {
+        type: "FeatureCollection",
+        features: newStore,
+      };
+      setActiveStoreFiltered(newStore);
+    }
+  }, [polygonCoordinates, activeStore]);
 
   return (
     <div>
