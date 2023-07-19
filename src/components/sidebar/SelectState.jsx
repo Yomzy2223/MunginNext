@@ -9,6 +9,7 @@ import { useActions } from "./actions";
 const SelectState = () => {
   const [stateSelect, setStateSelect] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [railChecked, setRailChecked] = useState(false);
 
   const {
     active,
@@ -19,6 +20,7 @@ const SelectState = () => {
   } = useActions({});
 
   const router = useRouter();
+  const { rail } = router.query;
 
   const handleView = (state) => {
     console.log(state);
@@ -53,6 +55,16 @@ const SelectState = () => {
 
     localStorage.setItem(active + "States", JSON.stringify(selectedStates));
     setStateSelect(!stateSelect);
+  };
+  //
+  const seeRailTracks = (e) => {
+    setRailChecked(!railChecked);
+    router.push({
+      query: {
+        ...router.query,
+        rail: !railChecked,
+      },
+    });
   };
 
   //
@@ -103,6 +115,7 @@ const SelectState = () => {
             $active={active === "farms"}
             $selected={checkSelectedDataPoints("farms")}
             onClick={() => handleDataSelect("farms")}
+            $disable={rail}
           >
             Farms
           </DataPoint>
@@ -112,6 +125,7 @@ const SelectState = () => {
             onClick={() => handleDataSelect("airports")}
             hueSelected={170}
             hueActive={190}
+            $disable={rail}
           >
             Airports
           </DataPoint>
@@ -121,6 +135,7 @@ const SelectState = () => {
             onClick={() => handleDataSelect("seaports")}
             hueSelected={220}
             hueActive={240}
+            $disable={rail}
           >
             Seaports
           </DataPoint>
@@ -130,22 +145,33 @@ const SelectState = () => {
             onClick={() => handleDataSelect("markets")}
             hueSelected={260}
             hueActive={280}
+            $disable={rail}
           >
             Markets
           </DataPoint>
         </DataPoints>
 
-        {active && active !== "farms" && active !== "markets" && (
-          <SelectAll>
-            <label htmlFor="select-all">Select All</label>
-            <input
-              type="checkbox"
-              id="select-all"
-              onChange={selectAll}
-              checked={checked}
-            />
-          </SelectAll>
-        )}
+        <SelectAll>
+          <label htmlFor="rail-tracks">Rail Tracks</label>
+          <input
+            type="checkbox"
+            id="rail-tracks"
+            defaultChecked={true}
+            onChange={seeRailTracks}
+            checked={railChecked}
+          />{" "}
+          {active && active !== "farms" && active !== "markets" && (
+            <>
+              <label htmlFor="select-all">Select All</label>
+              <input
+                type="checkbox"
+                id="select-all"
+                onChange={selectAll}
+                checked={checked}
+              />
+            </>
+          )}
+        </SelectAll>
         <AllStates>
           {nigeriaStates.map((state, i) => (
             <EachState
@@ -171,7 +197,9 @@ const SelectState = () => {
             </EachState>
           ))}
           <ViewOnMap>
-            <button onClick={handleView}>View On Map</button>
+            <button onClick={handleView} disabled={!selected}>
+              View On Map
+            </button>
           </ViewOnMap>
         </AllStates>
       </Main>
@@ -214,20 +242,20 @@ export const DataPoint = styled.p`
   color: ${({ $selected }) => $selected && "#ffffff"};
 
   :hover {
-    opacity: 0.95;
+    opacity: ${({ $disable }) => ($disable ? 1 : 0.95)};
   }
 
   :active {
-    scale: 0.9;
+    scale: ${({ $disable }) => ($disable ? 1 : 0.9)};
   }
 
-  ${({ $selected, $active, hueActive, hueSelected }) => {
-    if ($active)
+  ${({ $selected, $active, hueActive, hueSelected, $disable }) => {
+    if ($active && !$disable)
       return `
         background-color:  hsl( ${hueActive || "140"}, 72%, 28%);
         box-shadow: 0 10px 15px hsl( ${hueActive || "140"}, 72%, 70%);
     `;
-    if ($selected)
+    if ($selected && !$disable)
       return `
         background-color:  hsl( ${hueSelected || "100"}, 54%, 58%);
         border-bottom: 1px solid hsl( ${hueSelected || "100"}, 54%, 58%);
@@ -370,6 +398,11 @@ export const ViewOnMap = styled.div`
     :active {
       opacity: 0.8;
       scale: 0.9;
+    }
+    :disabled {
+      opacity: 0.7;
+      scale: 1;
+      cursor: not-allowed;
     }
   }
 `;

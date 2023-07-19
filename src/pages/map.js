@@ -14,7 +14,9 @@ import logo from "../assets/images/MUNGINLogo.png";
 import {
   getMapAirportInfo,
   getMapInfo,
+  getMapSeaportInfo,
   getMarketInfo,
+  getRailTracks,
 } from "@/services/auth.service";
 import farmImg from "../assets/farmIcon.png";
 import { TbZoomReplace } from "react-icons/tb";
@@ -34,17 +36,22 @@ const Map = () => {
     type: "FeatureCollection",
     features: [],
   });
+  const [seaportStore, setSeaportStore] = useState({
+    type: "FeatureCollection",
+    features: [],
+  });
   const [marketStore, setMarketStore] = useState({
     type: "FeatureCollection",
     features: [],
   });
+  const [railTracks, setRailTracks] = useState([]);
   const [activeStore, setActiveStore] = useState([]);
   const [activeStoreFiltered, setActiveStoreFiltered] = useState([]);
   const [loading, setLoading] = useState(false);
   const [polygonCoordinates, setPolygonCoordinates] = useState([]);
 
   const router = useRouter();
-  const { view, selected } = router.query;
+  const { view, selected, rail } = router.query;
 
   const active =
     typeof selected === "string" ? selected : selected?.[selected?.length - 1];
@@ -81,13 +88,16 @@ const Map = () => {
     setLoading(true);
     const farms = findDataPoint("farms") ? await getMapInfo(farmState) : [];
     const airports = findDataPoint("airports") ? await getMapAirportInfo() : [];
+    const seaports = findDataPoint("seaports") ? await getMapSeaportInfo() : [];
     const markets = findDataPoint("markets")
       ? await getMarketInfo(marketState)
       : [];
+    const rails = await getRailTracks();
     setLoading(false);
 
     resetStores();
 
+    setRailTracks(rails);
     if (farms?.length > 0) {
       setFarmStore({
         type: "FeatureCollection",
@@ -117,6 +127,22 @@ const Map = () => {
         setActiveStoreFiltered({
           type: "FeatureCollection",
           features: airports,
+        });
+      }
+    }
+    if (seaports?.length > 0) {
+      setSeaportStore({
+        type: "FeatureCollection",
+        features: seaports,
+      });
+      if (active === "seaports") {
+        setActiveStore({
+          type: "FeatureCollection",
+          features: seaports,
+        });
+        setActiveStoreFiltered({
+          type: "FeatureCollection",
+          features: seaports,
         });
       }
     }
@@ -156,35 +182,15 @@ const Map = () => {
       type: "FeatureCollection",
       features: [],
     });
+    setSeaportStore({
+      type: "FeatureCollection",
+      features: [],
+    });
     setMarketStore({
       type: "FeatureCollection",
       features: [],
     });
   };
-
-  // const handleMapInfo = async () => {
-  //   let mapPromise = [];
-  //   for (let i = 1; i <= 45; i++) {
-  //     let eachPromise = getMapInfo(i);
-  //     mapPromise.push(eachPromise);
-  //   }
-  //   setLoading(true);
-  //   const response2 = await Promise.all(mapPromise);
-  //   setLoading(false);
-  //   let farms = [];
-  //   response2?.map((el) => {
-  //     if (el?.farm?.length > 0) farms = [...farms, ...el.farm];
-  //   });
-  //   if (farms.length > 0)
-  //     setFarmStore({
-  //       type: "FeatureCollection",
-  //       features: farms,
-  //     });
-  //   setStores({
-  //     type: "FeatureCollection",
-  //     features: farms,
-  //   });
-  // };
 
   // Initialize map when component mounts
   useEffect(() => {
@@ -279,8 +285,54 @@ const Map = () => {
         // });
         findDataPoint("farms") && addMarkers(farmStore, "farm-marker");
         findDataPoint("airports") && addMarkers(airportStore, "airport-marker");
+        findDataPoint("seaports") && addMarkers(seaportStore, "seaport-marker");
         findDataPoint("markets") && addMarkers(marketStore, "market-marker");
 
+        // map.current.addSource("route", {
+        //   type: "geojson",
+        //   data: {
+        //     type: "Feature",
+        //     properties: {},
+        //     geometry: {
+        //       type: "LineString",
+        //       coordinates: [
+        //         [8.6753, 9.082],
+        //         [8.6853, 9.182],
+        //         [8.6753, 9.282],
+        //         [8.6753, 9.382],
+        //         [8.6753, 9.482],
+        //         [8.6753, 9.582],
+        //         [8.6753, 9.582],
+        //         [8.6753, 9.682],
+        //         [8.6753, 9.082],
+        //         [8.6753, 9.082],
+        //         [8.6753, 9.082],
+        //         [8.6753, 9.082],
+        //         [8.6753, 9.082],
+        //         [8.6753, 9.082],
+        //         [8.6753, 9.082],
+        //         [8.6753, 9.082],
+        //         [8.6753, 9.082],
+        //         [8.6753, 9.082],
+        //         [8.6753, 9.082],
+        //         [8.6753, 9.082],
+        //       ],
+        //     },
+        //   },
+        // });
+        // map.current.addLayer({
+        //   id: "route",
+        //   type: "line",
+        //   source: "route",
+        //   layout: {
+        //     "line-join": "round",
+        //     "line-cap": "round",
+        //   },
+        //   paint: {
+        //     "line-color": "#888",
+        //     "line-width": 8,
+        //   },
+        // });
         // buildLocationList(stores);
       }
     });
@@ -409,10 +461,13 @@ const Map = () => {
         `<h3>${
           currentFeature.properties.farmCategory ||
           currentFeature?.properties?.type ||
-          currentFeature?.properties?.source
+          currentFeature?.properties?.source ||
+          currentFeature.properties.state
         } <button class="popup-close-button" >X</button></h3>
         
-        <h4>${currentFeature.properties.name}</h4>`
+        <h4>${
+          currentFeature.properties.name || currentFeature.properties.port
+        }</h4>`
       )
       .addTo(map.current);
     // Add a click event listener to the close button
@@ -433,7 +488,13 @@ const Map = () => {
           checkInclude(el?.properties?.farmType, value) ||
           checkInclude(el?.properties?.farmCategory, value) ||
           checkInclude(el?.properties?.region, value) ||
-          checkInclude(el?.properties?.state, value)
+          checkInclude(el?.properties?.state, value) ||
+          checkInclude(el?.properties?.type, value) ||
+          checkInclude(el?.properties?.product_desc, value) ||
+          checkInclude(el?.properties?.type_goods, value) ||
+          checkInclude(el?.properties?.source, value) ||
+          checkInclude(el?.properties?.frequency, value) ||
+          checkInclude(el?.properties?.port, value)
       );
       setActiveStoreFiltered({
         type: "FeatureCollection",
@@ -517,15 +578,43 @@ const Map = () => {
       setActiveStore(marketStore);
       setActiveStoreFiltered(marketStore);
     } else if (selected === "seaports") {
-      setActiveStore({
-        type: "FeatureCollection",
-        features: [],
-      });
-      setActiveStoreFiltered({
-        type: "FeatureCollection",
-        features: [],
-      });
+      setActiveStore(seaportStore);
+      setActiveStoreFiltered(seaportStore);
     }
+  };
+
+  const handleRailTracks = (display) => {
+    railTracks.forEach((el) => {
+      if (display) {
+        map.current.addSource("route" + el.id, {
+          type: "geojson",
+          data: {
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "LineString",
+              coordinates: el.geometry.coordinates,
+            },
+          },
+        });
+        map.current.addLayer({
+          id: "route" + el.id,
+          type: "line",
+          source: "route" + el.id,
+          layout: {
+            "line-join": "round",
+            "line-cap": "round",
+          },
+          paint: {
+            "line-color": "#888",
+            "line-width": 8,
+          },
+        });
+      } else {
+        map.current.removeLayer("route" + el.id);
+        map.current.removeSource("route" + el.id);
+      }
+    });
   };
 
   useEffect(() => {
@@ -548,6 +637,15 @@ const Map = () => {
     }
   }, [polygonCoordinates, activeStore]);
 
+  useEffect(() => {
+    if (rail === "true") {
+      handleRailTracks(true);
+    } else {
+      handleRailTracks(false);
+    }
+  }, [rail]);
+
+  console.log(railTracks);
   return (
     <div>
       {/* <Top>

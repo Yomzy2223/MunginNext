@@ -199,6 +199,10 @@ p {
   background-color: hsl(170, 54%, 58%);
 }
 
+.seaport-marker {
+  background-color: hsl(240, 72%, 28%);
+}
+
 .market-marker {
   background-color: hsl(260, 54%, 58%);
 }

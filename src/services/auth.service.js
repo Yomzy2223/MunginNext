@@ -150,9 +150,7 @@ export const analyzeCrop = async (searchParams) => {
 
 export const getMapInfo = async (state) => {
   try {
-    let response = await client.get(
-      `https://crop-profiles.herokuapp.com/api/v1/geo/spatial/state?state=${state}`
-    );
+    let response = await client.get(`/geo/spatial/state?state=${state}`);
     // console.log(JSON.parse(response.data));
     return response.data;
   } catch (e) {
@@ -162,11 +160,9 @@ export const getMapInfo = async (state) => {
   }
 };
 
-export const getMapAirportInfo = async (state) => {
+export const getMapAirportInfo = async () => {
   try {
-    let response = await client.get(
-      `https://crop-profiles.herokuapp.com/api/v1/geo/airport`
-    );
+    let response = await client.get(`/geo/airport`);
     let data = response.data;
     const airportStates = JSON.parse(localStorage.getItem("airportsStates"));
     data = data.filter((el) =>
@@ -183,15 +179,42 @@ export const getMapAirportInfo = async (state) => {
   }
 };
 
+export const getMapSeaportInfo = async () => {
+  try {
+    let response = await client.get(`/geo/seaport`);
+    let data = response.data;
+    const airportStates = JSON.parse(localStorage.getItem("seaportsStates"));
+    data = data.filter((el) =>
+      airportStates.find(
+        (each) =>
+          each?.toLowerCase() === el.properties.state.slice(0, 2)?.toLowerCase()
+      )
+    );
+    return data;
+  } catch (e) {
+    if (e.message.toString() === "Network Error") toast.error("Network error");
+    // else toast.error(e.response.data);
+    return e;
+  }
+};
+
 export const getMarketInfo = async (state) => {
   try {
-    let response = await client.get(
-      `https://crop-profiles.herokuapp.com/api/v1/geo/market/state?state=${state}`
-    );
+    let response = await client.get(`/geo/market/state?state=${state}`);
     return response.data;
   } catch (e) {
     if (e.message.toString() === "Network Error") toast.error("Network error");
     // else toast.error(e.response.data);
+    return e;
+  }
+};
+
+export const getRailTracks = async () => {
+  try {
+    let response = await client.get(`/geo/rail/tracks`);
+    return response.data;
+  } catch (e) {
+    if (e.message.toString() === "Network Error") toast.error("Network error");
     return e;
   }
 };
