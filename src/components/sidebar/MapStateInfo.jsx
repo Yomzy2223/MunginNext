@@ -152,7 +152,7 @@ const MapStateInfo = ({
                 className="title"
                 onClick={() => handleListClick(store)}
               >
-                {store.properties.name},{" "}
+                {store.properties?.name || store.properties?.port},{" "}
                 {store?.properties?.farmType ||
                   store?.properties?.type ||
                   store?.properties?.source}
