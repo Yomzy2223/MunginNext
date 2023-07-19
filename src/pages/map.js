@@ -25,8 +25,6 @@ import { MdClear } from "react-icons/md";
 mapboxgl.accessToken =
   "pk.eyJ1IjoieW9tenkyMjIzIiwiYSI6ImNsaHgyZ28xcjBwcGozcW50anYwd2owcTkifQ.-uQHl78lQyHAQf-wnBAplw";
 
-export const MapContext = createContext();
-
 const Map = () => {
   const [farmStore, setFarmStore] = useState({
     type: "FeatureCollection",
@@ -69,6 +67,10 @@ const Map = () => {
     if (view) handleMapInfo();
   }, [view]);
 
+  useEffect(() => {
+    saveRailTracks();
+  }, []);
+
   const findDataPoint = (dataPoint) => {
     if (typeof selected === "string") {
       return dataPoint === selected;
@@ -77,11 +79,12 @@ const Map = () => {
     }
   };
 
+  const saveRailTracks = async () => {
+    const rails = await getRailTracks();
+    setRailTracks(rails);
+  };
+
   const handleMapInfo = async () => {
-    let stores = {
-      type: "FeatureCollection",
-      features: [],
-    };
     const farmState = JSON.parse(localStorage.getItem("farmsStates"))?.[0];
     const marketState = JSON.parse(localStorage.getItem("marketsStates"))?.[0];
 
@@ -92,12 +95,10 @@ const Map = () => {
     const markets = findDataPoint("markets")
       ? await getMarketInfo(marketState)
       : [];
-    const rails = await getRailTracks();
     setLoading(false);
 
     resetStores();
 
-    setRailTracks(rails);
     if (farms?.length > 0) {
       setFarmStore({
         type: "FeatureCollection",
@@ -272,7 +273,7 @@ const Map = () => {
     });
 
     map.current.on("load", () => {
-      if (view) {
+      if (view && rail !== "true") {
         /* Add the data to your map as a layer */
         // map.current.addLayer({
         //   id: "locations",
@@ -583,7 +584,7 @@ const Map = () => {
     }
   };
 
-  const handleRailTracks = (display) => {
+  const handleRailTracks = async (display) => {
     railTracks.forEach((el) => {
       if (display) {
         map.current.addSource("route" + el.id, {
@@ -611,8 +612,8 @@ const Map = () => {
           },
         });
       } else {
-        map.current.removeLayer("route" + el.id);
-        map.current.removeSource("route" + el.id);
+        map.current?.removeLayer("route" + el.id);
+        map.current?.removeSource("route" + el.id);
       }
     });
   };
@@ -645,7 +646,6 @@ const Map = () => {
     }
   }, [rail]);
 
-  console.log(railTracks);
   return (
     <div>
       {/* <Top>
@@ -653,31 +653,29 @@ const Map = () => {
           <Image src={logo} alt="" />
         </Link>
       </Top> */}
-      <MapContext.Provider>
-        <div className="container">
-          <MapSidebar
-            lists={activeStoreFiltered}
-            handleListClick={handleListClick}
-            listingRef={listingRef}
-            handleSearch={handleSearch}
-            loading={loading}
-            onDataPointClick={handleDataPointClick}
-          />
-          <div
-            ref={mapContainerRef}
-            style={{
-              height: "100vh",
-              position: "absolute",
-              left: "33.3333%",
-              width: "66.6666%",
-              overflow: "hidden",
-            }}
-          ></div>
-          <ResetZoom>
-            <TbZoomReplace color="#000" size={18} onClick={resetZoom} />
-          </ResetZoom>
-        </div>
-      </MapContext.Provider>
+      <div className="container">
+        <MapSidebar
+          lists={activeStoreFiltered}
+          handleListClick={handleListClick}
+          listingRef={listingRef}
+          handleSearch={handleSearch}
+          loading={loading}
+          onDataPointClick={handleDataPointClick}
+        />
+        <div
+          ref={mapContainerRef}
+          style={{
+            height: "100vh",
+            position: "absolute",
+            left: "33.3333%",
+            width: "66.6666%",
+            overflow: "hidden",
+          }}
+        ></div>
+        <ResetZoom>
+          <TbZoomReplace color="#000" size={18} onClick={resetZoom} />
+        </ResetZoom>
+      </div>
     </div>
   );
 };

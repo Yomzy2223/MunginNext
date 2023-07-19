@@ -9,7 +9,6 @@ import { useActions } from "./actions";
 const SelectState = () => {
   const [stateSelect, setStateSelect] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [railChecked, setRailChecked] = useState(false);
 
   const {
     active,
@@ -21,6 +20,10 @@ const SelectState = () => {
 
   const router = useRouter();
   const { rail } = router.query;
+
+  const [railChecked, setRailChecked] = useState(
+    rail === "true" ? true : false
+  );
 
   const handleView = (state) => {
     console.log(state);
@@ -93,7 +96,6 @@ const SelectState = () => {
     if (active) {
       let selectedStates = localStorage.getItem(active + "States");
       selectedStates = selectedStates ? JSON.parse(selectedStates) : [];
-      console.log(selectedStates.length);
       if (selectedStates?.length === 36) setChecked(true);
       else setChecked(false);
     }
@@ -115,7 +117,7 @@ const SelectState = () => {
             $active={active === "farms"}
             $selected={checkSelectedDataPoints("farms")}
             onClick={() => handleDataSelect("farms")}
-            $disable={rail}
+            $disable={rail === "true" ? true : false}
           >
             Farms
           </DataPoint>
@@ -125,7 +127,7 @@ const SelectState = () => {
             onClick={() => handleDataSelect("airports")}
             hueSelected={170}
             hueActive={190}
-            $disable={rail}
+            $disable={rail === "true" ? true : false}
           >
             Airports
           </DataPoint>
@@ -135,7 +137,7 @@ const SelectState = () => {
             onClick={() => handleDataSelect("seaports")}
             hueSelected={220}
             hueActive={240}
-            $disable={rail}
+            $disable={rail === "true" ? true : false}
           >
             Seaports
           </DataPoint>
@@ -145,21 +147,23 @@ const SelectState = () => {
             onClick={() => handleDataSelect("markets")}
             hueSelected={260}
             hueActive={280}
-            $disable={rail}
+            $disable={rail === "true" ? true : false}
           >
             Markets
           </DataPoint>
         </DataPoints>
 
         <SelectAll>
-          <label htmlFor="rail-tracks">Rail Tracks</label>
-          <input
-            type="checkbox"
-            id="rail-tracks"
-            defaultChecked={true}
-            onChange={seeRailTracks}
-            checked={railChecked}
-          />{" "}
+          <RailTrack disable={selected}>
+            <label htmlFor="rail-tracks">Rail Tracks</label>
+            <input
+              type="checkbox"
+              id="rail-tracks"
+              onChange={seeRailTracks}
+              checked={railChecked}
+              disabled={selected}
+            />{" "}
+          </RailTrack>
           {active && active !== "farms" && active !== "markets" && (
             <>
               <label htmlFor="select-all">Select All</label>
@@ -239,27 +243,41 @@ export const DataPoint = styled.p`
   border-radius: 8px;
   transition: 0.2s ease all;
   box-shadow: 5px 0 5px #e5e5e5;
-  color: ${({ $selected }) => $selected && "#ffffff"};
 
   :hover {
-    opacity: ${({ $disable }) => ($disable ? 1 : 0.95)};
+    opacity: 0.95;
   }
 
   :active {
-    scale: ${({ $disable }) => ($disable ? 1 : 0.9)};
+    scale: 0.9;
   }
 
   ${({ $selected, $active, hueActive, hueSelected, $disable }) => {
-    if ($active && !$disable)
+    if ($active)
       return `
         background-color:  hsl( ${hueActive || "140"}, 72%, 28%);
         box-shadow: 0 10px 15px hsl( ${hueActive || "140"}, 72%, 70%);
+        color: #fff
     `;
-    if ($selected && !$disable)
+    if ($selected)
       return `
         background-color:  hsl( ${hueSelected || "100"}, 54%, 58%);
         border-bottom: 1px solid hsl( ${hueSelected || "100"}, 54%, 58%);
+        color: #fff
       `;
+    if ($disable)
+      return `
+      cursor: not-allowed;
+      opacity: 0.5;
+      color:  hsl(148, 100%, 26%);
+
+      :hover {
+        opacity: 0.5;
+      }
+      :active {
+        scale: 1;
+      }
+    `;
   }}
 `;
 
@@ -273,6 +291,22 @@ export const SelectAll = styled.div`
 
   input {
     accent-color: #6f972d;
+  }
+`;
+
+export const RailTrack = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  label {
+    opacity: ${({ disable }) => disable && 0.5};
+    cursor: ${({ disable }) => disable && "not-allowed"};
+  }
+
+  input {
+    margin: 0;
+    cursor: ${({ disable }) => disable && "not-allowed"};
   }
 `;
 

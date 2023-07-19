@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 export const useActions = ({ onDataPointClick }) => {
   const router = useRouter();
 
-  const selected = router.query?.selected;
+  const { selected, rail } = router.query;
 
   const active =
     typeof selected === "string"
@@ -33,6 +33,8 @@ export const useActions = ({ onDataPointClick }) => {
   };
 
   const handleDataSelect = (selected) => {
+    if (rail === "true") return;
+
     let currSelected = router.query.selected || [];
 
     if (typeof currSelected === "string") {
