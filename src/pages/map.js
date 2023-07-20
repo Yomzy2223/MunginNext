@@ -17,10 +17,12 @@ import {
   getMapSeaportInfo,
   getMarketInfo,
   getRailTracks,
+  getWeatherInfo,
 } from "@/services/auth.service";
 import farmImg from "../assets/farmIcon.png";
 import { TbZoomReplace } from "react-icons/tb";
 import { MdClear } from "react-icons/md";
+import { getStateFullName } from "@/utils/globalFunctions";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoieW9tenkyMjIzIiwiYSI6ImNsaHgyZ28xcjBwcGozcW50anYwd2owcTkifQ.-uQHl78lQyHAQf-wnBAplw";
@@ -42,6 +44,7 @@ const Map = () => {
     type: "FeatureCollection",
     features: [],
   });
+  const [weatherInfo, setWeatherInfo] = useState({});
   const [railTracks, setRailTracks] = useState([]);
   const [activeStore, setActiveStore] = useState([]);
   const [activeStoreFiltered, setActiveStoreFiltered] = useState([]);
@@ -71,6 +74,10 @@ const Map = () => {
     saveRailTracks();
   }, []);
 
+  useEffect(() => {
+    saveWeatherInfo();
+  }, [activeStore]);
+
   const findDataPoint = (dataPoint) => {
     if (typeof selected === "string") {
       return dataPoint === selected;
@@ -84,6 +91,12 @@ const Map = () => {
     setRailTracks(rails);
   };
 
+  const saveWeatherInfo = async () => {
+    const weather = await getWeatherInfo();
+    setWeatherInfo(weather);
+  };
+
+  //
   const handleMapInfo = async () => {
     const farmState = JSON.parse(localStorage.getItem("farmsStates"))?.[0];
     const marketState = JSON.parse(localStorage.getItem("marketsStates"))?.[0];
@@ -448,10 +461,14 @@ const Map = () => {
     });
   };
 
-  const createPopUp = (currentFeature) => {
+  const createPopUp = async (currentFeature) => {
     const popUps = document.getElementsByClassName("mapboxgl-popup");
     /** Check if there is already a popup on the map and if so, remove it */
     if (popUps[0]) popUps[0].remove();
+    let state = currentFeature?.properties?.state;
+    state = getStateFullName(state);
+
+    const weather = await getWeatherInfo(state);
 
     const popup = new mapboxgl.Popup({
       closeOnClick: true,
@@ -459,16 +476,52 @@ const Map = () => {
     })
       .setLngLat(currentFeature.geometry.coordinates)
       .setHTML(
-        `<h3>${
-          currentFeature.properties.farmCategory ||
-          currentFeature?.properties?.type ||
-          currentFeature?.properties?.source ||
-          currentFeature.properties.state
-        } <button class="popup-close-button" >X</button></h3>
+        currentFeature.properties.farmCategory
+          ? `<h3>${
+              currentFeature.properties.farmCategory ||
+              currentFeature?.properties?.type ||
+              currentFeature?.properties?.source ||
+              currentFeature.properties.state
+            } <button class="popup-close-button" >X</button></h3>
         
         <h4>${
           currentFeature.properties.name || currentFeature.properties.port
-        }</h4>`
+        }</h4> 
+        
+        <div>
+        <span>Cloud: ${weather.current.cloud + " %"}</span>
+        <span>Feels like: ${weather.current.feelslike_c + "°C"}</span>
+        <span>Feels like: ${weather.current.feelslike_f + "°F"}</span>
+        <span>Wind gusts speed: ${weather.current.gust_kph + "km/h"}</span>
+        <span>Wind gusts speed: ${weather.current.gust_mph + "mph"}</span>
+        <span>Humidity: ${weather.current.humidity + " %"}</span>
+        <span>Precipitation amount: ${weather.current.precip_in + "in"}</span>
+        <span>Precipitation amount: ${weather.current.precip_mm + "mm"}</span>
+        <span>Atmospheric pressure: ${
+          weather.current.pressure_in + "inHg"
+        }</span>
+        <span>Atmospheric pressure: ${weather.current.pressure_mb + "mb"}</span>
+       <span>Temperature: ${weather.current.temp_c + "°C"}</span>
+        <span>Temperature: ${weather.current.temp_f + "°F"}</span>
+        <span>Ultraviolet index: ${weather.current.uv + "UV"}</span>
+        <span>Visibility: ${weather.current.vis_km + "km"}</span>
+        <span>Visibility: ${weather.current.vis_miles + "mi"}</span>
+        <span>Wind: ${weather.current.wind_degree + "°"}</span>
+        <span>Wind): ${weather.current.wind_dir}</span>
+        <span>Wind speed: ${weather.current.wind_kph + "km/h"}</span>
+        <span>Wind speed : ${weather.current.wind_mph + "mph"}</span>
+        </div>
+        `
+          : `<h3>${
+              currentFeature.properties.farmCategory ||
+              currentFeature?.properties?.type ||
+              currentFeature?.properties?.source ||
+              currentFeature.properties.state
+            } <button class="popup-close-button" >X</button></h3>
+        
+        <h4>${
+          currentFeature.properties.name || currentFeature.properties.port
+        }</h4> `
       )
       .addTo(map.current);
     // Add a click event listener to the close button
