@@ -160,10 +160,40 @@ p {
   margin: 0;
   padding: 10px;
   font-weight: 400;
+  font-size: 14px;
 }
 
 .mapboxgl-popup-content div {
+  display: flex;
+  flex-flow: column;
+  /* grid-template-columns: auto auto auto auto; */
+  gap: 5px;
+  border-top: 1px solid #b9b9b9;
+  border-radius: 5px;
   padding: 10px;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.mapboxgl-popup-content div::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-left: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.mapboxgl-popup-content div::-webkit-scrollbar-track {
+  background: none;
+}
+
+.mapboxgl-popup-content div::-webkit-scrollbar-thumb {
+  background: #00853e;
+  border-radius: 0;
+}
+
+.mapboxgl-popup-content span {
+  font-size: 10px;
+  white-space: nowrap;
 }
 
 .popup-close-button {

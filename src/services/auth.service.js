@@ -219,4 +219,12 @@ export const getRailTracks = async () => {
   }
 };
 
-export default new AuthService();
+export const getWeatherInfo = async (state) => {
+  try {
+    let response = await client.get(`/geo/current?state=${state}`);
+    return response.data;
+  } catch (e) {
+    if (e.message.toString() === "Network Error") toast.error("Network error");
+    return e;
+  }
+};
