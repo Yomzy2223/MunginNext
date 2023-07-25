@@ -130,6 +130,37 @@ p {
   border-radius: 0;
 }
 
+.cm-popup > div {
+  padding-block: 0;
+}
+
+.cm-popup ul {
+  list-style-type: none;
+  padding: 0;
+  border: 1px solid hsl(0, 0%, 80%);
+}
+
+.cm-popup ul :nth-child(even) {
+  background-color: hsl(0, 0%, 94%);
+  border-block: 1px solid hsl(0, 0%, 80%);
+}
+
+.cm-popup li {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+}
+
+.cm-popup li :nth-child(1) {
+  border-right: 1px solid hsl(0, 0%, 80%);
+}
+
+.cm-popup li span {
+  white-space: nowrap;
+  width: 50%;
+  padding: 3px 5px;
+}
+
 /* Marker tweaks */
 .mapboxgl-popup-close-button {
   display: none;
