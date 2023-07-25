@@ -1,17 +1,13 @@
 import React, { useRef, useEffect, useState, createContext } from "react";
 import mapboxgl from "mapbox-gl";
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
-// import "./Map.css";
-import ReactDOM from "react-dom";
-import Tooltip from "@/components/Tooltip";
 import MapSidebar from "@/components/sidebar/MapSidebar";
 import { useRouter } from "next/router";
-import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
-import Image from "next/image";
-import Link from "next/link";
 import styled from "styled-components";
-import logo from "../assets/images/MUNGINLogo.png";
 import {
+  getAreaHectares,
+  getAreaMeters,
+  getDistance,
   getMapAirportInfo,
   getMapInfo,
   getMapSeaportInfo,
@@ -19,10 +15,9 @@ import {
   getRailTracks,
   getWeatherInfo,
 } from "@/services/auth.service";
-import farmImg from "../assets/farmIcon.png";
 import { TbZoomReplace } from "react-icons/tb";
-import { MdClear } from "react-icons/md";
 import { getStateFullName } from "@/utils/globalFunctions";
+// import mapboxGLDrawRectangleDrag from "mapboxgl-draw-rectangle-drag";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoieW9tenkyMjIzIiwiYSI6ImNsaHgyZ28xcjBwcGozcW50anYwd2owcTkifQ.-uQHl78lQyHAQf-wnBAplw";
@@ -217,11 +212,15 @@ const Map = () => {
 
     const draw = new MapboxDraw({
       displayControlsDefault: false,
-
+      // modes: {
+      //   ...MapboxDraw.modes,
+      //   draw_rectangle_drag: mapboxGLDrawRectangleDrag,
+      // },
       // Select which mapbox-gl-draw control buttons to add to the map.
       controls: {
         polygon: true,
         trash: true,
+        line_string: true,
       },
 
       // Set mapbox-gl-draw to draw by default.
@@ -235,7 +234,12 @@ const Map = () => {
     map.current.on("draw.create", (e) => {
       const feature = e.features[0];
       const coordinates = feature.geometry.coordinates;
-      setPolygonCoordinates(coordinates[0]);
+      const isPolygon = coordinates[0]?.[0]?.[0];
+      isPolygon && setPolygonCoordinates(coordinates[0]);
+
+      // isPolygon
+      //   ? createPopUp2(coordinates[0], "polygon")
+      //   : createPopUp2(coordinates, "line");
       // const inside = getCoordinatesInsidePolygon(
       //   storesCoordinates,
       //   coordinates[0]
@@ -257,7 +261,8 @@ const Map = () => {
     map.current.on("draw.update", (e) => {
       const feature = e.features[0];
       const coordinates = feature.geometry.coordinates;
-      setPolygonCoordinates(coordinates[0]);
+      const isPolygon = coordinates[0]?.[0]?.[0];
+      isPolygon && setPolygonCoordinates(coordinates[0]);
       // const inside = getCoordinatesInsidePolygon(
       //   storesCoordinates,
       //   coordinates[0]
@@ -356,6 +361,26 @@ const Map = () => {
     // });
 
     map.current.on("click", (event) => {
+      const clickedFeatures = map.current.queryRenderedFeatures(event.point);
+      const clickedPolygons = clickedFeatures.filter(
+        (feature) =>
+          feature.layer.source.includes("mapbox-gl-draw-cold") &&
+          feature.geometry.type === "Polygon"
+      );
+      const clickedPoint = clickedFeatures.filter(
+        (feature) =>
+          feature.layer.source.includes("mapbox-gl-draw-cold") &&
+          feature.geometry.type === "LineString"
+      );
+
+      if (clickedPolygons.length > 0) {
+        const coordinates = clickedPolygons[0].geometry.coordinates[0];
+        createPopUp2(coordinates, "polygon");
+      }
+      if (clickedPoint.length > 0) {
+        const coordinates = clickedPoint[0].geometry.coordinates;
+        createPopUp2(coordinates, "line");
+      }
       /* Determine if a feature in the "locations" layer exists at that point. */
       const features = map.current.queryRenderedFeatures(event.point, {
         layers: ["locations"],
@@ -364,13 +389,11 @@ const Map = () => {
       /* If it does not exist, return */
       if (!features?.length) return;
 
-      const clickedPoint = features[0];
-
       /* Fly to the point */
-      flyToStore(clickedPoint);
+      // flyToStore(clickedPoint);
 
       /* Close all other popups and display popup for clicked store */
-      createPopUp(clickedPoint);
+      createPopUp(features[0]);
 
       /* Highlight listing in sidebar (and remove highlight for all other listings) */
       const activeItem = document.getElementsByClassName("active");
@@ -415,7 +438,7 @@ const Map = () => {
           query: { ...router.query, view, name: marker.properties.name },
         });
         /* Fly to the point */
-        flyToStore(marker);
+        // flyToStore(marker);
         /* Close all other popups and display popup for clicked store */
         createPopUp(marker);
         /* Highlight listing in sidebar */
@@ -459,6 +482,103 @@ const Map = () => {
       center: currentFeature.geometry.coordinates,
       zoom: 15,
     });
+  };
+
+  const createPopUp2 = async (coordinates, type) => {
+    const popUps = document.getElementsByClassName("mapboxgl-popup");
+    /** Check if there is already a popup on the map and if so, remove it */
+    if (popUps[0]) popUps[0].remove();
+    // let coordinates = currentFeature.geometry.coordinates;
+    // if (type === "polygon") coordinates = coordinates[0];
+
+    let distance;
+    let areaMeters;
+    let areaHectares;
+
+    if (type === "polygon") {
+      const hectaresRes = await getAreaHectares(coordinates);
+      const areaRes = await getAreaMeters(coordinates);
+      areaHectares = hectaresRes.area;
+      areaMeters = areaRes.area;
+    } else if (type === "line") {
+      const response = await getDistance(coordinates);
+      distance = response.distance.toFixed(2);
+    }
+
+    const popup = new mapboxgl.Popup({
+      closeOnClick: true,
+      closeButton: true,
+    })
+      .setLngLat(coordinates[coordinates.length - 1])
+      .setHTML(
+        type === "polygon"
+          ? `
+             <ul>
+              <li>
+                <span>Sq. Meters</span
+                <span>${areaMeters || "--"}</span
+              </li>
+              <li>
+                <span>Sq. Kilometers</span
+                <span>${
+                  areaMeters ? ((areaMeters * 1) / 1000).toFixed(2) : "--"
+                }
+              </li>
+              <li>
+                <span>Sq. Feet</span
+                <span>${
+                  areaMeters ? (areaMeters * 3.28084).toFixed(2) : "--"
+                }</span
+              </li>
+              <li>
+                <span>Acres</span
+                <span>${areaHectares || "--"}
+              </li>
+              <li>
+                <span>Miles</span
+                <span>${
+                  areaMeters ? (areaMeters * 0.000621371).toFixed(2) : "--"
+                }</span
+              </li>
+             </ul>
+          `
+          : `
+          <ul>
+            <li>
+              <span>Sq. Meters</span
+              <span>${distance || "--"}</span
+            </li>
+            <li>
+              <span>Kilometers</span
+              <span>${
+                distance ? ((distance * 1) / 1000).toFixed(2) : "--"
+              }</span
+            </li>
+            <li>
+              <span>Feet</span
+              <span>${distance ? (distance * 3.28084).toFixed(2) : "--"}</span
+            </li>
+            <li>
+              <span>Yards</span
+              <span>${distance ? (distance * 1.09361).toFixed(2) : "--"}</span
+            </li>
+            <li>
+              <span>Miles</span
+              <span>${
+                distance ? (distance * 0.000621371).toFixed(2) : "--"
+              }</span
+            </li>
+          </ul>
+          `
+      )
+      .addClassName("cm-popup")
+      .addTo(map.current);
+    // Add a click event listener to the close button
+    document
+      .querySelector(".popup-close-button")
+      ?.addEventListener("click", () => {
+        popup.remove();
+      });
   };
 
   const createPopUp = async (currentFeature) => {

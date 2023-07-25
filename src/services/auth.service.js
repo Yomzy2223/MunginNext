@@ -228,3 +228,36 @@ export const getWeatherInfo = async (state) => {
     return e;
   }
 };
+
+export const getDistance = async (coordinates) => {
+  try {
+    let response = await client.post(`/geo/spatial/distance`, [coordinates]);
+    return response.data;
+  } catch (e) {
+    if (e.message.toString() === "Network Error") toast.error("Network error");
+    return e;
+  }
+};
+
+export const getAreaMeters = async (coordinates) => {
+  try {
+    let response = await client.post(`/geo/distance/area/meters`, coordinates);
+    return response.data;
+  } catch (e) {
+    if (e.message.toString() === "Network Error") toast.error("Network error");
+    return e;
+  }
+};
+
+export const getAreaHectares = async (coordinates) => {
+  try {
+    let response = await client.post(
+      `/geo/distance/area/hectares`,
+      coordinates
+    );
+    return response.data;
+  } catch (e) {
+    if (e.message.toString() === "Network Error") toast.error("Network error");
+    return e;
+  }
+};
