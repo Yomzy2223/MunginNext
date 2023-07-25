@@ -373,13 +373,15 @@ const Map = () => {
           feature.geometry.type === "LineString"
       );
 
+      console.log(clickedFeatures);
+      console.log(clickedPoint?.[0]);
       if (clickedPolygons.length > 0) {
         const coordinates = clickedPolygons[0].geometry.coordinates[0];
-        createPopUp2(coordinates, "polygon");
+        createPopUp2(coordinates, "polygon", event.lngLat);
       }
       if (clickedPoint.length > 0) {
         const coordinates = clickedPoint[0].geometry.coordinates;
-        createPopUp2(coordinates, "line");
+        createPopUp2(coordinates, "line", event.lngLat);
       }
       /* Determine if a feature in the "locations" layer exists at that point. */
       const features = map.current.queryRenderedFeatures(event.point, {
@@ -484,7 +486,7 @@ const Map = () => {
     });
   };
 
-  const createPopUp2 = async (coordinates, type) => {
+  const createPopUp2 = async (coordinates, type, clickedCoordinate) => {
     const popUps = document.getElementsByClassName("mapboxgl-popup");
     /** Check if there is already a popup on the map and if so, remove it */
     if (popUps[0]) popUps[0].remove();
@@ -509,7 +511,7 @@ const Map = () => {
       closeOnClick: true,
       closeButton: true,
     })
-      .setLngLat(coordinates[coordinates.length - 1])
+      .setLngLat(clickedCoordinate)
       .setHTML(
         type === "polygon"
           ? `
@@ -871,7 +873,7 @@ export const Top = styled.div`
 export const ResetZoom = styled.div`
   cursor: pointer;
   position: absolute;
-  top: 175px;
+  top: 200px;
   right: 8px;
   z-index: 1000;
   background-color: #fff;
