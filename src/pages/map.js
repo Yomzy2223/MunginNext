@@ -5,9 +5,6 @@ import MapSidebar from "@/components/sidebar/MapSidebar";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import {
-  getAreaHectares,
-  getAreaMeters,
-  getDistance,
   getMapAirportInfo,
   getMapInfo,
   getMapSeaportInfo,
@@ -17,6 +14,7 @@ import {
 } from "@/services/auth.service";
 import { TbZoomReplace } from "react-icons/tb";
 import { getStateFullName } from "@/utils/globalFunctions";
+import * as turf from "@turf/turf";
 // import mapboxGLDrawRectangleDrag from "mapboxgl-draw-rectangle-drag";
 
 mapboxgl.accessToken =
@@ -374,7 +372,6 @@ const Map = () => {
       );
 
       console.log(clickedFeatures);
-      console.log(clickedPoint?.[0]);
       if (clickedPolygons.length > 0) {
         const coordinates = clickedPolygons[0].geometry.coordinates[0];
         createPopUp2(coordinates, "polygon", event.lngLat);
@@ -486,25 +483,38 @@ const Map = () => {
     });
   };
 
+  const getAreaMeters = (coordinates) => {
+    return turf.area({
+      type: "Polygon",
+      coordinates: [coordinates],
+    });
+  };
+
+  const getDistance = (coordinates) => {
+    let totalDistance = 0;
+    for (let i = 0; i < coordinates.length - 1; i++) {
+      const fromPoint = turf.point(coordinates[i]);
+      const toPoint = turf.point(coordinates[i + 1]);
+      const distance = turf.distance(fromPoint, toPoint, {
+        units: "meters",
+      }); // You can use other units like 'miles', 'meters', etc.
+      totalDistance += distance;
+    }
+    return totalDistance;
+  };
+
   const createPopUp2 = async (coordinates, type, clickedCoordinate) => {
     const popUps = document.getElementsByClassName("mapboxgl-popup");
     /** Check if there is already a popup on the map and if so, remove it */
     if (popUps[0]) popUps[0].remove();
-    // let coordinates = currentFeature.geometry.coordinates;
-    // if (type === "polygon") coordinates = coordinates[0];
 
     let distance;
     let areaMeters;
-    let areaHectares;
 
     if (type === "polygon") {
-      const hectaresRes = await getAreaHectares(coordinates);
-      const areaRes = await getAreaMeters(coordinates);
-      areaHectares = hectaresRes.area;
-      areaMeters = areaRes.area;
+      areaMeters = getAreaMeters(coordinates);
     } else if (type === "line") {
-      const response = await getDistance(coordinates);
-      distance = response.distance.toFixed(2);
+      distance = getDistance(coordinates).toFixed(2);
     }
 
     const popup = new mapboxgl.Popup({
@@ -515,39 +525,39 @@ const Map = () => {
       .setHTML(
         type === "polygon"
           ? `
-             <ul>
+           <h4>X</h4>
+            <ul>
               <li>
                 <span>Sq. Meters</span
-                <span>${areaMeters || "--"}</span
+                <span>${areaMeters.toFixed(2) || "--"}</span
               </li>
               <li>
                 <span>Sq. Kilometers</span
-                <span>${
-                  areaMeters ? ((areaMeters * 1) / 1000).toFixed(2) : "--"
-                }
+                <span>${areaMeters ? (areaMeters / 1000000).toFixed(2) : "--"}
               </li>
               <li>
                 <span>Sq. Feet</span
                 <span>${
-                  areaMeters ? (areaMeters * 3.28084).toFixed(2) : "--"
+                  areaMeters ? (areaMeters * 10.7639).toFixed(2) : "--"
                 }</span
               </li>
               <li>
                 <span>Acres</span
-                <span>${areaHectares || "--"}
+                <span>${(areaMeters / 4046.86).toFixed(2) || "--"}
               </li>
               <li>
-                <span>Miles</span
+                <span>Sq. Miles</span
                 <span>${
-                  areaMeters ? (areaMeters * 0.000621371).toFixed(2) : "--"
+                  areaMeters ? (areaMeters / 2589988.110336).toFixed(2) : "--"
                 }</span
               </li>
              </ul>
           `
           : `
+          <h4>X</h4>
           <ul>
             <li>
-              <span>Sq. Meters</span
+              <span>Meters</span
               <span>${distance || "--"}</span
             </li>
             <li>
@@ -581,6 +591,15 @@ const Map = () => {
       ?.addEventListener("click", () => {
         popup.remove();
       });
+
+    document
+      .querySelector(".cm-popup")
+      .querySelectorAll("div")[1]
+      .querySelector("h4")
+      ?.addEventListener("click", () => {
+        popup.remove();
+      });
+    // console.log(document.querySelector(".cm-popup"));
   };
 
   const createPopUp = async (currentFeature) => {
