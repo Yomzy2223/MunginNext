@@ -95,6 +95,7 @@ const Map = () => {
 
   const savePowerInfo = async () => {
     const power = await getPowerInfo();
+    console.log(power);
     setPowerInfo(power);
   };
 
@@ -592,11 +593,14 @@ const Map = () => {
           : `<h3>${
               currentFeature?.properties?.type ||
               currentFeature?.properties?.source ||
-              currentFeature.properties.state
+              currentFeature.properties.state ||
+              currentFeature.properties.typesOfPlants
             } <button class="popup-close-button" >X</button></h3>
         
         <h4>${
-          currentFeature.properties.name || currentFeature.properties.port
+          currentFeature.properties.name ||
+          currentFeature.properties.port ||
+          currentFeature.properties.description
         }</h4> `
       )
       .addTo(map.current);
@@ -754,7 +758,7 @@ const Map = () => {
     });
   };
 
-  const handlePower = async (display) => {
+  const handlePower = (display) => {
     const features = powerInfo.map((el, i) => ({
       ...el,
       properties: { ...el.property, id: i },
