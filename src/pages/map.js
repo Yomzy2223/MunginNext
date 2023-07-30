@@ -54,6 +54,7 @@ const Map = () => {
   const [activeStoreFiltered, setActiveStoreFiltered] = useState([]);
   const [loading, setLoading] = useState(false);
   const [polygonCoordinates, setPolygonCoordinates] = useState([]);
+  const [powerMarkers, setPowerMarkers] = useState([]);
 
   const router = useRouter();
   const { view, selected, rail, power } = router.query;
@@ -326,6 +327,7 @@ const Map = () => {
 
   //
   const addMarkers = (dataPointStore, className) => {
+    let markers = [];
     /* For each feature in the GeoJSON object above: */
     for (const marker of dataPointStore?.features) {
       // console.log(marker.properties);
@@ -343,19 +345,22 @@ const Map = () => {
        * Create a marker using the div element
        * defined above and add it to the map.
        **/
-      console.log(marker?.geometry?.coordinates);
-      if (marker?.geometry?.coordinates)
-        new mapboxgl.Marker(el, { offset: [0, 0] })
+      if (marker?.geometry?.coordinates) {
+        const each = new mapboxgl.Marker(el, { offset: [0, 0] })
           .setLngLat(marker.geometry.coordinates)
           .addTo(map.current);
+        markers.push(each);
+      }
 
-      if (marker?.electricGeometry?.coordinates)
-        new mapboxgl.Marker(el, { offset: [0, 0] })
+      if (marker?.electricGeometry?.coordinates) {
+        const each = new mapboxgl.Marker(el, { offset: [0, 0] })
           .setLngLat(
             marker?.geometry?.coordinates ||
               marker?.electricGeometry.coordinates
           )
           .addTo(map.current);
+        markers.push(each);
+      }
 
       el.addEventListener("click", (e) => {
         router.push({
@@ -377,6 +382,7 @@ const Map = () => {
         if (listing) listing.classList.add("active");
       });
     }
+    return markers;
   };
 
   //
@@ -716,6 +722,7 @@ const Map = () => {
   const handleRailTracks = (display) => {
     railTracks.forEach((el) => {
       if (display) {
+        console.log(railTracks);
         map.current.addSource("route" + el.id, {
           type: "geojson",
           data: {
@@ -753,13 +760,12 @@ const Map = () => {
       properties: { ...el.property, id: i },
     }));
 
-    if (display) addMarkers({ features }, "power-marker");
-    else {
-      powerInfo.map((el) => {
-        {
-          if (el?.properties?.id)
-            map.current?.removeLayer("marker" + el.properties.id);
-        }
+    if (display) {
+      const markers = addMarkers({ features }, "power-marker");
+      setPowerMarkers(markers);
+    } else {
+      features.map((el) => {
+        powerMarkers.map((el) => el.remove());
       });
     }
   };

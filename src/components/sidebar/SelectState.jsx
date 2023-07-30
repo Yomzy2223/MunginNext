@@ -225,12 +225,15 @@ const SelectState = () => {
               checked={railChecked}
               disabled={selected}
             />{" "}
-            <label htmlFor="power">Power</label>
+            <label htmlFor="power" style={{ color: "hsl(20, 54%, 58%" }}>
+              Power
+            </label>
             <input
               type="checkbox"
               id="power"
               onChange={setPower}
               checked={powerChecked}
+              style={{ accentColor: "hsl(20, 54%, 58%" }}
             />{" "}
           </RailTrack>
           {active &&
@@ -382,12 +385,12 @@ export const RailTrack = styled.div`
   align-items: center;
   gap: 8px;
 
-  label {
+  label:nth-of-type(1) {
     opacity: ${({ disable }) => disable && 0.5};
     cursor: ${({ disable }) => disable && "not-allowed"};
   }
 
-  input {
+  input:nth-of-type(1) {
     margin: 0;
     cursor: ${({ disable }) => disable && "not-allowed"};
   }
