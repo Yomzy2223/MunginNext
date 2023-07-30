@@ -5,10 +5,13 @@ import MapSidebar from "@/components/sidebar/MapSidebar";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import {
+  getElectricityInfo,
+  getFactoryInfo,
   getMapAirportInfo,
   getMapInfo,
   getMapSeaportInfo,
   getMarketInfo,
+  getPowerInfo,
   getRailTracks,
   getWeatherInfo,
 } from "@/services/auth.service";
@@ -37,15 +40,23 @@ const Map = () => {
     type: "FeatureCollection",
     features: [],
   });
-  const [weatherInfo, setWeatherInfo] = useState({});
+  const [factoryStore, setFactoryStore] = useState({
+    type: "FeatureCollection",
+    features: [],
+  });
+  const [electricStore, setElectricStore] = useState({
+    type: "FeatureCollection",
+    features: [],
+  });
   const [railTracks, setRailTracks] = useState([]);
+  const [powerInfo, setPowerInfo] = useState([]);
   const [activeStore, setActiveStore] = useState([]);
   const [activeStoreFiltered, setActiveStoreFiltered] = useState([]);
   const [loading, setLoading] = useState(false);
   const [polygonCoordinates, setPolygonCoordinates] = useState([]);
 
   const router = useRouter();
-  const { view, selected, rail } = router.query;
+  const { view, selected, rail, power } = router.query;
 
   const active =
     typeof selected === "string" ? selected : selected?.[selected?.length - 1];
@@ -65,11 +76,8 @@ const Map = () => {
 
   useEffect(() => {
     saveRailTracks();
+    savePowerInfo();
   }, []);
-
-  useEffect(() => {
-    saveWeatherInfo();
-  }, [activeStore]);
 
   const findDataPoint = (dataPoint) => {
     if (typeof selected === "string") {
@@ -84,15 +92,19 @@ const Map = () => {
     setRailTracks(rails);
   };
 
-  const saveWeatherInfo = async () => {
-    const weather = await getWeatherInfo();
-    setWeatherInfo(weather);
+  const savePowerInfo = async () => {
+    const power = await getPowerInfo();
+    setPowerInfo(power);
   };
 
   //
   const handleMapInfo = async () => {
     const farmState = JSON.parse(localStorage.getItem("farmsStates"))?.[0];
     const marketState = JSON.parse(localStorage.getItem("marketsStates"))?.[0];
+    const factoryState = JSON.parse(localStorage.getItem("factoryStates"))?.[0];
+    const electricState = JSON.parse(
+      localStorage.getItem("electricStates")
+    )?.[0];
 
     setLoading(true);
     const farms = findDataPoint("farms") ? await getMapInfo(farmState) : [];
@@ -101,102 +113,59 @@ const Map = () => {
     const markets = findDataPoint("markets")
       ? await getMarketInfo(marketState)
       : [];
+    const factories = findDataPoint("factory")
+      ? await getFactoryInfo(factoryState)
+      : [];
+    const electricity = findDataPoint("electric")
+      ? await getElectricityInfo(electricState)
+      : [];
     setLoading(false);
 
     resetStores();
 
-    if (farms?.length > 0) {
-      setFarmStore({
+    handleDataPoint("farms", farms, setFarmStore);
+    handleDataPoint("airports", airports, setAirportStore);
+    handleDataPoint("seaports", seaports, setSeaportStore);
+    handleDataPoint("markets", markets, setMarketStore);
+    handleDataPoint("factory", factories, setFactoryStore);
+    handleDataPoint("electric", electricity, setElectricStore);
+  };
+
+  const handleDataPoint = (name, data, setStore) => {
+    if (data?.length > 0) {
+      setStore({
         type: "FeatureCollection",
-        features: farms,
+        features: data,
       });
-      if (active === "farms") {
-        setActiveStore({
-          type: "FeatureCollection",
-          features: farms,
-        });
-        setActiveStoreFiltered({
-          type: "FeatureCollection",
-          features: farms,
-        });
-      }
+      handleActive(name, data);
     }
-    if (airports?.length > 0) {
-      setAirportStore({
+  };
+
+  const handleActive = (name, features) => {
+    if (active === name) {
+      setActiveStore({
         type: "FeatureCollection",
-        features: airports,
+        features,
       });
-      if (active === "airports") {
-        setActiveStore({
-          type: "FeatureCollection",
-          features: airports,
-        });
-        setActiveStoreFiltered({
-          type: "FeatureCollection",
-          features: airports,
-        });
-      }
-    }
-    if (seaports?.length > 0) {
-      setSeaportStore({
+      setActiveStoreFiltered({
         type: "FeatureCollection",
-        features: seaports,
+        features,
       });
-      if (active === "seaports") {
-        setActiveStore({
-          type: "FeatureCollection",
-          features: seaports,
-        });
-        setActiveStoreFiltered({
-          type: "FeatureCollection",
-          features: seaports,
-        });
-      }
-    }
-    if (markets?.length > 0) {
-      setMarketStore({
-        type: "FeatureCollection",
-        features: markets,
-      });
-      if (active === "markets") {
-        setActiveStore({
-          type: "FeatureCollection",
-          features: markets,
-        });
-        setActiveStoreFiltered({
-          type: "FeatureCollection",
-          features: markets,
-        });
-      }
     }
   };
 
   //
   const resetStores = () => {
-    setActiveStore({
+    const defaultObj = {
       type: "FeatureCollection",
       features: [],
-    });
-    setActiveStoreFiltered({
-      type: "FeatureCollection",
-      features: [],
-    });
-    setFarmStore({
-      type: "FeatureCollection",
-      features: [],
-    });
-    setAirportStore({
-      type: "FeatureCollection",
-      features: [],
-    });
-    setSeaportStore({
-      type: "FeatureCollection",
-      features: [],
-    });
-    setMarketStore({
-      type: "FeatureCollection",
-      features: [],
-    });
+    };
+    setActiveStore(defaultObj);
+    setActiveStoreFiltered(defaultObj);
+    setFarmStore(defaultObj);
+    setAirportStore(defaultObj);
+    setSeaportStore(defaultObj);
+    setMarketStore(defaultObj);
   };
 
   // Initialize map when component mounts
@@ -290,67 +259,13 @@ const Map = () => {
 
     map.current.on("load", () => {
       if (view && rail !== "true") {
-        /* Add the data to your map as a layer */
-        // map.current.addLayer({
-        //   id: "locations",
-        //   type: "circle",
-        //   /* Add a GeoJSON source containing place coordinates and information. */
-        //   source: {
-        //     type: "geojson",
-        //     data: stores,
-        //   },
-        // });
         findDataPoint("farms") && addMarkers(farmStore, "farm-marker");
         findDataPoint("airports") && addMarkers(airportStore, "airport-marker");
         findDataPoint("seaports") && addMarkers(seaportStore, "seaport-marker");
         findDataPoint("markets") && addMarkers(marketStore, "market-marker");
-
-        // map.current.addSource("route", {
-        //   type: "geojson",
-        //   data: {
-        //     type: "Feature",
-        //     properties: {},
-        //     geometry: {
-        //       type: "LineString",
-        //       coordinates: [
-        //         [8.6753, 9.082],
-        //         [8.6853, 9.182],
-        //         [8.6753, 9.282],
-        //         [8.6753, 9.382],
-        //         [8.6753, 9.482],
-        //         [8.6753, 9.582],
-        //         [8.6753, 9.582],
-        //         [8.6753, 9.682],
-        //         [8.6753, 9.082],
-        //         [8.6753, 9.082],
-        //         [8.6753, 9.082],
-        //         [8.6753, 9.082],
-        //         [8.6753, 9.082],
-        //         [8.6753, 9.082],
-        //         [8.6753, 9.082],
-        //         [8.6753, 9.082],
-        //         [8.6753, 9.082],
-        //         [8.6753, 9.082],
-        //         [8.6753, 9.082],
-        //         [8.6753, 9.082],
-        //       ],
-        //     },
-        //   },
-        // });
-        // map.current.addLayer({
-        //   id: "route",
-        //   type: "line",
-        //   source: "route",
-        //   layout: {
-        //     "line-join": "round",
-        //     "line-cap": "round",
-        //   },
-        //   paint: {
-        //     "line-color": "#888",
-        //     "line-width": 8,
-        //   },
-        // });
-        // buildLocationList(stores);
+        findDataPoint("factory") && addMarkers(factoryStore, "factory-marker");
+        findDataPoint("electric") &&
+          addMarkers(electricStore, "electric-marker");
       }
     });
 
@@ -407,7 +322,7 @@ const Map = () => {
 
     // Clean up on unmount
     return () => map.current.remove();
-  }, [farmStore, marketStore, airportStore]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [farmStore, marketStore, airportStore, factoryStore, electricStore]); // eslint-disable-line react-hooks/exhaustive-deps
 
   //
   const addMarkers = (dataPointStore, className) => {
@@ -428,9 +343,19 @@ const Map = () => {
        * Create a marker using the div element
        * defined above and add it to the map.
        **/
-      new mapboxgl.Marker(el, { offset: [0, 0] })
-        .setLngLat(marker.geometry.coordinates)
-        .addTo(map.current);
+      console.log(marker?.geometry?.coordinates);
+      if (marker?.geometry?.coordinates)
+        new mapboxgl.Marker(el, { offset: [0, 0] })
+          .setLngLat(marker.geometry.coordinates)
+          .addTo(map.current);
+
+      if (marker?.electricGeometry?.coordinates)
+        new mapboxgl.Marker(el, { offset: [0, 0] })
+          .setLngLat(
+            marker?.geometry?.coordinates ||
+              marker?.electricGeometry.coordinates
+          )
+          .addTo(map.current);
 
       el.addEventListener("click", (e) => {
         router.push({
@@ -478,7 +403,9 @@ const Map = () => {
 
   const flyToStore = (currentFeature) => {
     map.current.flyTo({
-      center: currentFeature.geometry.coordinates,
+      center:
+        currentFeature?.geometry?.coordinates ||
+        currentFeature?.electricGeometry.coordinates,
       zoom: 15,
     });
   };
@@ -615,7 +542,10 @@ const Map = () => {
       closeOnClick: true,
       closeButton: true,
     })
-      .setLngLat(currentFeature.geometry.coordinates)
+      .setLngLat(
+        currentFeature?.geometry?.coordinates ||
+          currentFeature?.electricGeometry.coordinates
+      )
       .setHTML(
         currentFeature.properties.farmCategory
           ? `<h3>${
@@ -630,12 +560,12 @@ const Map = () => {
         }</h4> 
         
         <div>
-        <span>Cloud: ${weather.current.cloud + " %"}</span>
+        <span>Cloud: ${weather.current.cloud + "%"}</span>
         <span>Feels like: ${weather.current.feelslike_c + "°C"}</span>
         <span>Feels like: ${weather.current.feelslike_f + "°F"}</span>
         <span>Wind gusts speed: ${weather.current.gust_kph + "km/h"}</span>
         <span>Wind gusts speed: ${weather.current.gust_mph + "mph"}</span>
-        <span>Humidity: ${weather.current.humidity + " %"}</span>
+        <span>Humidity: ${weather.current.humidity + "%"}</span>
         <span>Precipitation amount: ${weather.current.precip_in + "in"}</span>
         <span>Precipitation amount: ${weather.current.precip_mm + "mm"}</span>
         <span>Atmospheric pressure: ${
@@ -654,7 +584,6 @@ const Map = () => {
         </div>
         `
           : `<h3>${
-              currentFeature.properties.farmCategory ||
               currentFeature?.properties?.type ||
               currentFeature?.properties?.source ||
               currentFeature.properties.state
@@ -775,10 +704,16 @@ const Map = () => {
     } else if (selected === "seaports") {
       setActiveStore(seaportStore);
       setActiveStoreFiltered(seaportStore);
+    } else if (selected === "factory") {
+      setActiveStore(factoryStore);
+      setActiveStoreFiltered(factoryStore);
+    } else if (selected === "electric") {
+      setActiveStore(electricStore);
+      setActiveStoreFiltered(electricStore);
     }
   };
 
-  const handleRailTracks = async (display) => {
+  const handleRailTracks = (display) => {
     railTracks.forEach((el) => {
       if (display) {
         map.current.addSource("route" + el.id, {
@@ -812,6 +747,23 @@ const Map = () => {
     });
   };
 
+  const handlePower = async (display) => {
+    const features = powerInfo.map((el, i) => ({
+      ...el,
+      properties: { ...el.property, id: i },
+    }));
+
+    if (display) addMarkers({ features }, "power-marker");
+    else {
+      powerInfo.map((el) => {
+        {
+          if (el?.properties?.id)
+            map.current?.removeLayer("marker" + el.properties.id);
+        }
+      });
+    }
+  };
+
   useEffect(() => {
     if (storesCoordinates?.length > 0 && polygonCoordinates?.length > 0) {
       const insidePolygon = getCoordinatesInsidePolygon(
@@ -839,6 +791,14 @@ const Map = () => {
       handleRailTracks(false);
     }
   }, [rail]);
+
+  useEffect(() => {
+    if (power === "true") {
+      handlePower(true);
+    } else {
+      handlePower(false);
+    }
+  }, [power]);
 
   return (
     <div>

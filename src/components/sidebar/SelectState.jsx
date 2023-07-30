@@ -19,10 +19,13 @@ const SelectState = () => {
   } = useActions({});
 
   const router = useRouter();
-  const { rail } = router.query;
+  const { rail, power } = router.query;
 
   const [railChecked, setRailChecked] = useState(
     rail === "true" ? true : false
+  );
+  const [powerChecked, setPowerChecked] = useState(
+    power === "true" ? true : false
   );
 
   const handleView = (state) => {
@@ -50,7 +53,9 @@ const SelectState = () => {
     } else {
       if (
         (active === "farms" && selectedStates.length > 0) ||
-        (active === "markets" && selectedStates.length > 0)
+        (active === "markets" && selectedStates.length > 0) ||
+        (active === "factory" && selectedStates.length > 0) ||
+        (active === "electric" && selectedStates.length > 0)
       )
         return;
       selectedStates = [...selectedStates, state];
@@ -59,6 +64,7 @@ const SelectState = () => {
     localStorage.setItem(active + "States", JSON.stringify(selectedStates));
     setStateSelect(!stateSelect);
   };
+
   //
   const seeRailTracks = (e) => {
     setRailChecked(!railChecked);
@@ -66,6 +72,17 @@ const SelectState = () => {
       query: {
         ...router.query,
         rail: !railChecked,
+      },
+    });
+  };
+
+  //
+  const setPower = (e) => {
+    setPowerChecked(!powerChecked);
+    router.push({
+      query: {
+        ...router.query,
+        power: !powerChecked,
       },
     });
   };
@@ -91,6 +108,14 @@ const SelectState = () => {
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("marketsStates"))
       : [];
+  const factoryStates =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("factoryStates"))
+      : [];
+  const electricStates =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("electricStates"))
+      : [];
 
   useEffect(() => {
     if (active) {
@@ -100,6 +125,23 @@ const SelectState = () => {
       else setChecked(false);
     }
   }, [router.query.selected, stateSelect]);
+
+  const getDisabled = (state) => {
+    return (
+      (active === "farms" &&
+        farmStates?.length > 0 &&
+        state.shortName !== farmStates[0]) ||
+      (active === "markets" &&
+        marketStates?.length > 0 &&
+        state.shortName !== marketStates[0]) ||
+      (active === "factory" &&
+        factoryStates?.length > 0 &&
+        state.shortName !== factoryStates[0]) ||
+      (active === "electric" &&
+        electricStates?.length > 0 &&
+        state.shortName !== electricStates[0])
+    );
+  };
 
   return (
     <SelectStateWrapper>
@@ -151,6 +193,26 @@ const SelectState = () => {
           >
             Markets
           </DataPoint>
+          <DataPoint
+            $active={active === "factory"}
+            $selected={checkSelectedDataPoints("factory")}
+            onClick={() => handleDataSelect("factory")}
+            hueSelected={290}
+            hueActive={310}
+            $disable={rail === "true" ? true : false}
+          >
+            Factories
+          </DataPoint>
+          <DataPoint
+            $active={active === "electric"}
+            $selected={checkSelectedDataPoints("electric")}
+            onClick={() => handleDataSelect("electric")}
+            hueSelected={340}
+            hueActive={360}
+            $disable={rail === "true" ? true : false}
+          >
+            Electricity
+          </DataPoint>
         </DataPoints>
 
         <SelectAll>
@@ -163,18 +225,29 @@ const SelectState = () => {
               checked={railChecked}
               disabled={selected}
             />{" "}
+            <label htmlFor="power">Power</label>
+            <input
+              type="checkbox"
+              id="power"
+              onChange={setPower}
+              checked={powerChecked}
+            />{" "}
           </RailTrack>
-          {active && active !== "farms" && active !== "markets" && (
-            <>
-              <label htmlFor="select-all">Select All</label>
-              <input
-                type="checkbox"
-                id="select-all"
-                onChange={selectAll}
-                checked={checked}
-              />
-            </>
-          )}
+          {active &&
+            active !== "farms" &&
+            active !== "markets" &&
+            active !== "factory" &&
+            active !== "electric" && (
+              <>
+                <label htmlFor="select-all">Select All</label>
+                <input
+                  type="checkbox"
+                  id="select-all"
+                  onChange={selectAll}
+                  checked={checked}
+                />
+              </>
+            )}
         </SelectAll>
         <AllStates>
           {nigeriaStates.map((state, i) => (
@@ -182,14 +255,7 @@ const SelectState = () => {
               key={i}
               onClick={() => selected && selectState(state)}
               $selected={selected}
-              $disable={
-                (active === "farms" &&
-                  farmStates?.length > 0 &&
-                  state.shortName !== farmStates[0]) ||
-                (active === "markets" &&
-                  marketStates?.length > 0 &&
-                  state.shortName !== marketStates[0])
-              }
+              $disable={getDisabled(state)}
             >
               {checkSelectedStates(state) && (
                 <Icon>
@@ -234,6 +300,23 @@ export const DataPoints = styled.div`
   border-bottom: 1px solid #eee;
   padding: 12px 24px;
   width: 100%;
+  overflow-x: auto;
+
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+    border-left: 0;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  ::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #00853e;
+    border-radius: 0;
+  }
 `;
 
 export const DataPoint = styled.p`

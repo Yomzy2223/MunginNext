@@ -229,32 +229,31 @@ export const getWeatherInfo = async (state) => {
   }
 };
 
-export const getDistance = async (coordinates) => {
+export const getFactoryInfo = async (state) => {
   try {
-    let response = await client.post(`/geo/spatial/distance`, [coordinates]);
+    let response = await client.get(`/geo/factory/state?state=${state}`);
     return response.data;
   } catch (e) {
     if (e.message.toString() === "Network Error") toast.error("Network error");
+    // else toast.error(e.response.data);
     return e;
   }
 };
 
-export const getAreaMeters = async (coordinates) => {
+export const getElectricityInfo = async (state) => {
   try {
-    let response = await client.post(`/geo/distance/area/meters`, coordinates);
+    let response = await client.get(`/geo/electric/state?state=${state}`);
     return response.data;
   } catch (e) {
     if (e.message.toString() === "Network Error") toast.error("Network error");
+    // else toast.error(e.response.data);
     return e;
   }
 };
 
-export const getAreaHectares = async (coordinates) => {
+export const getPowerInfo = async () => {
   try {
-    let response = await client.post(
-      `/geo/distance/area/hectares`,
-      coordinates
-    );
+    let response = await client.get(`/geo/power`);
     return response.data;
   } catch (e) {
     if (e.message.toString() === "Network Error") toast.error("Network error");
