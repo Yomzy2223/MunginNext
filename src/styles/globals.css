@@ -264,7 +264,7 @@ p {
 }
 
 .farm-marker {
-  background-color: #91c949;
+  background-color: hsl(86, 54%, 54%);
 }
 
 .airport-marker {
@@ -277,6 +277,17 @@ p {
 
 .market-marker {
   background-color: hsl(260, 54%, 58%);
+}
+
+.factory-marker {
+  background-color: hsl(290, 54%, 58%);
+}
+.electric-marker {
+  background-color: hsl(340, 54%, 58%);
+}
+
+.power-marker {
+  background-color: hsl(20, 54%, 58%);
 }
 
 .mapboxgl-popup {

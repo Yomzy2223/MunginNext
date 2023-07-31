@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiArrowLeft } from "react-icons/hi";
 import { Puff } from "react-loading-icons";
 import ReactPaginate from "react-paginate";
@@ -52,20 +52,6 @@ const MapStateInfo = ({
     });
   };
 
-  const handleTagSelect = (tag) => {
-    console.log(tag);
-    if (!tags.find((el) => el === tag)) {
-      setTags([...tags, tag]);
-      handleChange([...tags, tag]);
-    }
-  };
-
-  const handleTagRemove = (tag) => {
-    const newTags = tags.filter((el) => el !== tag);
-    setTags(newTags);
-    handleChange(newTags);
-  };
-
   return (
     <SidebarInfoWrapper>
       <MapSidebarHeader className="heading">
@@ -112,6 +98,28 @@ const MapStateInfo = ({
               Markets
             </DataPoint>
           )}
+          {checkSelectedDataPoints("factory") && (
+            <DataPoint
+              $active={active === "factory"}
+              $selected={true}
+              onClick={() => handleDataToggle("factory")}
+              hueSelected={290}
+              hueActive={310}
+            >
+              Factory
+            </DataPoint>
+          )}
+          {checkSelectedDataPoints("electric") && (
+            <DataPoint
+              $active={active === "electric"}
+              $selected={true}
+              onClick={() => handleDataToggle("electric")}
+              hueSelected={340}
+              hueActive={360}
+            >
+              Electricity
+            </DataPoint>
+          )}
         </DataPoints>
         <SubHeader>
           <HiArrowLeft
@@ -138,33 +146,43 @@ const MapStateInfo = ({
         </Loading>
       ) : (
         <div id="listings" className="listings">
-          {currentItems?.map((store, i) => (
-            <Listing
-              key={i}
-              id={`listing-${store.properties.id}`}
-              className="item"
-              ref={listingRef}
-              active={name === store.properties.name}
-            >
-              <a
-                id={`link-${store.properties.id}`}
-                href="#"
-                className="title"
-                onClick={() => handleListClick(store)}
+          {currentItems?.map((store, i) => {
+            const status = store?.properties?.status;
+            return (
+              <Listing
+                key={i}
+                id={`listing-${store.properties.id}`}
+                className="item"
+                ref={listingRef}
+                active={name === store.properties.name}
               >
-                {store.properties?.name || store.properties?.port},{" "}
-                {store?.properties?.farmType ||
-                  store?.properties?.type ||
-                  store?.properties?.source}
-              </a>
-              <div>
-                {store?.properties?.farmCategory}{" "}
-                {store?.properties?.farmCategory && ","}{" "}
-                {store?.properties?.region} {store?.properties?.region && ","}{" "}
-                {store.properties.state}
-              </div>
-            </Listing>
-          ))}
+                <div>
+                  <a
+                    id={`link-${store.properties.id}`}
+                    href="#"
+                    className="title"
+                    onClick={() => handleListClick(store)}
+                  >
+                    {store.properties?.name || store.properties?.port},{" "}
+                    {store?.properties?.farmType ||
+                      store?.properties?.type ||
+                      store?.properties?.source}{" "}
+                  </a>
+                  {status && (
+                    <Status $unused={status.toLowerCase().includes("unused")}>
+                      {status}
+                    </Status>
+                  )}
+                </div>
+                <div>
+                  {store?.properties?.farmCategory}{" "}
+                  {store?.properties?.farmCategory && ","}{" "}
+                  {store?.properties?.region} {store?.properties?.region && ","}{" "}
+                  {store.properties.state}
+                </div>
+              </Listing>
+            );
+          })}
         </div>
       )}
       <Pagination>
@@ -235,6 +253,11 @@ export const Count = styled.p`
 
 export const Listing = styled.div`
   background-color: ${({ active }) => (active ? "#BAFFE655" : "transparent")};
+
+  div:nth-of-type(1) {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 export const SubHeader = styled.div`
@@ -286,4 +309,12 @@ export const Loading = styled.div`
   display: flex;
   justify-content: center;
   padding-block: 50px;
+`;
+
+export const Status = styled.div`
+  color: white;
+  /* background-color: ${({ $unused }) => ($unused ? "red" : "green")}; */
+  border-radius: 8px;
+  font-size: 10px;
+  padding: 5px;
 `;
