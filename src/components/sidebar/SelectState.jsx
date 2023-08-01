@@ -211,7 +211,7 @@ const SelectState = () => {
             hueActive={360}
             $disable={rail === "true" ? true : false}
           >
-            Electricity
+            Electricity Stations
           </DataPoint>
         </DataPoints>
 
@@ -226,7 +226,7 @@ const SelectState = () => {
               disabled={selected}
             />{" "}
             <label htmlFor="power" style={{ color: "hsl(20, 54%, 58%" }}>
-              Power
+              Power Plants
             </label>
             <input
               type="checkbox"
