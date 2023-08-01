@@ -106,7 +106,7 @@ const MapStateInfo = ({
               hueSelected={290}
               hueActive={310}
             >
-              Factory
+              Factories
             </DataPoint>
           )}
           {checkSelectedDataPoints("electric") && (
@@ -117,7 +117,7 @@ const MapStateInfo = ({
               hueSelected={340}
               hueActive={360}
             >
-              Electricity
+              Electricity Stations
             </DataPoint>
           )}
         </DataPoints>
