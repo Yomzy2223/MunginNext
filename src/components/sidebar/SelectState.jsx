@@ -329,6 +329,7 @@ export const DataPoint = styled.p`
   border-radius: 8px;
   transition: 0.2s ease all;
   box-shadow: 5px 0 5px #e5e5e5;
+  white-space: nowrap;
 
   :hover {
     opacity: 0.95;
