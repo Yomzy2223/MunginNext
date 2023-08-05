@@ -759,7 +759,7 @@ const Map = () => {
   };
 
   const handlePower = (display) => {
-    const features = powerInfo.map((el, i) => ({
+    const features = powerInfo?.map((el, i) => ({
       ...el,
       properties: { ...el.property, id: i },
     }));
@@ -768,9 +768,7 @@ const Map = () => {
       const markers = addMarkers({ features }, "power-marker");
       setPowerMarkers(markers);
     } else {
-      features.map((el) => {
-        powerMarkers.map((el) => el.remove());
-      });
+      powerMarkers.map((el) => el.remove());
     }
   };
 
