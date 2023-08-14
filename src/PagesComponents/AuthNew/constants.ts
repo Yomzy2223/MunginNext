@@ -1,30 +1,174 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-// export const signUpSchema = z.object({
-//   username: z.string().min(2, {
-//     message: "Username must be at least 2 characters.",
-//   }),
-// });
-// export type signUpTypes = z.infer<typeof signUpSchema>;
+//
+export const institutionSchema = z
+  .object({
+    fullname: z
+      .string({
+        required_error: "Enter your full name",
+      })
+      .nonempty("Enter your full name"),
+    email: z.string().email("Enter a valid email address"),
+    password: z.string().min(6, {
+      message: "Must be at least 6 characters",
+    }),
+    confirmPassword: z
+      .string({
+        required_error: "Confirm your password",
+      })
+      .nonempty("Confirm your password"),
+    phone: z
+      .string({
+        required_error: "Enter phone number",
+      })
+      .refine((phone) => phone.length === 13, { message: "Enter a valid phone number" }),
+    gender: z
+      .string({
+        required_error: "Select your gender",
+      })
+      .nonempty("Select your gender"),
+    location: z
+      .string({
+        required_error: "Enter institution location",
+      })
+      .nonempty("Enter institution location"),
+    institutionName: z
+      .string({
+        required_error: "Enter institution name",
+      })
+      .nonempty("Enter institution name"),
+    areaOfInterest: z
+      .string({
+        required_error: "Enter area of interest",
+      })
+      .nonempty("Enter area of interest"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
-export const getSignUpSchema = (farms: number) => {
+//
+
+//
+export const investorSchema = z.object({
+  fullname: z
+    .string({
+      required_error: "Enter your full name",
+    })
+    .nonempty("Enter your full name"),
+  email: z.string().email("Enter a valid email address"),
+  password: z.string().min(6, {
+    message: "Must be at least 6 characters",
+  }),
+  confirmPassword: z
+    .string({
+      required_error: "Confirm your password",
+    })
+    .nonempty("Confirm your password"),
+  phone: z
+    .string({
+      required_error: "Enter phone number",
+    })
+    .refine((phone) => phone.length === 13, { message: "Enter a valid phone number" }),
+  gender: z
+    .string({
+      required_error: "Select your gender",
+    })
+    .nonempty("Select your gender"),
+  companyName: z
+    .string({
+      required_error: "Enter Company name",
+    })
+    .nonempty("Enter Company name"),
+  companyWebsite: z
+    .string({
+      required_error: "Enter Company website",
+    })
+    .nonempty("Enter Conmpany website"),
+  areaOfInterest: z
+    .string({
+      required_error: "Enter area of interest",
+    })
+    .nonempty("Enter area of interest"),
+});
+
+//
+
+//
+export const serviceProviderSchema = z.object({
+  fullname: z
+    .string({
+      required_error: "Enter your full name",
+    })
+    .nonempty("Enter your full name"),
+  email: z.string().email("Enter a valid email address"),
+  password: z.string().min(6, {
+    message: "Must be at least 6 characters",
+  }),
+  confirmPassword: z
+    .string({
+      required_error: "Confirm your password",
+    })
+    .nonempty("Confirm your password"),
+  phone: z
+    .string({
+      required_error: "Enter phone number",
+    })
+    .refine((phone) => phone.length === 13, { message: "Enter a valid phone number" }),
+  serviceOffering: z
+    .string({
+      required_error: "Select service offering",
+    })
+    .nonempty("Enter service offering"),
+});
+
+//
+
+//
+export const individualSchema = z.object({
+  fullname: z
+    .string({
+      required_error: "Enter your full name",
+    })
+    .nonempty("Enter your full name"),
+  email: z.string().email("Enter a valid email address"),
+  password: z.string().min(6, {
+    message: "Must be at least 6 characters",
+  }),
+  confirmPassword: z
+    .string({
+      required_error: "Confirm your password",
+    })
+    .nonempty("Confirm your password"),
+  phone: z
+    .string({
+      required_error: "Enter phone number",
+    })
+    .refine((phone) => phone.length === 13, { message: "Enter a valid phone number" }),
+  gender: z
+    .string({
+      required_error: "Select your gender",
+    })
+    .nonempty("Select your gender"),
+});
+
+//
+
+//
+export const getFarmerSchema = (farms: number) => {
   let farmObj = {
     fullname: z
       .string({
         required_error: "Enter your full name",
       })
       .nonempty("Enter your full name"),
-    phone1: z
+    phone: z
       .string({
-        required_error: "Enter phone number 1",
+        required_error: "Enter phone number",
       })
-      .refine((phone) => phone.length === 11, { message: "Enter a valid phone number" }),
-    phone2: z
-      .string({
-        required_error: "Enter phone number 2",
-      })
-      .refine((phone) => phone.length === 11, { message: "Enter a valid phone number" }),
+      .refine((phone) => phone.length === 13, { message: "Enter a valid phone number" }),
+    phone2: z.string().optional(),
     email: z.string().email("Enter a valid email address"),
     password: z.string().min(6, {
       message: "Must be at least 6 characters",
@@ -74,6 +218,9 @@ export const getSignUpSchema = (farms: number) => {
   });
 };
 
+//
+
+//
 export const signInSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",

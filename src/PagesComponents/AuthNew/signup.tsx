@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useFormContext } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { getSignUpSchema } from "./constants";
+import { getFarmerSchema } from "./constants";
 import InputWithLabel from "@/components/Inputs/inputWithLabel";
 import CMSelect from "@/components/cmSelect";
 import Image from "next/image";
@@ -13,21 +13,21 @@ import "swiper/css/scrollbar";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/bundle";
-import { createNewSwiper } from "./actions";
+import { createNewSwiper, getSignUpSchema } from "./actions";
 import "react-phone-input-2/lib/style.css";
 import { useRouter } from "next/router";
 import SwipeContent from "./swipeContent";
 import * as z from "zod";
 import PhoneNumInput from "@/components/Inputs/phoneInput";
-import PhoneInput from "react-phone-input-2";
 
 const SignUpNew = () => {
   const [farmNumbers, setfarmNumbers] = useState(0);
   const [visibleFarm, setVisibleFarm] = useState(1);
 
   const { query } = useRouter();
+  const { user } = query;
 
-  const signUpSchema = getSignUpSchema(farmNumbers);
+  const signUpSchema = getSignUpSchema(user) || getFarmerSchema(farmNumbers);
   type signUpTypes = z.infer<typeof signUpSchema>;
 
   // 1. Define your form.
@@ -70,8 +70,10 @@ const SignUpNew = () => {
             placeholder="Enter your fullname"
           />
           <div className="flex gap-4">
-            <PhoneNumInput form={form} name="phone1" label="Phone number 1" />
-            <PhoneNumInput form={form} name="phone2" label="Phone number 2" />
+            <PhoneNumInput form={form} name="phone" label="Phone number 1" />
+            {user === "farmer" && (
+              <PhoneNumInput form={form} name="phone2" label="Phone number 2" />
+            )}
           </div>
 
           <div className="flex gap-4">
@@ -98,27 +100,84 @@ const SignUpNew = () => {
               placeholder="Must match the current password"
               type="password"
             />
-            <CMSelect
-              name="gender"
-              mainLabel="Gender"
-              placeholder="Select your gender"
-              options={["Male", "Female"]}
-              defaultValue=""
-            />
+
+            {user === "service-provider" ? (
+              <InputWithLabel
+                form={form}
+                name="serviceOffering"
+                label="Service offering"
+                placeholder="Maize distribution"
+              />
+            ) : (
+              <CMSelect
+                name="gender"
+                mainLabel="Gender"
+                placeholder="Select your gender"
+                options={["Male", "Female"]}
+                defaultValue=""
+              />
+            )}
           </div>
-          <div className="w-1/2 m-auto">
-            <InputWithLabel
-              form={form}
-              name="farmsNumber"
-              label="Number of farms"
-              placeholder="Enter the number of farms you have.  e.g. 5"
-              type="number"
-              onChange={(e) => setfarmNumbers(e.target.value)}
-            />
+
+          {user === "institution" && (
+            <div className="flex gap-4">
+              <InputWithLabel
+                form={form}
+                name="institutionName"
+                label="Institution name"
+                placeholder="Johnson & sons Inc."
+              />
+              <InputWithLabel
+                form={form}
+                name="location"
+                label="Institution location"
+                placeholder="Workstation, VI Lagos."
+              />
+            </div>
+          )}
+
+          {user === "investor" && (
+            <div className="flex gap-4">
+              <InputWithLabel
+                form={form}
+                name="companyName"
+                label="Company name"
+                placeholder="Johnson & sons Inc."
+              />
+              <InputWithLabel
+                form={form}
+                name="companyWebsite"
+                label="Company website"
+                placeholder="https://www.example.com"
+              />
+            </div>
+          )}
+
+          <div className="flex gap-4">
+            {(user === "institution" || user === "investor") && (
+              <InputWithLabel
+                form={form}
+                name="areaOfInterest"
+                label="Area of interest"
+                placeholder="Agricultural science"
+              />
+            )}
+          </div>
+          <div className="flex gap-4">
+            {user === "farmer" && (
+              <InputWithLabel
+                form={form}
+                name="farmsNumber"
+                label="Number of farms"
+                placeholder="Enter the number of farms you have.  e.g. 5"
+                type="number"
+                onChange={(e) => setfarmNumbers(e.target.value)}
+              />
+            )}
           </div>
         </div>
 
-        {farmNumbers > 0 && query.user === "farmer" && (
+        {farmNumbers > 0 && user === "farmer" && (
           <div className="relative">
             <div className="border border-input rounded-lg p-6 w-2/3 m-auto">
               <p className="absolute -top-3 bg-white px-6 text-sm font-semibold ">
