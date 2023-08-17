@@ -3,8 +3,25 @@ import InputWithLabel from "@/components/Inputs/inputWithLabel";
 import React, { ReactNode, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-const SwipeContent = ({ form, i }: { form: any; i: number }) => {
+const SwipeContent = ({
+  form,
+  i,
+  farmType,
+  setFarmType,
+}: {
+  form: any;
+  i: number;
+  farmType: string[];
+  setFarmType: any;
+}) => {
   const [type, setType] = useState("");
+
+  const handleSelect = (selected: string) => {
+    let typeArray = [...farmType];
+    typeArray[i] = selected.toLowerCase();
+    // setType(selected.toLowerCase());
+    setFarmType(typeArray);
+  };
 
   return (
     <SwiperSlide>
@@ -28,9 +45,7 @@ const SwipeContent = ({ form, i }: { form: any; i: number }) => {
           mainLabel="Farm type"
           placeholder="Select farm type"
           options={["Crop farming", "Animal farming", "Mixed farming"]}
-          handleSelect={(selected) => {
-            setType(selected.toLowerCase());
-          }}
+          handleSelect={handleSelect}
           defaultValue=""
         />
         <InputWithLabel
@@ -41,7 +56,7 @@ const SwipeContent = ({ form, i }: { form: any; i: number }) => {
           className="flex-1"
         />
       </div>
-      {(type === "animal farming" || type === "mixed farming") && (
+      {(farmType[i] === "animal farming" || farmType[i] === "mixed farming") && (
         <div>
           <InputWithLabel
             form={form}
@@ -54,7 +69,7 @@ const SwipeContent = ({ form, i }: { form: any; i: number }) => {
           />
         </div>
       )}
-      {(type === "crop farming" || type === "mixed farming") && (
+      {(farmType[i] === "crop farming" || farmType[i] === "mixed farming") && (
         <div>
           <InputWithLabel
             form={form}

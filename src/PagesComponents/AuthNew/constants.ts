@@ -156,7 +156,7 @@ export const individualSchema = z.object({
 //
 
 //
-export const getFarmerSchema = (farms: number) => {
+export const getFarmerSchema = (farms: number, farmType: string[]) => {
   let farmObj = {
     fullname: z
       .string({
@@ -169,8 +169,8 @@ export const getFarmerSchema = (farms: number) => {
       })
       .refine((phone) => phone.length === 13, { message: "Enter a valid phone number" }),
     phone2: z.string().optional(),
-    email: z.string().email("Enter a valid email address"),
-    password: z.string().min(6, {
+    email: z.string({ required_error: "Enter email address" }).email("Enter a valid email address"),
+    password: z.string({ required_error: "Enter your password" }).min(6, {
       message: "Must be at least 6 characters",
     }),
     confirmPassword: z
@@ -201,15 +201,25 @@ export const getFarmerSchema = (farms: number) => {
         .string({ required_error: "Select farm type" })
         .nonempty("Select farm type"),
       ["farmSize" + i]: z.string({ required_error: "Enter farm size" }).nonempty("Enter farm size"),
-      ["animalNames" + i]: z
-        .string({ required_error: "Enter animal names" })
-        .array()
-        .nonempty("Enter animal names"),
-      ["cropNames" + i]: z
-        .string({ required_error: "Enter crop names" })
-        .array()
-        .nonempty("Enter crop names"),
     };
+    if (farmType[i] === "animal farming" || farmType[i] === "mixed farming") {
+      farmObj = {
+        ...farmObj,
+        ["animalNames" + i]: z
+          .string({ required_error: "Enter animal names" })
+          .array()
+          .nonempty("Enter animal names"),
+      };
+    }
+    if (farmType[i] === "crop farming" || farmType[i] === "mixed farming") {
+      farmObj = {
+        ...farmObj,
+        ["cropNames" + i]: z
+          .string({ required_error: "Enter crop names" })
+          .array()
+          .nonempty("Enter crop names"),
+      };
+    }
   }
 
   return z.object(farmObj).refine((data) => data.password === data.confirmPassword, {

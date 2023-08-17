@@ -54,10 +54,6 @@ const InputWithLabel = ({
         setValueTag(newArr);
         setValue(name, newArr, { shouldValidate: true });
         setInpValue("");
-        if (id) {
-          const input = document.getElementById(id);
-          input?.focus();
-        }
       }
     }
     if (onKeyDown) onKeyDown(e);

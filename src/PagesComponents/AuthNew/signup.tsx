@@ -19,15 +19,23 @@ import { useRouter } from "next/router";
 import SwipeContent from "./swipeContent";
 import * as z from "zod";
 import PhoneNumInput from "@/components/Inputs/phoneInput";
+import {
+  registerFarmer,
+  registerIndividual,
+  registerInstitution,
+  registerInvestor,
+  registerServiceProvider,
+} from "@/services/auth.service.js";
 
 const SignUpNew = () => {
   const [farmNumbers, setfarmNumbers] = useState(0);
+  const [farmType, setFarmType] = useState([]);
   const [visibleFarm, setVisibleFarm] = useState(1);
 
   const { query } = useRouter();
   const { user } = query;
 
-  const signUpSchema = getSignUpSchema(user) || getFarmerSchema(farmNumbers);
+  const signUpSchema = getSignUpSchema(user) || getFarmerSchema(farmNumbers, farmType);
   type signUpTypes = z.infer<typeof signUpSchema>;
 
   // 1. Define your form.
@@ -38,9 +46,12 @@ const SignUpNew = () => {
 
   // 2. Define a submit handler.
   function onSubmit(values: signUpTypes) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
+    if (user === "farmer") registerFarmer(values, farmNumbers);
+    if (user === "institution") registerInstitution(values);
+    if (user === "investor") registerInvestor(values);
+    if (user === "service-provider") registerServiceProvider(values);
+    if (user === "individual") registerIndividual(values);
   }
 
   useEffect(() => {
@@ -53,6 +64,10 @@ const SignUpNew = () => {
     active?.parentNode?.childNodes?.forEach((el: any, i) => {
       if (el === active) setVisibleFarm(i + 1);
     });
+  };
+
+  const handleFarmNumChange = (e: any) => {
+    setfarmNumbers(e.target.value);
   };
 
   return (
@@ -171,7 +186,7 @@ const SignUpNew = () => {
                 label="Number of farms"
                 placeholder="Enter the number of farms you have.  e.g. 5"
                 type="number"
-                onChange={(e) => setfarmNumbers(e.target.value)}
+                onChange={handleFarmNumChange}
               />
             )}
           </div>
@@ -186,7 +201,13 @@ const SignUpNew = () => {
               <Swiper>
                 <SwiperWrapper>
                   {Array.from({ length: farmNumbers }, () => "").map((el, i) => (
-                    <SwipeContent key={i} i={i} form={form} />
+                    <SwipeContent
+                      key={i}
+                      i={i}
+                      form={form}
+                      farmType={farmType}
+                      setFarmType={setFarmType}
+                    />
                   ))}
                 </SwiperWrapper>
               </Swiper>
@@ -220,44 +241,3 @@ const Swiper = ({ children }: { children: ReactNode }) => {
 const SwiperWrapper = ({ children }: { children: ReactNode }) => {
   return <div className="swiper-wrapper">{children}</div>;
 };
-
-//
-
-//  <div className="space-y-1 flex-1">
-//    <label htmlFor="phone1" className="text-sm">
-//      Phone number 1
-//    </label>
-//    <PhoneInput
-//      country={"ng"}
-//      value={phone}
-//      onChange={(phone) => setPhone(phone)}
-//      preferredCountries={["ng"]}
-//      placeholder="8137726622"
-//      inputProps={{
-//        name: "phone1",
-//        required: true,
-//        autoFocus: true,
-//      }}
-//      buttonClass="h-10"
-//      inputStyle={{ height: "40px", width: "100%" }}
-//    />
-//    <div className="space-y-1 flex-1">
-//      <label htmlFor="phone" className="text-sm">
-//        Phone number 2
-//      </label>
-//      <PhoneInput
-//        country={"ng"}
-//        value={phone}
-//        onChange={(phone) => setPhone(phone)}
-//        preferredCountries={["ng"]}
-//        placeholder="8137726622"
-//        inputProps={{
-//          name: "phone2",
-//          required: true,
-//          autoFocus: true,
-//        }}
-//        buttonClass="h-10"
-//        inputStyle={{ height: "40px", width: "100%" }}
-//      />
-//    </div>
-//  </div>;
