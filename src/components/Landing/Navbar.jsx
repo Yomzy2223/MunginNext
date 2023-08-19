@@ -24,7 +24,7 @@ const Navbar = () => {
         <HeaderRight>
           <NavList onClick={() => scrollTo("work-progress")}>Process</NavList>
           <NavList onClick={() => scrollTo("our-mission")}>Our Mission</NavList>
-          <Link href="/register">
+          <Link href="/auth/signup/farmer">
             <div style={{ color: "#375a1a" }}>Join Us</div>
           </Link>
           <Link href={"/database"}>
@@ -32,9 +32,7 @@ const Navbar = () => {
           </Link>
         </HeaderRight>
 
-        <MenuIcon>
-          {<AiOutlineMenu size={24} onClick={() => setOpen(true)} />}
-        </MenuIcon>
+        <MenuIcon>{<AiOutlineMenu size={24} onClick={() => setOpen(true)} />}</MenuIcon>
 
         <MobileSidebarCont anchor="right" open={open} setOpen={setOpen}>
           <MobileSidebar setOpen={setOpen} />

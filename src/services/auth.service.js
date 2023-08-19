@@ -310,6 +310,7 @@ export const registerFarmer = async (formData) => {
     return true;
   } catch (e) {
     if (e?.message?.toString() === "Network Error") toast.error(e.message);
+    else toast.error("Error occured");
     // else toast.error(e?.response?.data);
     console.log(e);
     return false;
@@ -337,6 +338,7 @@ export const registerInstitution = async (formData) => {
     return true;
   } catch (e) {
     if (e?.message?.toString() === "Network Error") toast.error(e.message);
+    else toast.error("Error occured");
     // else toast.error(e?.response?.data);
     console.log(e);
     return false;
@@ -364,6 +366,7 @@ export const registerInvestor = async (formData) => {
     return true;
   } catch (e) {
     if (e?.message?.toString() === "Network Error") toast.error(e.message);
+    else toast.error("Error occured");
     // else toast.error(e?.response?.data);
     console.log(e);
     return false;
@@ -389,7 +392,8 @@ export const registerServiceProvider = async (formData) => {
     return true;
   } catch (e) {
     if (e?.message?.toString() === "Network Error") toast.error(e.message);
-    else toast.error(e?.response?.data);
+    else toast.error("Error occured");
+    // else toast.error(e?.response?.data);
     console.log(e);
     return false;
   }
@@ -413,6 +417,7 @@ export const registerIndividual = async (formData) => {
     return true;
   } catch (e) {
     if (e?.message?.toString() === "Network Error") toast.error(e.message);
+    else toast.error("Error occured");
     // else toast.error(e?.response?.data);
     console.log(e);
     return false;

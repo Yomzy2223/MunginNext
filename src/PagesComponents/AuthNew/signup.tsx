@@ -26,11 +26,13 @@ import {
   registerInvestor,
   registerServiceProvider,
 } from "@/services/auth.service.js";
+import { Oval } from "react-loading-icons";
 
 const SignUpNew = () => {
   const [farmNumbers, setfarmNumbers] = useState(0);
   const [farmType, setFarmType] = useState([]);
   const [visibleFarm, setVisibleFarm] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const { query } = useRouter();
   const { user } = query;
@@ -45,14 +47,16 @@ const SignUpNew = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: signUpTypes) {
+  const onSubmit = async (values: signUpTypes) => {
+    setLoading(true);
     console.log(values);
-    if (user === "farmer") registerFarmer(values, farmNumbers);
-    if (user === "institution") registerInstitution(values);
-    if (user === "investor") registerInvestor(values);
-    if (user === "service-provider") registerServiceProvider(values);
-    if (user === "individual") registerIndividual(values);
-  }
+    if (user === "farmer") await registerFarmer(values);
+    if (user === "institution") await registerInstitution(values);
+    if (user === "investor") await registerInvestor(values);
+    if (user === "service-provider") await registerServiceProvider(values);
+    if (user === "individual") await registerIndividual(values);
+    setLoading(false);
+  };
 
   useEffect(() => {
     createNewSwiper();
@@ -224,7 +228,7 @@ const SignUpNew = () => {
 
         <div className="flex justify-center w-2/3 m-auto">
           <Button size="full" type="submit">
-            Submit
+            {loading ? <Oval stroke="#fff" className="w-5 h-5 " /> : "Submit"}
           </Button>
         </div>
       </form>

@@ -44,7 +44,7 @@ const SwipeContent = ({
           name={`farmType${i}`}
           mainLabel="Farm type"
           placeholder="Select farm type"
-          options={["Crop farming", "Animal farming", "Mixed farming"]}
+          options={["Crop", "Animal", "Mixed farming"]}
           handleSelect={handleSelect}
           defaultValue=""
         />
@@ -56,7 +56,7 @@ const SwipeContent = ({
           className="flex-1"
         />
       </div>
-      {(farmType[i] === "animal farming" || farmType[i] === "mixed farming") && (
+      {(farmType[i] === "animal" || farmType[i] === "mixed farming") && (
         <div>
           <InputWithLabel
             form={form}
@@ -69,7 +69,7 @@ const SwipeContent = ({
           />
         </div>
       )}
-      {(farmType[i] === "crop farming" || farmType[i] === "mixed farming") && (
+      {(farmType[i] === "crop" || farmType[i] === "mixed farming") && (
         <div>
           <InputWithLabel
             form={form}

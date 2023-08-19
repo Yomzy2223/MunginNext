@@ -202,7 +202,7 @@ export const getFarmerSchema = (farms: number, farmType: string[]) => {
         .nonempty("Select farm type"),
       ["farmSize" + i]: z.string({ required_error: "Enter farm size" }).nonempty("Enter farm size"),
     };
-    if (farmType[i] === "animal farming" || farmType[i] === "mixed farming") {
+    if (farmType[i] === "animal" || farmType[i] === "mixed farming") {
       farmObj = {
         ...farmObj,
         ["animalNames" + i]: z
@@ -211,7 +211,7 @@ export const getFarmerSchema = (farms: number, farmType: string[]) => {
           .nonempty("Enter animal names"),
       };
     }
-    if (farmType[i] === "crop farming" || farmType[i] === "mixed farming") {
+    if (farmType[i] === "crop" || farmType[i] === "mixed farming") {
       farmObj = {
         ...farmObj,
         ["cropNames" + i]: z
