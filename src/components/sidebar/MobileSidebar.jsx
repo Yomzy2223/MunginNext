@@ -15,7 +15,7 @@ const MobileSidebar = ({ open, setOpen }) => {
       <AiOutlineClose size={24} onClick={() => setOpen(false)} />
       <button onMouseDown={() => scrollTo("work-progress")}>Process</button>
       <button onMouseDown={() => scrollTo("our-mission")}>Our Mission</button>
-      <Link href="/register">Join Us</Link>
+      <Link href="/auth/signup/farmer">Join Us</Link>
       <Link href="/database">Search Our Database</Link>
     </SidebarContainer>
   );

@@ -13,16 +13,14 @@ const Hero = () => {
       <Left>
         <AnimatedElement animation="animate__fadeIn">
           <h1>
-            Growing <span style={{ color: "#83BF4F" }}>Agricultural</span> Data
-            For immediate Impact
+            Growing <span style={{ color: "#83BF4F" }}>Agricultural</span> Data For immediate Impact
           </h1>
         </AnimatedElement>
         <AnimatedElement animation="animate__fadeIn">
           <p className="mt-7 text-[#565656]">
-            We transform data to actionable insights that power decision making
-            across the agricultural value chain. Delivering innovative Agtech
-            Solutions to improve agricultural productivity in Nigeria is our
-            ethos.{" "}
+            We transform data to actionable insights that power decision making across the
+            agricultural value chain. Delivering innovative Agtech Solutions to improve agricultural
+            productivity in Nigeria is our ethos.{" "}
           </p>
         </AnimatedElement>
         {/* button and link */}
@@ -31,7 +29,7 @@ const Hero = () => {
             <Link href={"/database"}>
               <HeroButton>Search Our Database</HeroButton>
             </Link>
-            <Link href={"/register"}>
+            <Link href={"/auth/signup/farmer"}>
               <button style={JoinButtonStyles}>Join Us</button>
             </Link>
           </Buttons>

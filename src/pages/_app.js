@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import "mapbox-gl/dist/mapbox-gl.css";
+import "tailwindcss/tailwind.css";
 
 export default function App({ Component, pageProps }) {
   return (
