@@ -4,6 +4,7 @@ import icon from "@/assets/icons/mungin-icon-white.svg";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/router";
 import { cn } from "@/lib/utils";
+import { ArrowLeft } from "lucide-react";
 
 const AuthLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
@@ -48,7 +49,12 @@ const AuthLayout = ({ children }: { children: ReactNode }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-1 p-10  overflow-auto">{children}</div>
+      <div className="flex flex-1 p-10  overflow-auto">
+        <Button variant="ghost2" onClick={() => router.push("/")}>
+          <ArrowLeft />
+        </Button>
+        {children}
+      </div>
     </div>
   );
 };

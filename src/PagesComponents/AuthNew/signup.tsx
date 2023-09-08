@@ -89,7 +89,11 @@ const SignUpNew = () => {
             placeholder="Enter your fullname"
           />
           <div className="flex gap-4">
-            <PhoneNumInput form={form} name="phone" label="Phone number 1" />
+            <PhoneNumInput
+              form={form}
+              name="phone"
+              label={`Phone number ${user === "farmer" ? "1" : ""}`}
+            />
             {user === "farmer" && (
               <PhoneNumInput form={form} name="phone2" label="Phone number 2" />
             )}
