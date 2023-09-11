@@ -50,7 +50,8 @@ const InputWithLabel = ({
   const handleKeydown = (e: any) => {
     if (e.key === "Enter") {
       if (type === "array") {
-        const newArr = [...valueTag, inpValue];
+        e.preventDefault();
+        const newArr = [...new Set([...valueTag, inpValue.trim()])];
         setValueTag(newArr);
         setValue(name, newArr, { shouldValidate: true });
         setInpValue("");

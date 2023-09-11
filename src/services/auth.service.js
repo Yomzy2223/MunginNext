@@ -386,7 +386,7 @@ export const registerServiceProvider = async (formData) => {
   };
   console.log(requiredData);
   try {
-    let response = await client.post("/auth//provider/register", requiredData);
+    let response = await client.post("/auth/provider/register", requiredData);
     console.log(response);
     if (response?.data?.phoneNumber) toast.success("Registration successful");
     return true;
