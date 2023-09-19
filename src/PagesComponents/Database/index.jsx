@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../../assets/images/MUNGINLogo.png";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { BsArrowDown } from "react-icons/bs";
-import { getCrops, getCropsDetails } from "../../services/auth.service";
+import { getCrops } from "../../services/map.service";
 import Modal1 from "../../layout/Modal1";
 import Analyzer from "../../components/CropDetails/Analyzer";
 import Link from "next/link";

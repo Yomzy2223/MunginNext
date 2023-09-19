@@ -7,7 +7,7 @@ import DetailsHeader from "../components/header";
 import Sidebar from "../components/sidebar/index";
 import { storeCropDetails } from "../redux/slices";
 import { store } from "../redux/store";
-import { getCropDetails } from "../services/auth.service";
+import { getCropDetails } from "../services/map.service";
 
 const DetailsLayout = ({ children }) => {
   const [cropName, setCropName] = useState(false);

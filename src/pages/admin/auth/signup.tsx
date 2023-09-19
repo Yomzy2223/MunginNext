@@ -3,10 +3,10 @@ import AuthLayout from "@/layout/AuthLayout";
 import React, { useState } from "react";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { signUpSchema, signUpTypes } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import profilesvg from "@/assets/icons/profile.svg";
+import { signUpSchema, signUpTypes } from "@/lib/constants";
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
