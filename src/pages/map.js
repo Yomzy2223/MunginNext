@@ -14,7 +14,7 @@ import {
   getPowerInfo,
   getRailTracks,
   getWeatherInfo,
-} from "@/services/auth.service";
+} from "@/services/map.service";
 import { TbZoomReplace } from "react-icons/tb";
 import { getStateFullName } from "@/utils/globalFunctions";
 import * as turf from "@turf/turf";
@@ -59,17 +59,14 @@ const Map = () => {
   const router = useRouter();
   const { view, selected, rail, power } = router.query;
 
-  const active =
-    typeof selected === "string" ? selected : selected?.[selected?.length - 1];
+  const active = typeof selected === "string" ? selected : selected?.[selected?.length - 1];
 
   const mapContainerRef = useRef(null);
 
   let map = useRef();
   const listingRef = useRef();
 
-  const storesCoordinates = activeStore?.features?.map(
-    (el) => el?.geometry?.coordinates
-  );
+  const storesCoordinates = activeStore?.features?.map((el) => el?.geometry?.coordinates);
 
   useEffect(() => {
     if (view) handleMapInfo();
@@ -104,23 +101,15 @@ const Map = () => {
     const farmState = JSON.parse(localStorage.getItem("farmsStates"))?.[0];
     const marketState = JSON.parse(localStorage.getItem("marketsStates"))?.[0];
     const factoryState = JSON.parse(localStorage.getItem("factoryStates"))?.[0];
-    const electricState = JSON.parse(
-      localStorage.getItem("electricStates")
-    )?.[0];
+    const electricState = JSON.parse(localStorage.getItem("electricStates"))?.[0];
 
     setLoading(true);
     const farms = findDataPoint("farms") ? await getMapInfo(farmState) : [];
     const airports = findDataPoint("airports") ? await getMapAirportInfo() : [];
     const seaports = findDataPoint("seaports") ? await getMapSeaportInfo() : [];
-    const markets = findDataPoint("markets")
-      ? await getMarketInfo(marketState)
-      : [];
-    const factories = findDataPoint("factory")
-      ? await getFactoryInfo(factoryState)
-      : [];
-    const electricity = findDataPoint("electric")
-      ? await getElectricityInfo(electricState)
-      : [];
+    const markets = findDataPoint("markets") ? await getMarketInfo(marketState) : [];
+    const factories = findDataPoint("factory") ? await getFactoryInfo(factoryState) : [];
+    const electricity = findDataPoint("electric") ? await getElectricityInfo(electricState) : [];
     setLoading(false);
 
     resetStores();
@@ -266,8 +255,7 @@ const Map = () => {
         findDataPoint("seaports") && addMarkers(seaportStore, "seaport-marker");
         findDataPoint("markets") && addMarkers(marketStore, "market-marker");
         findDataPoint("factory") && addMarkers(factoryStore, "factory-marker");
-        findDataPoint("electric") &&
-          addMarkers(electricStore, "electric-marker");
+        findDataPoint("electric") && addMarkers(electricStore, "electric-marker");
       }
     });
 
@@ -316,9 +304,7 @@ const Map = () => {
       if (activeItem[0]) {
         activeItem[0].classList.remove("active");
       }
-      const listing = document.getElementById(
-        `listing-${clickedPoint.properties.id}`
-      );
+      const listing = document.getElementById(`listing-${clickedPoint.properties.id}`);
       if (listing) listing.classList.add("active");
     });
 
@@ -355,10 +341,7 @@ const Map = () => {
 
       if (marker?.electricGeometry?.coordinates) {
         const each = new mapboxgl.Marker(el, { offset: [0, 0] })
-          .setLngLat(
-            marker?.geometry?.coordinates ||
-              marker?.electricGeometry.coordinates
-          )
+          .setLngLat(marker?.geometry?.coordinates || marker?.electricGeometry.coordinates)
           .addTo(map.current);
         markers.push(each);
       }
@@ -377,9 +360,7 @@ const Map = () => {
         if (activeItem[0]) {
           activeItem[0].classList.remove("active");
         }
-        const listing = document.getElementById(
-          `listing-${marker.properties.id}`
-        );
+        const listing = document.getElementById(`listing-${marker.properties.id}`);
         if (listing) listing.classList.add("active");
       });
     }
@@ -404,15 +385,12 @@ const Map = () => {
     if (activeItem[0]) {
       activeItem[0].classList.remove("active");
     }
-    if (listingRef.current)
-      listingRef.current.parentNode.classList.add("active");
+    if (listingRef.current) listingRef.current.parentNode.classList.add("active");
   };
 
   const flyToStore = (currentFeature) => {
     map.current.flyTo({
-      center:
-        currentFeature?.geometry?.coordinates ||
-        currentFeature?.electricGeometry.coordinates,
+      center: currentFeature?.geometry?.coordinates || currentFeature?.electricGeometry.coordinates,
       zoom: 15,
     });
   };
@@ -471,9 +449,7 @@ const Map = () => {
               </li>
               <li>
                 <span>Sq. Feet</span
-                <span>${
-                  areaMeters ? (areaMeters * 10.7639).toFixed(2) : "--"
-                }</span
+                <span>${areaMeters ? (areaMeters * 10.7639).toFixed(2) : "--"}</span
               </li>
               <li>
                 <span>Acres</span
@@ -481,9 +457,7 @@ const Map = () => {
               </li>
               <li>
                 <span>Sq. Miles</span
-                <span>${
-                  areaMeters ? (areaMeters / 2589988.110336).toFixed(2) : "--"
-                }</span
+                <span>${areaMeters ? (areaMeters / 2589988.110336).toFixed(2) : "--"}</span
               </li>
              </ul>
           `
@@ -496,9 +470,7 @@ const Map = () => {
             </li>
             <li>
               <span>Kilometers</span
-              <span>${
-                distance ? ((distance * 1) / 1000).toFixed(2) : "--"
-              }</span
+              <span>${distance ? ((distance * 1) / 1000).toFixed(2) : "--"}</span
             </li>
             <li>
               <span>Feet</span
@@ -510,9 +482,7 @@ const Map = () => {
             </li>
             <li>
               <span>Miles</span
-              <span>${
-                distance ? (distance * 0.000621371).toFixed(2) : "--"
-              }</span
+              <span>${distance ? (distance * 0.000621371).toFixed(2) : "--"}</span
             </li>
           </ul>
           `
@@ -520,11 +490,9 @@ const Map = () => {
       .addClassName("cm-popup")
       .addTo(map.current);
     // Add a click event listener to the close button
-    document
-      .querySelector(".popup-close-button")
-      ?.addEventListener("click", () => {
-        popup.remove();
-      });
+    document.querySelector(".popup-close-button")?.addEventListener("click", () => {
+      popup.remove();
+    });
 
     document
       .querySelector(".cm-popup")
@@ -550,8 +518,7 @@ const Map = () => {
       closeButton: true,
     })
       .setLngLat(
-        currentFeature?.geometry?.coordinates ||
-          currentFeature?.electricGeometry.coordinates
+        currentFeature?.geometry?.coordinates || currentFeature?.electricGeometry.coordinates
       )
       .setHTML(
         currentFeature.properties.farmCategory
@@ -562,9 +529,7 @@ const Map = () => {
               currentFeature.properties.state
             } <button class="popup-close-button" >X</button></h3>
         
-        <h4>${
-          currentFeature.properties.name || currentFeature.properties.port
-        }</h4> 
+        <h4>${currentFeature.properties.name || currentFeature.properties.port}</h4> 
         
         <div>
         <span>Cloud: ${weather.current.cloud + "%"}</span>
@@ -575,9 +540,7 @@ const Map = () => {
         <span>Humidity: ${weather.current.humidity + "%"}</span>
         <span>Precipitation amount: ${weather.current.precip_in + "in"}</span>
         <span>Precipitation amount: ${weather.current.precip_mm + "mm"}</span>
-        <span>Atmospheric pressure: ${
-          weather.current.pressure_in + "inHg"
-        }</span>
+        <span>Atmospheric pressure: ${weather.current.pressure_in + "inHg"}</span>
         <span>Atmospheric pressure: ${weather.current.pressure_mb + "mb"}</span>
        <span>Temperature: ${weather.current.temp_c + "°C"}</span>
         <span>Temperature: ${weather.current.temp_f + "°F"}</span>
@@ -605,11 +568,9 @@ const Map = () => {
       )
       .addTo(map.current);
     // Add a click event listener to the close button
-    document
-      .querySelector(".popup-close-button")
-      ?.addEventListener("click", () => {
-        popup.remove();
-      });
+    document.querySelector(".popup-close-button")?.addEventListener("click", () => {
+      popup.remove();
+    });
   };
 
   //
@@ -653,8 +614,7 @@ const Map = () => {
       const xj = polygon[j][0],
         yj = polygon[j][1];
 
-      const intersect =
-        yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi;
+      const intersect = yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi;
 
       if (intersect) {
         isInside = !isInside;
@@ -774,14 +734,10 @@ const Map = () => {
 
   useEffect(() => {
     if (storesCoordinates?.length > 0 && polygonCoordinates?.length > 0) {
-      const insidePolygon = getCoordinatesInsidePolygon(
-        storesCoordinates,
-        polygonCoordinates
-      );
+      const insidePolygon = getCoordinatesInsidePolygon(storesCoordinates, polygonCoordinates);
       let newStore = activeStore?.features?.filter((el) =>
         insidePolygon?.find(
-          (val) =>
-            JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
+          (val) => JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
         )
       );
       newStore = {

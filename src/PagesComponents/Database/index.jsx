@@ -8,16 +8,7 @@ import Analyzer from "../../components/CropDetails/Analyzer";
 import Link from "next/link";
 import Image from "next/image";
 import { Router, useRouter } from "next/router";
-import {
-  Container,
-  CropName,
-  Header,
-  Main,
-  Middle,
-  MiddleLeft,
-  MiddleRight,
-  Top,
-} from "./styled";
+import { Container, CropName, Header, Main, Middle, MiddleLeft, MiddleRight, Top } from "./styled";
 
 const DatabaseComponent = () => {
   const [open, setOpen] = useState(false);
@@ -75,7 +66,7 @@ const DatabaseComponent = () => {
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            <button onClick={handleMapNavigate}>Check Map</button>
+            {/* <button onClick={handleMapNavigate}>Check Map</button> */}
           </MiddleRight>
         </Middle>
       </Header>
@@ -100,9 +91,7 @@ const DatabaseComponent = () => {
               ?.map((crop, index) => (
                 <tr key={index}>
                   <CropName>
-                    <Link href={`/database/${crop?.id}/profile`}>
-                      {crop?.cropName}
-                    </Link>
+                    <Link href={`/database/${crop?.id}/profile`}>{crop?.cropName}</Link>
                   </CropName>
                 </tr>
               ))}
