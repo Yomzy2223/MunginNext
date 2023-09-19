@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import styled from "styled-components";
-import { analyzeCrop } from "../../services/auth.service";
+import { analyzeCrop } from "../../services/map.service";
 
 const Analyzer = ({ setOpen }) => {
   const [analysed, setAnalysed] = useState(false);
@@ -41,8 +41,7 @@ const Analyzer = ({ setOpen }) => {
           <p>Analyze Crop Yield</p>
           {!analysed && (
             <p>
-              Input your crop information in the fields provided below to
-              calculate a possible yield
+              Input your crop information in the fields provided below to calculate a possible yield
             </p>
           )}
         </Top>
@@ -50,31 +49,16 @@ const Analyzer = ({ setOpen }) => {
           {!analysed && (
             <Input>
               <p>Crop Name</p>
-              <input
-                type="text"
-                placeholder="Rice"
-                disabled={analysed}
-                required
-              />
+              <input type="text" placeholder="Rice" disabled={analysed} required />
             </Input>
           )}
           <Input>
             <p>Soil Type</p>
-            <input
-              type="text"
-              placeholder="Sandy Soil"
-              disabled={analysed}
-              required
-            />
+            <input type="text" placeholder="Sandy Soil" disabled={analysed} required />
           </Input>
           <Input>
             <p>Rainfall Value</p>
-            <input
-              type="text"
-              placeholder="300 mm/annum"
-              disabled={analysed}
-              required
-            />
+            <input type="text" placeholder="300 mm/annum" disabled={analysed} required />
             {analysed && (
               <Result>
                 <span>Result:</span>

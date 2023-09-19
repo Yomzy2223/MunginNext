@@ -2,7 +2,7 @@ import ImageWithLabel from "@/components/CropDetails/ImageWithLabel";
 import DetailsLayout from "@/layout/DetailsLayout";
 import { storeTitle } from "@/redux/slices";
 import { store } from "@/redux/store";
-import { getCrops } from "@/services/auth.service";
+import { getCrops } from "@/services/map.service";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -21,9 +21,7 @@ const Profile = () => {
   // Get all crops and set the selected crop
   const handleCrops = async () => {
     let crops = await getCrops();
-    let selectedCrop = crops?.filter(
-      (crop) => crop?.id?.toString() === cropId?.toString()
-    );
+    let selectedCrop = crops?.filter((crop) => crop?.id?.toString() === cropId?.toString());
     setCrops(selectedCrop ? selectedCrop[0] : []);
   };
 
@@ -36,7 +34,7 @@ const Profile = () => {
       value: crops?.scientificName,
       valueStyle: { fontStyle: "italic" },
     },
-    { property: "yeild rate", value: crops?.yieldRate},
+    { property: "yeild rate", value: crops?.yieldRate },
   ];
 
   return (
