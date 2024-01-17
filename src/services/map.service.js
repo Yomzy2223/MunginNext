@@ -1,8 +1,11 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
+// const client = axios.create({
+//   baseURL: "https://crop-profiles.herokuapp.com/api/v1",
+// });
 const client = axios.create({
-  baseURL: "https://crop-profiles.herokuapp.com/api/v1",
+  baseURL: "https://ec2-18-188-173-94.us-east-2.compute.amazonaws.com/api/v1",
 });
 
 export const getCrops = async () => {

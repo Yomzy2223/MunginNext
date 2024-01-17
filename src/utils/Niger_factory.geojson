@@ -1,0 +1,215 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Ishow Choice Concept Limited",
+        "status": "In Use"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          4.5140257,
+          9.8814451
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Danadams Pharmaceutical Industry",
+        "status": "Unused Good"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          6.5842076,
+          9.5271096
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Wawa Ginning Station",
+        "status": "Unused Poor"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          4.4136905,
+          9.9096439
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Pure Water Industry",
+        "status": "In Use"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          6.6106127,
+          9.4973768
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Makama Bakery",
+        "status": "In Use"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          6.2975437,
+          9.3602829
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Sabuke Table Water",
+        "status": "In Use"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          4.5103336,
+          9.8944351
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Gawu Water Factory",
+        "status": "In Use"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          6.9853892,
+          9.2731341
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Haruna Shaibu Factory",
+        "status": "In Use"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          6.41158,
+          9.3447733
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Iklas Water",
+        "status": "In Use"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          4.5103894,
+          9.893707
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Eterno Table Water Factory",
+        "status": "In Use"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          6.7846633,
+          9.6912385
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Timber Shade Factory",
+        "status": "In Use"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          4.5135133,
+          9.8811809
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Timber Factory",
+        "status": "In Use"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          4.718625,
+          10.1910317
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Aweda Golden Water",
+        "status": "In Use"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          4.6283367,
+          9.856995
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Fielmark Construction Ltd",
+        "status": "Unused Poor"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          6.9655621,
+          9.4223081
+        ]
+      }
+    }
+  ]
+}

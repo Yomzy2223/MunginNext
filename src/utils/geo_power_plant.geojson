@@ -1,0 +1,450 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1,
+        "description": "Jebba Hydroelectric Power Plant ",
+        "types_of_plants": "Hydro",
+        "installation_capacity_mw": 570
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.7877778,
+          9.1355556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2,
+        "description": "AES Nigeria BARGE IPP Limited ",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 270
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.615,
+          6.5591667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3,
+        "description": "Egbin Thermal Power Station ",
+        "types_of_plants": "Steam ",
+        "installation_capacity_mw": 1320
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6152778,
+          6.5630556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4,
+        "description": "Olorunsogo II Power Plant - NIPP ",
+        "types_of_plants": "Gas; Steam  ",
+        "installation_capacity_mw": 720
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.3155556,
+          6.8855556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5,
+        "description": "Olorunsogo Power Plant ",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 320
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.314444,
+          6.8819444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6,
+        "description": "Omotosho Power Plant - NIPP",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 480
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.7108333,
+          6.7358333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 7,
+        "description": "Omotosho I & II Power Station ",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 304
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.7108333,
+          6.7358333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8,
+        "description": "Kainji Hydroelectric Power Station ",
+        "types_of_plants": "Hydro",
+        "installation_capacity_mw": 760
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.6133333,
+          9.8625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9,
+        "description": "Shiroro Hydroelectric Power Station ",
+        "types_of_plants": "Hydro",
+        "installation_capacity_mw": 600
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.8344444,
+          9.975
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 10,
+        "description": "Delta Power Station (Transcorp Ughelli Power Station)",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 860
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.9155556,
+          5.5411111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 11,
+        "description": "Gerugu II Power Plant - NIPP",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 435
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6927778,
+          7.5630556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12,
+        "description": "Gerugu I Power Station ",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 405
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9197333,
+          7.41611111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 13,
+        "description": "Ihovbor Power Plant - NIPP",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 480
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.6833333,
+          6.4055556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 14,
+        "description": "Sapele Power Plant - NIPP",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 480
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.6447222,
+          5.9277778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 15,
+        "description": "Sapele Power Station ",
+        "types_of_plants": "Steam ",
+        "installation_capacity_mw": 420
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.6455556,
+          5.9252778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16,
+        "description": "Okpai Power Plant ",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 470
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.57561,
+          5.7103
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 17,
+        "description": "Afam IV-V Power Plant ",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 260
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2547222,
+          4.8513889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 18,
+        "description": "Afam VI Power Plant ",
+        "types_of_plants": "Gas; Steam ",
+        "installation_capacity_mw": 725
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2566667,
+          4.8494444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 19,
+        "description": "Alaoiji Power Plant - NIPP",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 480
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.3233333,
+          5.0666667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 20,
+        "description": "Ibom Power Station (IPP)",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 174
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.5683333,
+          4.5647222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 21,
+        "description": "Odukpani  (Calabar) Power Plant ",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 600
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.2736111,
+          5.1891667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 22,
+        "description": "Omoku Power Plant - NIPP",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 120
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.663333,
+          5.39
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 23,
+        "description": "Trans-Amadi Power Plant (IPP)",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 80
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.031416,
+          4.815994
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 24,
+        "description": "Rivers Power Plant (IPP)",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 160
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": {}
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 25,
+        "description": "ASCO (Ajaokuta Steel Company) IPP",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 110
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.69059,
+          7.5144
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26,
+        "description": "Azura Thermal Power Station (IPP)",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 460
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.683611,
+          6.408889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 27,
+        "description": "Paras Energy & Natural Res. Dev. Ltd.",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 96
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5222,
+          6.72014
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 28,
+        "description": "Gbarain Power Plant - NIPP",
+        "types_of_plants": "Gas ",
+        "installation_capacity_mw": 250
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.30156,
+          5.03223
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Minna Airport",
+        "scheduled_service": "0",
+        "type": "medium_airport"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          6.462259769,
+          9.652170181
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Shiroro Airport",
+        "scheduled_service": "0",
+        "type": "small_airport"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          6.818630219,
+          9.88465023
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Bida Airport",
+        "scheduled_service": "0",
+        "type": "small_airport"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          6.017000198,
+          9.100000381
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "NI",
+        "name": "Kainji Air Base",
+        "scheduled_service": "0",
+        "type": "small_airport"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          4.484224,
+          9.895279
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "BE",
+        "name": "Makurdi Airport",
+        "scheduled_service": "1",
+        "type": "medium_airport"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          8.61394,
+          7.70388
+        ]
+      }
+    }
+  ]
+}
