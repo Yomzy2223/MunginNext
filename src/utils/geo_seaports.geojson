@@ -1,0 +1,117 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "port": "PORT HARCOURT",
+        "state": "CR"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          7,
+          4.767
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "port": "CALABAR",
+        "state": "RI"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          8.317,
+          4.967
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "port": "BURUTU",
+        "state": "DE"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          5.5,
+          5.35
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "port": "WARRI",
+        "state": "DE"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          5.733,
+          5.517
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "port": "SAPELE",
+        "state": "DE"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          5.683,
+          5.9
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "port": "KOKO",
+        "state": "DE"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          5.467,
+          6
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "port": "LAGOS",
+        "state": "LG"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          3.4,
+          6.4
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "port": "TIN CAN ISLAND",
+        "state": "LG"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          3.3,
+          6.417
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,3227 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 51,
+        "farm_category": "Unknown",
+        "farm_type": "Commercial",
+        "name": "Ruwa Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.3048095,
+          9.3941596
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 477,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Beji Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.3373583,
+          9.63592
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 641,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Murabu Lafiya Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.9712,
+          10.450615
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 920,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Yangalo Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4855188,
+          10.429461
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1086,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Crops Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4713573,
+          9.3642457
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1304,
+        "farm_category": "Unknown",
+        "farm_type": "Commercial",
+        "name": "Poultry Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4357053,
+          10.3890239
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1342,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Rural Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.7041283,
+          9.33342
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1484,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Bayan Makabarta Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4560267,
+          10.4154833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1577,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Ukuru Road Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.998645,
+          10.40431
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1982,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Yakaji Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.7750167,
+          9.6836133
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2169,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Farin Doki Farm Old Road",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.8267233,
+          9.3924433
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2207,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Awwal Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.65217,
+          9.94402
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2509,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Diri Road Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2704633,
+          11.1193489
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2740,
+        "farm_category": "Animal Farm",
+        "farm_type": "Both",
+        "name": "Fish Farm Roadway",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.575335,
+          9.5327017
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2792,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Commercial",
+        "name": "Muhammad Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.7778389,
+          9.5139604
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3167,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Birnin Ketere Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.9555867,
+          10.4190283
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3171,
+        "farm_category": "Unknown",
+        "farm_type": "Both",
+        "name": "Rice Production Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.7019417,
+          9.9807883
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3178,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Yam Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9768671,
+          9.5914052
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3977,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Audu Lato Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.967665,
+          10.45339
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4027,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Beni Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.1775365,
+          9.6557147
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4054,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Agogwai Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6563933,
+          9.72384
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4168,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Kampanin Sabulu Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4722717,
+          10.34641
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4248,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Katako Farmers",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.8185883,
+          9.478045
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4334,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Commercial",
+        "name": "Kuriga Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.1164807,
+          10.0073297
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4506,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Musa Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2592525,
+          9.342145
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4644,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Open Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2933517,
+          9.310715
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4910,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Dapkpanchi Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4717583,
+          9.3447098
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5132,
+        "farm_category": "Animal Farm",
+        "farm_type": "Subsistence",
+        "name": "Sahuma Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.3011044,
+          11.0650782
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5422,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Hussaini Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.02107,
+          10.40126
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5715,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Mabrini Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.9501617,
+          10.42643
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5968,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Gonan Sarki",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4775833,
+          10.5046067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6011,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Maahigin Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5677454,
+          9.616905
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6326,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Shago Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.5407133,
+          9.6857967
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6386,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Galadima Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.6631417,
+          10.65087
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6670,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Yams Cultivation",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.5811883,
+          9.6366417
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6885,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Zungeru Junction Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.1663033,
+          9.76699
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6920,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Amina Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.3907133,
+          9.55818
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6954,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Shingnai Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.5200683,
+          9.7445583
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 7243,
+        "farm_category": "Animal Farm",
+        "farm_type": "Both",
+        "name": "Chikin Gari",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.1869025,
+          10.2365657
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 7502,
+        "farm_category": "Animal Farm",
+        "farm_type": "Commercial",
+        "name": "Green Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.0002517,
+          9.31499
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 7580,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Makolo Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6816131,
+          9.6562349
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 7951,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Makers Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.20383,
+          9.5558017
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8036,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Yam Maize and Rice Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.7056554,
+          9.9491607
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8293,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Owu Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.65646,
+          9.72383
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8466,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "River Basin Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.6321383,
+          9.8436267
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8467,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Jigawa Fulani Settlement",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4183983,
+          10.4538133
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8563,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Farm Area",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.145898,
+          9.4423384
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8772,
+        "farm_category": "Animal Farm",
+        "farm_type": "Commercial",
+        "name": "Dugabe Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.737872,
+          9.8394661
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9128,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Ekan Bello Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.62369,
+          10.3338067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9232,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Ajatayi Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.7679676,
+          10.1225242
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9257,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Jamaare Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2803927,
+          11.0496604
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9307,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Rice Farming and Corn",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.3925559,
+          10.5630691
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9441,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Kushenayi",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.8033683,
+          9.9389683
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9468,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Guta Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6969967,
+          9.5825833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9638,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Ibrahim Baduku Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.2714583,
+          9.6864067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 10734,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Shata Sabo Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.560825,
+          9.7842167
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 10802,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Commercial",
+        "name": "Umaru Baduku Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.2888983,
+          9.6790567
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 11118,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Subsistence",
+        "name": "Ruga Mai Kewo",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.6043434,
+          9.2594204
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 11431,
+        "farm_category": "Animal Farm",
+        "farm_type": "Subsistence",
+        "name": "Rugan Fulani Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.3701598,
+          10.5693477
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 11499,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Commercial",
+        "name": "Kozeko Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6160967,
+          9.7730217
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 11514,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.8586683,
+          10.2730217
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12154,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Hanyan Makaranta Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.62683,
+          10.3229917
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12233,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Yam Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6175071,
+          9.7271351
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12511,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Samana Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.7974333,
+          9.5850017
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12538,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Gonan Haruna Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9844483,
+          9.300815
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12587,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Subsistence",
+        "name": "Communal Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.4570433,
+          9.86842
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12818,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Subsistence",
+        "name": "Lalu Farm Settlement",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.8085033,
+          9.4590983
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12948,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Gonan Alhaji Ardo Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9985817,
+          9.31273
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 13746,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Gidan Doma Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.2938802,
+          9.4929903
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 14040,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Kana Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.3822383,
+          9.6907517
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 15001,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Kubi Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.1511583,
+          9.6636667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 15102,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.8094083,
+          9.894505
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 15167,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Mashigin Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5704933,
+          9.6232362
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 15600,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Muhammad Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.72106,
+          10.56339
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 15923,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Farming Land",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.7864133,
+          9.6956567
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16227,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.7021667,
+          9.3305617
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16496,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Unguwar Makira Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.4373383,
+          10.55379
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16549,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Yashi Road Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.7153876,
+          8.9114358
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 17288,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Sheguni Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.687405,
+          9.604715
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 17674,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Warra Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.165897,
+          9.7368242
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 17986,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.9599633,
+          10.43954
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 18327,
+        "farm_category": "Animal Farm",
+        "farm_type": "Commercial",
+        "name": "Magaji Poultry Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.0034433,
+          9.3623533
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 18599,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Ewan Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.5594531,
+          8.5455101
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 18775,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Balas Farm Anyintan",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6534543,
+          9.8380448
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 18788,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Magamadaji Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.230605,
+          10.7018067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 18822,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Maruba Road Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.002545,
+          10.4172017
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 18992,
+        "farm_category": "Animal Farm",
+        "farm_type": "Both",
+        "name": "Fulani Settlement Called Rugan Madaki Secretary",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9008183,
+          9.2757117
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 19205,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Zankogi Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.2079933,
+          9.615595
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 19377,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Farm 1",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.2922667,
+          9.361215
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 19475,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Grandnut Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.687325,
+          9.86058
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 20608,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Beans Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9947533,
+          9.3154083
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 20703,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Wanu Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6182652,
+          9.7817154
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 20927,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Inusa Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.5936953,
+          9.6355624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 21357,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Rugan Wakili Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.1586466,
+          9.7377351
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 21886,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Mallam Musa Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.3775833,
+          9.5535667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 22014,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Bmaipe Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.7959683,
+          9.7168083
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 22075,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Mallam Mai Kano",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5228488,
+          10.3297045
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 22113,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Zauna Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.3713417,
+          9.76728
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 22623,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Maize and Yam Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.74703,
+          9.8677583
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 22735,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Subsistence",
+        "name": "Rugam Fulani",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.4089383,
+          9.80989
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 22974,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Banana Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.7192894,
+          10.1907948
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 23074,
+        "farm_category": "Animal Farm",
+        "farm_type": "Subsistence",
+        "name": "Abdulsalam Fish Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.5110383,
+          9.8965517
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 23286,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Commercial",
+        "name": "Minna Road Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.1166164,
+          10.0077881
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 23767,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Agricultural Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.7777997,
+          10.5627312
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 23793,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6393833,
+          10.0163217
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 24456,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Old Fulani Settlement Pankanpayu River Katcha",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.3122075,
+          8.7595625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 25137,
+        "farm_category": "Animal Farm",
+        "farm_type": "Commercial",
+        "name": "Bonu Coconut Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9993983,
+          9.3361617
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 25754,
+        "farm_category": "Animal Farm",
+        "farm_type": "Both",
+        "name": "Alhaji Ralawan Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.5479032,
+          9.8886132
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26234,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Pyata Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.5286983,
+          9.689305
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26457,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Jeni Farm Nyidan",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6397117,
+          9.9385083
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26508,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Gonan Hanya Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.291918,
+          9.4943979
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 27122,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Agricultural Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.701245,
+          10.61891
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 27442,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Kato Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.972235,
+          10.4736933
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 27902,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Maianguwa Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6005833,
+          9.65929
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 28230,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Umaru Opkan Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6514179,
+          9.8360654
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 28303,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Newbussa Wawa Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.4351567,
+          9.8876933
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 28801,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Shape Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.616615,
+          9.7781767
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 29099,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Sohon Bussa",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.4955533,
+          9.9211733
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 29174,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Kwakulagi Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.2149217,
+          9.53029
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 29894,
+        "farm_category": "Unknown",
+        "farm_type": "Commercial",
+        "name": "Mohammed Jibrin Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.7551587,
+          10.6418561
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30084,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Subsistence",
+        "name": "College Orchard Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.721665,
+          9.8566033
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30136,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.29012,
+          9.3612683
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30181,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Bobi Road Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.8649967,
+          10.2532033
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 31046,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Obba Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6498001,
+          9.855785
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 31310,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.2749389,
+          9.4180057
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 31542,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Gogo Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.5030583,
+          9.7917483
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 32348,
+        "farm_category": "Animal Farm",
+        "farm_type": "Both",
+        "name": "Abubakar Fulani Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.7673902,
+          9.5073193
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 32646,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Bordor Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.8000367,
+          9.5829517
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 32783,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Lambu Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.4955267,
+          9.920935
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 33349,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Makeri Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.9499433,
+          10.4709267
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 33390,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Sabon Titi Farin Doki",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.8411742,
+          9.3927721
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 33522,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.510809,
+          9.3064639
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 33768,
+        "farm_category": "Unknown",
+        "farm_type": "Both",
+        "name": "Zakaria Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.7817509,
+          9.5197161
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 33785,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Commercial",
+        "name": "Banana Plantation",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.1314124,
+          10.570421
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 34240,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Communal Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.4013917,
+          9.8415283
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 34743,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Gonan Fulani Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9843817,
+          9.3193117
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 34986,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Iwa Dauda Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2032533,
+          9.3459233
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 35148,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Community Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.1624767,
+          9.443755
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 35369,
+        "farm_category": "Animal Farm",
+        "farm_type": "Subsistence",
+        "name": "Sarki Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.0395,
+          9.2544667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 35432,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.8080617,
+          9.881915
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 35580,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Gonan Masara Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9902283,
+          9.31901
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 35741,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Wadare Road Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.9233908,
+          10.4775409
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 35984,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Sabon Lunko Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.4125481,
+          9.4897993
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 36441,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Magaji Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.979075,
+          10.4730883
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 36729,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Laduji Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.2237867,
+          9.7452267
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 37192,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "A and E Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.95899,
+          10.310925
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 37531,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Cornan Maje Farmlands",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5273267,
+          10.5229583
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 37557,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.926695,
+          10.4847633
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 37953,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Alh Sule Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.2709167,
+          9.6919433
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 38164,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Tauyi Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6187814,
+          9.7823211
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 38224,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Personal Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.4241717,
+          9.76861
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 38402,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Groundnut and Maize Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.7361433,
+          9.86604
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 38684,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Baka Yawa Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.4749167,
+          8.452285
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 38987,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Both",
+        "name": "Farm Land",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.3474667,
+          9.7964367
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 39151,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Udoro Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.0124283,
+          10.3836733
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 39340,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Farmlands Across Two Lgas Boundary",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.4849233,
+          9.403555
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 39533,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Cereal Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.7847517,
+          9.4717017
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 39900,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Yam Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.3644517,
+          9.6027717
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 40368,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.2514822,
+          9.7089164
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 40808,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Dakpa Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6219517,
+          9.7162317
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 40939,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Maize Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.774185,
+          9.8573233
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 40959,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Makera Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.2052033,
+          9.532125
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 41129,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Rugan Sarkin Fulani Dikko Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.4527579,
+          9.4796634
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 41132,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Zuzungi Pangu Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.3408816,
+          9.3130528
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 41150,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Gekun Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.8153977,
+          9.6049071
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 41485,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Ja Gurara Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.9860442,
+          9.2697472
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 41486,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Yams and Cassava",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.7203039,
+          9.6651853
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 41494,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Mai Salati Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.6769967,
+          9.5682617
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 42315,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Keroro Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.0047333,
+          10.4023783
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 42411,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Zuzungi Farm Land",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.3369417,
+          9.31758
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 42790,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Mohammed Kudu Ndaman Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.1037233,
+          9.2696483
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 42815,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Umaru Jigawa Farmer",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.5328085,
+          10.3175373
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 42974,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Gudugudu Farms",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.3129383,
+          9.438265
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 43024,
+        "farm_category": "Animal Farm",
+        "farm_type": "Both",
+        "name": "Paleli Farmland",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.7996733,
+          9.7190367
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 43045,
+        "farm_category": "Crop Farm",
+        "farm_type": "Subsistence",
+        "name": "Sami Naka Farmlands",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.71595,
+          9.7303033
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 43712,
+        "farm_category": "Animal Farm",
+        "farm_type": "Commercial",
+        "name": "Hazamu Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.3638806,
+          9.6308341
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 43733,
+        "farm_category": "Mixed Farm",
+        "farm_type": "Subsistence",
+        "name": "Dada Iwa Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.203265,
+          9.3460367
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 43739,
+        "farm_category": "Crop Farm",
+        "farm_type": "Commercial",
+        "name": "Pangun Bawa Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.473485,
+          9.4554967
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 44112,
+        "farm_category": "Crop Farm",
+        "farm_type": "Both",
+        "name": "Kpakogi Road Farm",
+        "region": "NC",
+        "state": "NI"
+      },
+      "wkb_geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.2688333,
+          9.3830983
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "BE",
+        "name": "Oladagu High Tension Station"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          7.9522333,
+          6.8147833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "BE",
+        "name": "Transmission Station Apir"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          8.5687833,
+          7.6253333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "BE",
+        "name": "Transmission Company Nigeria"
+      },
+      "geom": {
+        "type": "Point",
+        "coordinates": [
+          8.1405933,
+          7.1729817
+        ]
+      }
+    }
+  ]
+}
