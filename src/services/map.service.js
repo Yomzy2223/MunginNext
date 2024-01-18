@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 //   baseURL: "http://ec2-18-188-173-94.us-east-2.compute.amazonaws.com:8080/api/v1",
 // });
 const client = axios.create({
-  baseURL: "http://18.191.159.65:8080/api/v1",
+  baseURL: "https://ec2-18-191-159-65.us-east-2.compute.amazonaws.com:8443/api/v1",
 });
 
 export const getCrops = async () => {
