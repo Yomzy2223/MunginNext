@@ -66,7 +66,9 @@ const Map = () => {
   let map = useRef();
   const listingRef = useRef();
 
-  const storesCoordinates = activeStore?.features?.map((el) => el?.geometry?.coordinates);
+  const storesCoordinates = activeStore?.features?.map(
+    (el) => el?.geometry?.coordinates || el?.wbk_geometry?.coordinates
+  );
 
   useEffect(() => {
     if (view) handleMapInfo();
@@ -191,7 +193,7 @@ const Map = () => {
     // Event handling for draw.create
     map.current.on("draw.create", (e) => {
       const feature = e.features[0];
-      const coordinates = feature.geometry.coordinates;
+      const coordinates = feature.geometry.coordinates || feature?.wbk_geometry?.coordinates;
       const isPolygon = coordinates[0]?.[0]?.[0];
       isPolygon && setPolygonCoordinates(coordinates[0]);
 
@@ -218,7 +220,7 @@ const Map = () => {
     // Event handling for draw.update
     map.current.on("draw.update", (e) => {
       const feature = e.features[0];
-      const coordinates = feature.geometry.coordinates;
+      const coordinates = feature.geometry.coordinates || feature?.wbk_geometry?.coordinates;
       const isPolygon = coordinates[0]?.[0]?.[0];
       isPolygon && setPolygonCoordinates(coordinates[0]);
       // const inside = getCoordinatesInsidePolygon(
@@ -267,22 +269,27 @@ const Map = () => {
       const clickedFeatures = map.current.queryRenderedFeatures(event.point);
       const clickedPolygons = clickedFeatures.filter(
         (feature) =>
-          feature.layer.source.includes("mapbox-gl-draw-cold") &&
-          feature.geometry.type === "Polygon"
+          (feature.layer.source.includes("mapbox-gl-draw-cold") &&
+            feature.geometry.type === "Polygon") ||
+          feature?.wbk_geometry?.type === "Polygon"
       );
       const clickedPoint = clickedFeatures.filter(
         (feature) =>
-          feature.layer.source.includes("mapbox-gl-draw-cold") &&
-          feature.geometry.type === "LineString"
+          (feature.layer.source.includes("mapbox-gl-draw-cold") &&
+            feature.geometry.type === "LineString") ||
+          feature?.wbk_geometry?.type === "LineString"
       );
 
       console.log(clickedFeatures);
       if (clickedPolygons.length > 0) {
-        const coordinates = clickedPolygons[0].geometry.coordinates[0];
+        const coordinates =
+          clickedPolygons[0].geometry.coordinates[0] ||
+          clickedPolygons[0].wbk_geometry.coordinates[0];
         createPopUp2(coordinates, "polygon", event.lngLat);
       }
       if (clickedPoint.length > 0) {
-        const coordinates = clickedPoint[0].geometry.coordinates;
+        const coordinates =
+          clickedPoint[0].geometry.coordinates || clickedPoint[0].wbk_geometry.coordinates;
         createPopUp2(coordinates, "line", event.lngLat);
       }
       /* Determine if a feature in the "locations" layer exists at that point. */
@@ -332,9 +339,9 @@ const Map = () => {
        * Create a marker using the div element
        * defined above and add it to the map.
        **/
-      if (marker?.geometry?.coordinates) {
+      if (marker?.geometry?.coordinates || marker?.wbk_geometry?.coordinates) {
         const each = new mapboxgl.Marker(el, { offset: [0, 0] })
-          .setLngLat(marker.geometry.coordinates)
+          .setLngLat(marker.geometry.coordinates || marker?.wbk_geometry?.coordinates)
           .addTo(map.current);
         markers.push(each);
       }
@@ -518,7 +525,9 @@ const Map = () => {
       closeButton: true,
     })
       .setLngLat(
-        currentFeature?.geometry?.coordinates || currentFeature?.electricGeometry.coordinates
+        currentFeature?.geometry?.coordinates ||
+          currentFeature?.electricGeometry.coordinates ||
+          currentFeature?.wbk_geometry?.coordinates
       )
       .setHTML(
         currentFeature.properties.farmCategory
@@ -532,25 +541,25 @@ const Map = () => {
         <h4>${currentFeature.properties.name || currentFeature.properties.port}</h4> 
         
         <div>
-        <span>Cloud: ${weather.current.cloud + "%"}</span>
-        <span>Feels like: ${weather.current.feelslike_c + "°C"}</span>
-        <span>Feels like: ${weather.current.feelslike_f + "°F"}</span>
-        <span>Wind gusts speed: ${weather.current.gust_kph + "km/h"}</span>
-        <span>Wind gusts speed: ${weather.current.gust_mph + "mph"}</span>
-        <span>Humidity: ${weather.current.humidity + "%"}</span>
-        <span>Precipitation amount: ${weather.current.precip_in + "in"}</span>
-        <span>Precipitation amount: ${weather.current.precip_mm + "mm"}</span>
-        <span>Atmospheric pressure: ${weather.current.pressure_in + "inHg"}</span>
-        <span>Atmospheric pressure: ${weather.current.pressure_mb + "mb"}</span>
-       <span>Temperature: ${weather.current.temp_c + "°C"}</span>
-        <span>Temperature: ${weather.current.temp_f + "°F"}</span>
-        <span>Ultraviolet index: ${weather.current.uv + "UV"}</span>
-        <span>Visibility: ${weather.current.vis_km + "km"}</span>
-        <span>Visibility: ${weather.current.vis_miles + "mi"}</span>
-        <span>Wind: ${weather.current.wind_degree + "°"}</span>
-        <span>Wind): ${weather.current.wind_dir}</span>
-        <span>Wind speed: ${weather.current.wind_kph + "km/h"}</span>
-        <span>Wind speed : ${weather.current.wind_mph + "mph"}</span>
+        <span>Cloud: ${weather?.current?.cloud + "%"}</span>
+        <span>Feels like: ${weather?.current?.feelslike_c + "°C"}</span>
+        <span>Feels like: ${weather?.current?.feelslike_f + "°F"}</span>
+        <span>Wind gusts speed: ${weather?.current?.gust_kph + "km/h"}</span>
+        <span>Wind gusts speed: ${weather?.current?.gust_mph + "mph"}</span>
+        <span>Humidity: ${weather?.current?.humidity + "%"}</span>
+        <span>Precipitation amount: ${weather?.current?.precip_in + "in"}</span>
+        <span>Precipitation amount: ${weather?.current?.precip_mm + "mm"}</span>
+        <span>Atmospheric pressure: ${weather?.current?.pressure_in + "inHg"}</span>
+        <span>Atmospheric pressure: ${weather?.current?.pressure_mb + "mb"}</span>
+       <span>Temperature: ${weather?.current?.temp_c + "°C"}</span>
+        <span>Temperature: ${weather?.current?.temp_f + "°F"}</span>
+        <span>Ultraviolet index: ${weather?.current?.uv + "UV"}</span>
+        <span>Visibility: ${weather?.current?.vis_km + "km"}</span>
+        <span>Visibility: ${weather?.current?.vis_miles + "mi"}</span>
+        <span>Wind: ${weather?.current?.wind_degree + "°"}</span>
+        <span>Wind): ${weather?.current?.wind_dir}</span>
+        <span>Wind speed: ${weather?.current?.wind_kph + "km/h"}</span>
+        <span>Wind speed : ${weather?.current?.wind_mph + "mph"}</span>
         </div>
         `
           : `<h3>${
@@ -694,7 +703,7 @@ const Map = () => {
             properties: {},
             geometry: {
               type: "LineString",
-              coordinates: el.geometry.coordinates,
+              coordinates: el.geometry.coordinates || el?.wbk_geometry?.coordinates,
             },
           },
         });
@@ -737,7 +746,9 @@ const Map = () => {
       const insidePolygon = getCoordinatesInsidePolygon(storesCoordinates, polygonCoordinates);
       let newStore = activeStore?.features?.filter((el) =>
         insidePolygon?.find(
-          (val) => JSON.stringify(val) === JSON.stringify(el.geometry.coordinates)
+          (val) =>
+            JSON.stringify(val) ===
+            JSON.stringify(el.geometry.coordinates || el?.wbk_geometry?.coordinates)
         )
       );
       newStore = {
