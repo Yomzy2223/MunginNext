@@ -516,7 +516,7 @@ const Map = () => {
     /** Check if there is already a popup on the map and if so, remove it */
     if (popUps[0]) popUps[0].remove();
     let state = currentFeature?.properties?.state;
-    state = getStateFullName(state);
+    // state = getStateFullName(state);
 
     const weather = await getWeatherInfo(state);
 
